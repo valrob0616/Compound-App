@@ -2,7 +2,7 @@
 
 **Homestead Compound News**  
 Operated by Imcon International Inc.  
-Bundle ID: `com.imconintl.homesteadcompound`
+Bundle ID: `com.loudfh.homesteadcompound`
 
 **Effective date:** September 15, 2026
 
@@ -12,7 +12,7 @@ This policy describes how Homestead Compound News (“the app,” “we,” “u
 
 Imcon International Inc. publishes Homestead Compound News, a news and video companion for homesteaders and family compounds.
 
-Privacy requests: **rob@imconintl.com**
+Privacy requests: **rob@loudfh.com**
 
 ## What this app does
 
@@ -100,7 +100,7 @@ When you use certain features, you leave our screens or load third-party content
 - You can browse without an account.
 - You can edit your display name and preferred category while signed in.
 - You can sign out at any time.
-- **Delete account** is on the Account screen. In demo mode this erases the local account, session, and favorites on this device immediately. In Supabase mode it signs you out and clears favorites on this device; email **rob@imconintl.com** from that same address so we can delete the cloud Auth record.
+- **Delete account** is on the Account screen. In demo mode this erases the local account, session, and favorites on this device immediately. In Supabase mode it signs you out and clears favorites on this device; email **rob@loudfh.com** from that same address so we can delete the cloud Auth record.
 - You can also email that address to ask what data we have, to correct your display name, or to request deletion if you cannot use the in-app control.
 
 ## Children
@@ -118,7 +118,7 @@ If we change this policy, we will update the effective date and the copy in the 
 ## Contact
 
 Imcon International Inc.  
-Email: rob@imconintl.com  
-App: Homestead Compound News (`com.imconintl.homesteadcompound`)
+Email: rob@loudfh.com  
+App: Homestead Compound News (`com.loudfh.homesteadcompound`)
 
 If this contact address changes, the Account screen and a later revision of this policy will show the address in use.
