@@ -53,6 +53,10 @@ export async function setJson(key: string, value: unknown): Promise<void> {
   await AsyncStorage.setItem(key, JSON.stringify(value));
 }
 
+export async function removeItem(key: string): Promise<void> {
+  await AsyncStorage.removeItem(key);
+}
+
 export const storageKeys = {
   session: 'hcn.session',
   demoUsers: 'hcn.demo.users',

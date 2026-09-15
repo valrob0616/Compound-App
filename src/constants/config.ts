@@ -1,3 +1,5 @@
+import Constants from 'expo-constants';
+
 import type { CategoryId, PreferredCategory } from '@/types';
 
 export const APP_DISPLAY_NAME = 'Homestead Compound News';
@@ -31,4 +33,40 @@ export function amazonAssociateTag(): string {
 
 export function isPlaceholderAssociateTag(tag = amazonAssociateTag()): boolean {
   return tag === DEFAULT_AMAZON_ASSOCIATE_TAG;
+}
+
+/** Intended GitHub Pages URL after Pages is enabled on this repo (docs/ folder). */
+export const DEFAULT_PRIVACY_POLICY_URL = 'https://valrob0616.github.io/Compound-App/privacy.html';
+export const DEFAULT_TERMS_OF_USE_URL = 'https://valrob0616.github.io/Compound-App/terms.html';
+export const DEFAULT_PRIVACY_CONTACT_EMAIL = 'rob@imconintl.com';
+
+type ExtraConfig = {
+  privacyPolicyUrl?: string;
+  termsOfUseUrl?: string;
+  privacyContactEmail?: string;
+};
+
+function extra(): ExtraConfig {
+  return (Constants.expoConfig?.extra ?? {}) as ExtraConfig;
+}
+
+export function privacyPolicyUrl(): string {
+  const fromEnv = process.env.EXPO_PUBLIC_PRIVACY_POLICY_URL?.trim();
+  if (fromEnv) return fromEnv;
+  const fromExtra = extra().privacyPolicyUrl?.trim();
+  return fromExtra || DEFAULT_PRIVACY_POLICY_URL;
+}
+
+export function termsOfUseUrl(): string {
+  const fromEnv = process.env.EXPO_PUBLIC_TERMS_OF_USE_URL?.trim();
+  if (fromEnv) return fromEnv;
+  const fromExtra = extra().termsOfUseUrl?.trim();
+  return fromExtra || DEFAULT_TERMS_OF_USE_URL;
+}
+
+export function privacyContactEmail(): string {
+  const fromEnv = process.env.EXPO_PUBLIC_PRIVACY_CONTACT_EMAIL?.trim();
+  if (fromEnv) return fromEnv;
+  const fromExtra = extra().privacyContactEmail?.trim();
+  return fromExtra || DEFAULT_PRIVACY_CONTACT_EMAIL;
 }

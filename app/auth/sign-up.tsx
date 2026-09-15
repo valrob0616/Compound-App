@@ -3,6 +3,7 @@ import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleShee
 import { Link, useRouter } from 'expo-router';
 
 import { AuthModePill, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
+import { LegalLinks } from '@/components/LegalLinks';
 import { PREFERRED_LABELS } from '@/constants/config';
 import { useAppPrefs, useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
@@ -106,6 +107,11 @@ export default function SignUpScreen() {
           })}
         </View>
         <PrimaryButton label="Create account" loading={busy} onPress={() => void onSubmit()} />
+        <Text style={[styles.switch, { color: colors.textMuted }]}>
+          By creating an account you agree to the Terms of Use. Read the Privacy Policy for how we
+          handle email, preferences, and favorites.
+        </Text>
+        <LegalLinks />
         <Text style={[styles.switch, { color: colors.textMuted }]}>
           Already have an account?{' '}
           <Link href="/auth/sign-in" style={{ color: colors.tint, fontWeight: '700' }}>

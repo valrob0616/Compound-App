@@ -1,7 +1,7 @@
 import * as Crypto from 'expo-crypto';
 
 import type { PreferredCategory, UserProfile } from '@/types';
-import { getJson, getSecureItem, setJson, setSecureItem, deleteSecureItem, storageKeys } from '@/lib/storage';
+import { getJson, getSecureItem, setJson, setSecureItem, deleteSecureItem, removeItem, storageKeys } from '@/lib/storage';
 
 type DemoUser = UserProfile & {
   passwordSalt: string;
@@ -90,6 +90,13 @@ export async function demoSignIn(email: string, password: string): Promise<UserP
 
 export async function demoSignOut(): Promise<void> {
   await deleteSecureItem(storageKeys.session);
+}
+
+export async function demoDeleteAccount(userId: string): Promise<void> {
+  const users = await loadUsers();
+  await saveUsers(users.filter((item) => item.id !== userId));
+  await deleteSecureItem(storageKeys.session);
+  await removeItem(storageKeys.favorites(userId));
 }
 
 export async function demoUpdateProfile(

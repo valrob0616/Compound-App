@@ -1,0 +1,38 @@
+# Terms of Use
+
+**Homestead Compound News**  
+Operated by Imcon International Inc.  
+**Effective date:** September 15, 2026
+
+These terms are a short agreement for using the app. The [Privacy Policy](./privacy-policy.md) explains how information is handled.
+
+## The app
+
+Homestead Compound News offers news and video feeds for Homesteading and Family Compounds, plus a store of product cards that link to Amazon. Features may change.
+
+## Accounts
+
+Accounts are optional. You are responsible for the email and password you use and for the display name you choose. We may refuse or close accounts that are abusive or created in bulk.
+
+Use **Delete account** on the Account screen, or email rob@imconintl.com, if you want the account removed (see the Privacy Policy for demo vs cloud accounts).
+
+## Affiliate disclosure
+
+Some store links are Amazon Associates links. Imcon International Inc. may earn a commission if you buy something after following a link. Prices, stock, and Amazon’s checkout are Amazon’s, not ours.
+
+## Third-party content
+
+Articles, videos, and product listings belong to their publishers, creators, or Amazon. We provide links and embeds for convenience. We do not warrant that third-party pages are accurate, safe, or available.
+
+## Acceptable use
+
+Do not misuse the app (including attempting to break authentication, scrape the app as a substitute for publisher sites in a way that violates their terms, or harass others through any feature we add later).
+
+## “As is”
+
+The app is provided as is, for general information and shopping links. It is not professional legal, medical, agricultural, or engineering advice.
+
+## Contact
+
+rob@imconintl.com  
+Imcon International Inc.

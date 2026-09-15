@@ -45,6 +45,8 @@ function RootNav() {
         <Stack.Screen name="product/[id]" options={{ title: 'Product' }} />
         <Stack.Screen name="auth/sign-in" options={{ title: 'Sign in', presentation: 'modal' }} />
         <Stack.Screen name="auth/sign-up" options={{ title: 'Create account', presentation: 'modal' }} />
+        <Stack.Screen name="legal/privacy" options={{ title: 'Privacy Policy' }} />
+        <Stack.Screen name="legal/terms" options={{ title: 'Terms of Use' }} />
       </Stack>
     </>
   );

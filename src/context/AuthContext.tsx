@@ -26,6 +26,7 @@ type AuthContextValue = {
   }) => Promise<void>;
   signOut: () => Promise<void>;
   updateProfile: (patch: Partial<Pick<UserProfile, 'displayName' | 'preferredCategory'>>) => Promise<void>;
+  deleteAccount: () => Promise<{ cloudDeletionPending: boolean }>;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -85,6 +86,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         wrap(async () => {
           if (!user) throw new Error('Sign in to update your profile.');
           setUser(await auth.updateProfile(user, patch));
+        }),
+      deleteAccount: () =>
+        wrap(async () => {
+          if (!user) throw new Error('Sign in to delete your account.');
+          const result = await auth.deleteAccount(user);
+          setUser(null);
+          return result;
         }),
     }),
     [authMode, busy, loading, user, wrap],

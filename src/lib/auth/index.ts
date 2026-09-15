@@ -1,4 +1,5 @@
 import type { PreferredCategory, UserProfile } from '@/types';
+import { removeItem, storageKeys } from '@/lib/storage';
 import { getAuthMode } from './mode';
 import * as demo from './demo';
 import * as supabaseAuth from './supabase';
@@ -47,4 +48,18 @@ export async function updateProfile(
     return supabaseAuth.supabaseUpdateProfile(patch);
   }
   return demo.demoUpdateProfile(user.id, patch);
+}
+
+export type DeleteAccountResult = {
+  cloudDeletionPending: boolean;
+};
+
+export async function deleteAccount(user: UserProfile): Promise<DeleteAccountResult> {
+  if (getAuthMode() === 'supabase') {
+    await supabaseAuth.supabaseSignOut();
+    await removeItem(storageKeys.favorites(user.id));
+    return { cloudDeletionPending: true };
+  }
+  await demo.demoDeleteAccount(user.id);
+  return { cloudDeletionPending: false };
 }

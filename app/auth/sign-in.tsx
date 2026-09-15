@@ -3,6 +3,7 @@ import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, Vi
 import { Link, useRouter } from 'expo-router';
 
 import { AuthModePill, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
+import { LegalLinks } from '@/components/LegalLinks';
 import { useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
 import { isValidEmail } from '@/lib/format';
@@ -66,6 +67,7 @@ export default function SignInScreen() {
             Create an account
           </Link>
         </Text>
+        <LegalLinks />
       </ScrollView>
     </KeyboardAvoidingView>
   );

@@ -3,7 +3,8 @@ import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-nati
 import { useRouter } from 'expo-router';
 
 import { AuthModePill, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
-import { PREFERRED_LABELS } from '@/constants/config';
+import { LegalLinks } from '@/components/LegalLinks';
+import { PREFERRED_LABELS, privacyContactEmail } from '@/constants/config';
 import { useAppPrefs, useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
 import { initials } from '@/lib/format';
@@ -16,7 +17,7 @@ const PREFERRED: PreferredCategory[] = ['homesteading', 'family-compounds', 'bot
 export default function AccountScreen() {
   const { colors } = useAppTheme();
   const router = useRouter();
-  const { user, authMode, busy, signOut, updateProfile } = useAuth();
+  const { user, authMode, busy, signOut, updateProfile, deleteAccount } = useAuth();
   const { setCategory } = useAppPrefs();
   const [displayName, setDisplayName] = useState(user?.displayName ?? '');
   const [status, setStatus] = useState<string | null>(null);
@@ -47,6 +48,7 @@ export default function AccountScreen() {
             This build is using live Supabase Auth.
           </Text>
         )}
+        <LegalLinks />
       </ScrollView>
     );
   }
@@ -134,9 +136,46 @@ export default function AccountScreen() {
           ]);
         }}
       />
+      <View style={{ height: spacing.sm }} />
+      <PrimaryButton
+        variant="ghost"
+        label="Delete account"
+        onPress={() => {
+          Alert.alert(
+            'Delete account?',
+            authMode === 'demo'
+              ? 'This removes your local account, session, and favorites on this device.'
+              : `This signs you out and clears favorites on this device. Email ${privacyContactEmail()} from this account so we can delete the cloud login.`,
+            [
+              { text: 'Cancel', style: 'cancel' },
+              {
+                text: 'Delete',
+                style: 'destructive',
+                onPress: () => {
+                  void (async () => {
+                    try {
+                      const result = await deleteAccount();
+                      if (result.cloudDeletionPending) {
+                        Alert.alert(
+                          'Device data cleared',
+                          `Email ${privacyContactEmail()} from this address to finish deleting the cloud account.`,
+                        );
+                      }
+                    } catch (err) {
+                      Alert.alert('Could not delete', err instanceof Error ? err.message : 'Try again.');
+                    }
+                  })();
+                },
+              },
+            ],
+          );
+        }}
+      />
+      <LegalLinks />
       <Text style={[styles.privacy, { color: colors.textMuted }]}>
         We store your email, display name, and preferred category. In demo mode that stays on this
-        device. With Supabase, it is stored in your Auth user metadata. See the README privacy notes.
+        device. With Supabase, it is stored in your Auth user metadata. Full details are in the Privacy
+        Policy.
       </Text>
     </ScrollView>
   );
