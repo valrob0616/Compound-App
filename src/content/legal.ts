@@ -31,12 +31,12 @@ export const privacyPolicy: LegalDocument = {
     { type: 'h2', text: 'Who we are' },
     {
       type: 'p',
-      text: `Imcon International Inc. publishes Homestead Compound News, a news, video, and shopping companion for homesteaders and family compounds. Privacy requests: ${CONTACT}.`,
+      text: `Imcon International Inc. publishes Homestead Compound News, a news and video companion for homesteaders and family compounds. Privacy requests: ${CONTACT}.`,
     },
     { type: 'h2', text: 'What this app does' },
     {
       type: 'p',
-      text: 'You can browse two category feeds (Homesteading and Family Compounds), watch curated YouTube videos, open news articles, and tap store products that lead to Amazon. You may create an optional account to save a display name, a preferred category, and favorites. You can use the feeds and store without an account.',
+      text: 'You can browse two category feeds (Homesteading and Family Compounds), watch curated YouTube videos, and open news articles. The Store tab is Coming Soon; Amazon affiliate picks will be added after this first release. You may create an optional account to save a display name, a preferred category, and favorites. You can use the feeds without an account.',
     },
     { type: 'h2', text: 'Information we collect' },
     { type: 'h2', text: 'If you browse as a guest' },
@@ -68,7 +68,7 @@ export const privacyPolicy: LegalDocument = {
       type: 'ul',
       items: [
         'Precise location, contacts, photos, camera, microphone, or your address book',
-        'Payment card numbers (purchases, if any, happen on Amazon)',
+        'Payment card numbers (this version has no in-app checkout; a later Store may open Amazon)',
         'Government ID numbers',
         'Advertising identifiers for our own ads (the app does not include an ads SDK)',
         'Analytics from a third-party analytics SDK (none is bundled in this app)',
@@ -95,7 +95,7 @@ export const privacyPolicy: LegalDocument = {
     { type: 'h2', text: 'How we use information' },
     {
       type: 'p',
-      text: 'We use account and preference data to sign you in, show your display name and email, remember your preferred category, and save favorites when you are signed in. We use technical connections (not your account profile) to load public RSS feeds, YouTube thumbnails and videos, and Amazon product pages when you choose View on Amazon.',
+      text: 'We use account and preference data to sign you in, show your display name and email, remember your preferred category, and save favorites when you are signed in. We use technical connections (not your account profile) to load public RSS feeds and YouTube thumbnails and videos. When the Store is available, choosing a product may open Amazon.',
     },
     { type: 'h2', text: 'Third parties' },
     {
@@ -105,7 +105,7 @@ export const privacyPolicy: LegalDocument = {
     {
       type: 'ul',
       items: [
-        'Amazon. Store products open Amazon using a product ID and an Amazon Associates tracking tag. If you continue on Amazon, Amazon may collect information under Amazon’s privacy policy. Affiliate clicks can earn Imcon International Inc. a commission if you buy something. We do not receive your Amazon account details.',
+        'Amazon. The Store is Coming Soon in this first release. When affiliate product links are added, they will open Amazon using a product ID and an Associates tracking tag. If you continue on Amazon, Amazon may collect information under Amazon’s privacy policy. Affiliate clicks can earn Imcon International Inc. a commission if you buy something. We do not receive your Amazon account details.',
         'YouTube / Google. Video cards use YouTube video IDs. Playback uses an in-app player (a YouTube embed) and you can open the video on YouTube. Google’s policies apply.',
         'News publishers. Article cards open the publisher’s webpage in an in-app browser. RSS feeds are requested from public publisher URLs. Those sites may set their own cookies or logs when the page loads.',
         'Supabase. Only when Supabase mode is enabled, as described above.',
@@ -141,7 +141,7 @@ export const privacyPolicy: LegalDocument = {
     { type: 'h2', text: 'Security' },
     {
       type: 'p',
-      text: 'We use platform secure storage for demo sessions and password hashes, and HTTPS for RSS, YouTube, Amazon, and (when enabled) Supabase. No method of transmission or storage is perfectly secure.',
+      text: 'We use platform secure storage for demo sessions and password hashes, and HTTPS for RSS, YouTube, and (when enabled) Supabase. Future Store links to Amazon would also use HTTPS. No method of transmission or storage is perfectly secure.',
     },
     { type: 'h2', text: 'Changes' },
     {
@@ -168,7 +168,7 @@ export const termsOfUse: LegalDocument = {
     { type: 'h2', text: 'The app' },
     {
       type: 'p',
-      text: 'Homestead Compound News offers news and video feeds for Homesteading and Family Compounds, plus a store of product cards that link to Amazon. Features may change.',
+      text: 'Homestead Compound News offers news and video feeds for Homesteading and Family Compounds. The Store tab is Coming Soon. Features may change.',
     },
     { type: 'h2', text: 'Accounts' },
     {
@@ -178,12 +178,12 @@ export const termsOfUse: LegalDocument = {
     { type: 'h2', text: 'Affiliate disclosure' },
     {
       type: 'p',
-      text: 'Some store links are Amazon Associates links. Imcon International Inc. may earn a commission if you buy something after following a link. Prices, stock, and Amazon’s checkout are Amazon’s, not ours.',
+      text: 'When the Store includes product links, some may be Amazon Associates links. Imcon International Inc. may earn a commission if you buy something after following a link. Prices, stock, and Amazon’s checkout are Amazon’s, not ours. This first release does not show those links.',
     },
     { type: 'h2', text: 'Third-party content' },
     {
       type: 'p',
-      text: 'Articles, videos, and product listings belong to their publishers, creators, or Amazon. We provide links and embeds for convenience. We do not warrant that third-party pages are accurate, safe, or available.',
+      text: 'Articles and videos belong to their publishers or creators. We provide links and embeds for convenience. We do not warrant that third-party pages are accurate, safe, or available.',
     },
     { type: 'h2', text: 'Acceptable use' },
     {
@@ -193,7 +193,7 @@ export const termsOfUse: LegalDocument = {
     { type: 'h2', text: '“As is”' },
     {
       type: 'p',
-      text: 'The app is provided as is, for general information and shopping links. It is not professional legal, medical, agricultural, or engineering advice.',
+      text: 'The app is provided as is, for general information. It is not professional legal, medical, agricultural, or engineering advice.',
     },
     { type: 'h2', text: 'Contact' },
     {

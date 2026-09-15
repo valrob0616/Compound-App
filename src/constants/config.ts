@@ -23,6 +23,12 @@ export const PREFERRED_LABELS: Record<PreferredCategory, string> = {
   both: 'Both',
 };
 
+/**
+ * First publish: Store tab is Coming Soon. Flip this to true after Amazon
+ * affiliate products are curated. Catalog JSON and URL builder stay in the repo.
+ */
+export const STORE_CATALOG_ENABLED = false;
+
 /** Placeholder Associates tag — replace via EXPO_PUBLIC_AMAZON_ASSOCIATE_TAG. */
 export const DEFAULT_AMAZON_ASSOCIATE_TAG = 'yourtag-20';
 

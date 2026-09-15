@@ -1,6 +1,6 @@
 # Homestead Compound News
 
-Cross-platform Expo (React Native) app for homesteaders and family compounds: two clearly separated news + video feeds, an Amazon affiliate store, and email/password accounts.
+Cross-platform Expo (React Native) app for homesteaders and family compounds: two clearly separated news + video feeds, a Store tab (Coming Soon for first publish), and email/password accounts.
 
 Display name: **Homestead Compound News**  
 Bundle ID / application ID: `com.imconintl.homesteadcompound`
@@ -42,7 +42,7 @@ npm test
 ## What you can demo without any keys
 
 1. **Feed** — switch **Homesteading** vs **Family Compounds**. Cards interleave news and YouTube. Pull to refresh. Tap news for an in-app WebView; tap video for an in-app player (plus Open in YouTube).
-2. **Store** — product grid by category. **View on Amazon** opens `https://www.amazon.com/dp/{ASIN}?tag={tag}`.
+2. **Store** — **Coming Soon** for first publish. Homesteading and Family Compounds shopping (Amazon affiliate picks) will be added after launch. Catalog JSON and URL helpers stay in the repo; set `STORE_CATALOG_ENABLED` in `src/constants/config.ts` when you are ready.
 3. **Account** — sign up, sign in, sign out, edit display name, set preferred category (Homesteading / Family Compounds / both). Session survives app restarts. Guests can browse; saving favorites prompts for an account. **Privacy Policy** and **Terms of Use** are on the Account tab without signing in.
 
 Until Supabase env vars are set, auth is **demo mode**: accounts live in local secure storage on the device (or `localStorage` on web).
@@ -53,7 +53,7 @@ Copy `.env.example` to `.env` or `.env.local`. Expo only inlines names that star
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `EXPO_PUBLIC_AMAZON_ASSOCIATE_TAG` | For real affiliate commissions | Amazon Associates tracking ID. Default placeholder: `yourtag-20`. |
+| `EXPO_PUBLIC_AMAZON_ASSOCIATE_TAG` | After Store launch | Amazon Associates tracking ID. Default placeholder: `yourtag-20`. Not used in the first-publish Store UI. |
 | `EXPO_PUBLIC_SUPABASE_URL` | For live Auth | Project URL, e.g. `https://xxxx.supabase.co` |
 | `EXPO_PUBLIC_SUPABASE_ANON_KEY` | For live Auth | Public anon key from the Supabase project API settings |
 | `EXPO_PUBLIC_PRIVACY_POLICY_URL` | For store listings | Public Privacy Policy URL. Default: GitHub Pages `…/Compound-App/privacy.html`. |
@@ -62,14 +62,14 @@ Copy `.env.example` to `.env` or `.env.local`. Expo only inlines names that star
 
 Do **not** put a service-role key, a real production Associates ID you are not ready to publish, or any other secret in the repo. The anon key is expected to be public in the client but should still be protected with Auth + RLS on any tables you add later.
 
-### Amazon Associates tag
+### Amazon Associates tag (post-launch)
+
+The first-publish Store tab is Coming Soon. When you turn the catalog on (`STORE_CATALOG_ENABLED` in `src/constants/config.ts`):
 
 1. Join [Amazon Associates](https://affiliate-program.amazon.com/).
 2. Copy your tracking ID (often looks like `yourname-20`).
 3. Set `EXPO_PUBLIC_AMAZON_ASSOCIATE_TAG` and rebuild (`npx expo start -c` so Metro reloads env).
 4. Confirm a product URL includes `?tag=your-real-id`.
-
-The store also shows a notice while the placeholder tag is in use.
 
 ### Flip demo auth → live Supabase
 
@@ -112,7 +112,7 @@ Favorites remain on-device, keyed by user id (works in both auth modes).
 - **Family Compounds RSS (when reachable):** [Foundation for Intentional Community](https://www.ic.org/feed/), [resilience.org](https://www.resilience.org/feed/) (keyword-filtered for land, community, food, stewardship, etc.).
 - If a host is down, blocks bots, or CORS blocks web, the app **merges in original seed briefings** so both feeds still look complete.
 - YouTube IDs are curated in `src/data/videos.ts` (permaculture, compost, ecovillage / co-housing). Playback uses an in-app WebView embed (`react-native-webview`).
-- Store catalog is `src/data/products.json` (ASIN + blurb). URLs are built in `src/lib/affiliate.ts`.
+- Store catalog JSON and affiliate URL builder remain in `src/data/products.json` and `src/lib/affiliate.ts` for a later release. The Store tab currently shows Coming Soon.
 
 ## EAS / App Store / Google Play
 
@@ -144,7 +144,7 @@ Not finished by this scaffold (Apple and Google require your accounts and live h
 - [ ] **Host a public Privacy Policy URL** (required for accounts). Follow [Host the privacy policy](#host-the-privacy-policy) below, then paste that URL into App Store Connect and Play Console.
 - [ ] Apple Developer Program ($99/year) + App Store Connect app record, privacy nutrition labels, export compliance.
 - [ ] Google Play Developer account + Data safety form + content rating questionnaire.
-- [ ] Real Amazon Associates ID in EAS secrets.
+- [ ] Real Amazon Associates ID in EAS secrets (when enabling the Store catalog after first publish).
 - [ ] Production Supabase project, email templates, and abuse controls (rate limits, captcha if needed).
 - [ ] Support URL, marketing URL, and age rating (likely 4+ / Everyone if content stays non-graphic).
 - [ ] Confirm YouTube ToS for in-app playback of third-party videos; keep “Open in YouTube”.
@@ -198,7 +198,7 @@ Matches the in-app policy. Summary:
 
 **Collected when someone creates an account:** email, password (salted hash in demo secure storage, or hashed by Supabase), display name, preferred category. Favorites (item ids) stay on the device.
 
-**Not collected in this MVP:** precise location, contacts, photos, payment cards, government IDs, ads SDK, analytics SDK. We do not sell personal data. Amazon, YouTube/Google, and RSS publishers apply when the user opens those features.
+**Not collected in this MVP:** precise location, contacts, photos, payment cards, government IDs, ads SDK, analytics SDK. We do not sell personal data. YouTube/Google and RSS publishers apply when the user opens those features. Amazon Associates links are not shown in the first-publish Store UI (Coming Soon).
 
 **Deletion:** Account tab → Delete account. Demo mode wipes the local record immediately. Supabase mode clears this device and requires an email to `rob@imconintl.com` to erase the Auth user.
 

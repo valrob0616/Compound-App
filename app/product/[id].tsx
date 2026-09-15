@@ -1,10 +1,10 @@
 import * as WebBrowser from 'expo-web-browser';
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { Redirect, useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { PrimaryButton } from '@/components/ui';
-import { CATEGORY_LABELS, amazonAssociateTag, isPlaceholderAssociateTag } from '@/constants/config';
+import { CATEGORY_LABELS, STORE_CATALOG_ENABLED, amazonAssociateTag } from '@/constants/config';
 import { useAppTheme } from '@/context/ThemeContext';
 import { amazonImageUrl, amazonProductUrl } from '@/lib/affiliate';
 import { getProductById } from '@/lib/catalog';
@@ -12,6 +12,14 @@ import { radii, spacing } from '@/theme';
 import { serif } from '@/theme/typography';
 
 export default function ProductScreen() {
+  if (!STORE_CATALOG_ENABLED) {
+    return <Redirect href="/store" />;
+  }
+
+  return <ProductDetail />;
+}
+
+function ProductDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const navigation = useNavigation();
   const { colors } = useAppTheme();
@@ -46,13 +54,6 @@ export default function ProductScreen() {
       <Text style={[styles.kicker, { color: colors.accent }]}>{categoryLabel}</Text>
       <Text style={[styles.title, { color: colors.text }]}>{product.title}</Text>
       <Text style={[styles.blurb, { color: colors.textMuted }]}>{product.blurb}</Text>
-      <Text style={[styles.asin, { color: colors.textMuted }]}>ASIN {product.asin}</Text>
-      {isPlaceholderAssociateTag() ? (
-        <Text style={[styles.note, { color: colors.textMuted }]}>
-          Opens Amazon with placeholder tag `yourtag-20`. Replace EXPO_PUBLIC_AMAZON_ASSOCIATE_TAG
-          before publishing.
-        </Text>
-      ) : null}
       <PrimaryButton
         label="View on Amazon"
         onPress={() => void WebBrowser.openBrowserAsync(href)}
@@ -74,7 +75,5 @@ const styles = StyleSheet.create({
   kicker: { fontSize: 12, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 0.5 },
   title: { fontFamily: serif, fontSize: 28, fontWeight: '700', marginVertical: 8 },
   blurb: { fontSize: 16, lineHeight: 24, marginBottom: spacing.md },
-  asin: { fontSize: 12, marginBottom: spacing.md },
-  note: { fontSize: 13, lineHeight: 18, marginBottom: spacing.md },
   fallback: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: spacing.lg },
 });

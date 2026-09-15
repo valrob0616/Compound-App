@@ -42,7 +42,7 @@ export default function TabLayout() {
         options={{
           title: 'Store',
           headerTitle: 'Store',
-          tabBarAccessibilityLabel: 'Amazon affiliate store',
+          tabBarAccessibilityLabel: 'Store, coming soon',
           tabBarIcon: ({ color, size }) => <Ionicons name="bag-handle-outline" size={size} color={color} />,
         }}
       />

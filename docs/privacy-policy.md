@@ -10,15 +10,15 @@ This policy describes how Homestead Compound News (“the app,” “we,” “u
 
 ## Who we are
 
-Imcon International Inc. publishes Homestead Compound News, a news, video, and shopping companion for homesteaders and family compounds.
+Imcon International Inc. publishes Homestead Compound News, a news and video companion for homesteaders and family compounds.
 
 Privacy requests: **rob@imconintl.com**
 
 ## What this app does
 
-You can browse two category feeds (Homesteading and Family Compounds), watch curated YouTube videos, open news articles, and tap store products that lead to Amazon. You may create an optional account to save a display name, a preferred category, and favorites.
+You can browse two category feeds (Homesteading and Family Compounds), watch curated YouTube videos, and open news articles. The Store tab is Coming Soon; Amazon affiliate picks will be added after this first release. You may create an optional account to save a display name, a preferred category, and favorites.
 
-You can use the feeds and store without an account.
+You can use the feeds without an account.
 
 ## Information we collect
 
@@ -42,7 +42,7 @@ Do not put sensitive personal information in your display name.
 This version of the app does not collect:
 
 - Precise location, contacts, photos, camera, microphone, or your address book
-- Payment card numbers (purchases, if any, happen on Amazon)
+- Payment card numbers (this version has no in-app checkout; a later Store may open Amazon)
 - Government ID numbers
 - Advertising identifiers for our own ads (the app does not include an ads SDK)
 - Analytics from a third-party analytics SDK (none is bundled in this app)
@@ -72,13 +72,13 @@ We use technical connections (not your account profile) to:
 
 - Load public RSS feeds for the news cards
 - Load YouTube thumbnails and play videos
-- Open Amazon product pages when you choose View on Amazon
+- When the Store is available, open Amazon product pages if you choose a product link
 
 ## Third parties
 
 When you use certain features, you leave our screens or load third-party content. Those services have their own policies. We do not control them.
 
-**Amazon.** Store products open Amazon using a product ID and an Amazon Associates tracking tag. If you continue on Amazon, Amazon may collect information under [Amazon’s privacy policy](https://www.amazon.com/privacy). Affiliate clicks can earn Imcon International Inc. a commission if you buy something. We do not receive your Amazon account details.
+**Amazon.** The Store is Coming Soon in this first release. When affiliate product links are added, they will open Amazon using a product ID and an Associates tracking tag. If you continue on Amazon, Amazon may collect information under [Amazon’s privacy policy](https://www.amazon.com/privacy). Affiliate clicks can earn Imcon International Inc. a commission if you buy something. We do not receive your Amazon account details.
 
 **YouTube / Google.** Video cards use YouTube video IDs. Playback uses an in-app player (a YouTube embed) and you can open the video on YouTube. Google’s policies apply, including [YouTube’s terms](https://www.youtube.com/t/terms) and [Google’s privacy policy](https://policies.google.com/privacy).
 
@@ -109,7 +109,7 @@ Homestead Compound News is not directed at children under 13, and we do not know
 
 ## Security
 
-We use platform secure storage for demo sessions and password hashes, and HTTPS for RSS, YouTube, Amazon, and (when enabled) Supabase. No method of transmission or storage is perfectly secure.
+We use platform secure storage for demo sessions and password hashes, and HTTPS for RSS, YouTube, and (when enabled) Supabase. Future Store links to Amazon would also use HTTPS. No method of transmission or storage is perfectly secure.
 
 ## Changes
 

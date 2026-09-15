@@ -8,7 +8,7 @@ These terms are a short agreement for using the app. The [Privacy Policy](./priv
 
 ## The app
 
-Homestead Compound News offers news and video feeds for Homesteading and Family Compounds, plus a store of product cards that link to Amazon. Features may change.
+Homestead Compound News offers news and video feeds for Homesteading and Family Compounds. The Store tab is Coming Soon. Features may change.
 
 ## Accounts
 
@@ -18,11 +18,11 @@ Use **Delete account** on the Account screen, or email rob@imconintl.com, if you
 
 ## Affiliate disclosure
 
-Some store links are Amazon Associates links. Imcon International Inc. may earn a commission if you buy something after following a link. Prices, stock, and Amazon’s checkout are Amazon’s, not ours.
+When the Store includes product links, some may be Amazon Associates links. Imcon International Inc. may earn a commission if you buy something after following a link. Prices, stock, and Amazon’s checkout are Amazon’s, not ours. This first release does not show those links.
 
 ## Third-party content
 
-Articles, videos, and product listings belong to their publishers, creators, or Amazon. We provide links and embeds for convenience. We do not warrant that third-party pages are accurate, safe, or available.
+Articles and videos belong to their publishers or creators. We provide links and embeds for convenience. We do not warrant that third-party pages are accurate, safe, or available.
 
 ## Acceptable use
 
@@ -30,7 +30,7 @@ Do not misuse the app (including attempting to break authentication, scrape the 
 
 ## “As is”
 
-The app is provided as is, for general information and shopping links. It is not professional legal, medical, agricultural, or engineering advice.
+The app is provided as is, for general information. It is not professional legal, medical, agricultural, or engineering advice.
 
 ## Contact
 
