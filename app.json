@@ -49,7 +49,12 @@
     "extra": {
       "privacyPolicyUrl": "https://valrob0616.github.io/Compound-App/privacy.html",
       "termsOfUseUrl": "https://valrob0616.github.io/Compound-App/terms.html",
-      "privacyContactEmail": "rob@imconintl.com"
-    }
+      "privacyContactEmail": "rob@imconintl.com",
+      "router": {},
+      "eas": {
+        "projectId": "a1c843ff-c984-4177-9c91-e34e08256712"
+      }
+    },
+    "owner": "rloud74"
   }
 }
