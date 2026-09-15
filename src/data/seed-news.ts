@@ -1,0 +1,148 @@
+import type { NewsItem } from '@/types';
+
+export const SEED_NEWS: NewsItem[] = [
+  {
+    kind: 'news',
+    id: 'seed-hs-01',
+    category: 'homesteading',
+    title: 'Fall garden succession: what to sow after the last tomatoes',
+    summary:
+      'A practical briefing on cool-season beds — garlic, leafy greens, and cover crops — so homestead plots keep producing after summer harvests wind down.',
+    url: 'https://www.nrcs.usda.gov/conservation-basics/conservation-by-state/cover-crops',
+    source: 'Homestead Compound News',
+    publishedAt: '2026-09-08T12:00:00.000Z',
+    author: 'Editorial briefing',
+  },
+  {
+    kind: 'news',
+    id: 'seed-hs-02',
+    category: 'homesteading',
+    title: 'Livestock water in freeze season: troughs, heaters, and backups',
+    summary:
+      'Keep poultry and small ruminants hydrated when overnight lows drop. We outline low-tech backups that work when grid power is unreliable.',
+    url: 'https://www.nrcs.usda.gov/resources/guides-and-instructions',
+    source: 'Homestead Compound News',
+    publishedAt: '2026-09-06T12:00:00.000Z',
+    author: 'Editorial briefing',
+  },
+  {
+    kind: 'news',
+    id: 'seed-hs-03',
+    category: 'homesteading',
+    title: 'Canning safety refresh: altitude, headspace, and tested recipes',
+    summary:
+      'Home food preservation is only as safe as the process. A short checklist drawn from public extension guidance before the autumn put-up rush.',
+    url: 'https://nchfp.uga.edu/',
+    source: 'Homestead Compound News',
+    publishedAt: '2026-09-04T12:00:00.000Z',
+    author: 'Editorial briefing',
+  },
+  {
+    kind: 'news',
+    id: 'seed-hs-04',
+    category: 'homesteading',
+    title: 'Off-grid solar: sizing a modest homestead array',
+    summary:
+      'How to think about daily watt-hours, winter sun hours, and battery days of autonomy without overbuying gear you will not use.',
+    url: 'https://www.energy.gov/energysaver/solar-photovoltaic-system-design-basics',
+    source: 'Homestead Compound News',
+    publishedAt: '2026-09-01T12:00:00.000Z',
+    author: 'Editorial briefing',
+  },
+  {
+    kind: 'news',
+    id: 'seed-hs-05',
+    category: 'homesteading',
+    title: 'Fence first: predator-wise poultry yards on a budget',
+    summary:
+      'Hardware cloth, buried aprons, and gate discipline prevent more flock losses than any gadget. A field-notes approach to a tight chicken run.',
+    url: 'https://www.hobbyfarms.com/how-to-keep-free-range-chickens-safe-adding-cover/',
+    source: 'Homestead Compound News',
+    publishedAt: '2026-08-28T12:00:00.000Z',
+    author: 'Editorial briefing',
+  },
+  {
+    kind: 'news',
+    id: 'seed-hs-06',
+    category: 'homesteading',
+    title: 'Seed saving after harvest: dry, label, and store',
+    summary:
+      'Open-pollinated varieties earn their keep when you can replant them. Three drying methods and a simple winter storage protocol.',
+    url: 'https://www.hobbyfarms.com/how-to-dry-seeds-3-techniques/',
+    source: 'Homestead Compound News',
+    publishedAt: '2026-08-24T12:00:00.000Z',
+    author: 'Editorial briefing',
+  },
+  {
+    kind: 'news',
+    id: 'seed-fc-01',
+    category: 'family-compounds',
+    title: 'Shared wells and septic: infrastructure before floorplans',
+    summary:
+      'Multi-household land works only if water, waste, and access are sized for everyone. A planning order that avoids expensive do-overs.',
+    url: 'https://www.epa.gov/septic',
+    source: 'Homestead Compound News',
+    publishedAt: '2026-09-09T12:00:00.000Z',
+    author: 'Editorial briefing',
+  },
+  {
+    kind: 'news',
+    id: 'seed-fc-02',
+    category: 'family-compounds',
+    title: 'It takes a village: raising children across households',
+    summary:
+      'Alloparenting is older than the nuclear floorplan. Notes on trust, overlapping adult presence, and the cultural work of living next door on purpose.',
+    url: 'https://www.ic.org/it-takes-a-village-raising-children-in-community/',
+    source: 'Foundation for Intentional Community',
+    publishedAt: '2026-07-09T16:16:20.000Z',
+    author: 'Eva Goldfarb',
+  },
+  {
+    kind: 'news',
+    id: 'seed-fc-03',
+    category: 'family-compounds',
+    title: 'Compound firebreaks and shared water caches',
+    summary:
+      'Rural multi-home sites need a common wildfire plan: defensible space, labeled caches, and one radio channel everybody actually uses.',
+    url: 'https://www.firewise.org/',
+    source: 'Homestead Compound News',
+    publishedAt: '2026-09-05T12:00:00.000Z',
+    author: 'Editorial briefing',
+  },
+  {
+    kind: 'news',
+    id: 'seed-fc-04',
+    category: 'family-compounds',
+    title: 'Land stewardship agreements that survive a disagreement',
+    summary:
+      'Write use, maintenance, and exit rules while everyone is still friendly. Easements, cost-shares, and a simple annual work day beat informal promises.',
+    url: 'https://www.ic.org/',
+    source: 'Homestead Compound News',
+    publishedAt: '2026-09-02T12:00:00.000Z',
+    author: 'Editorial briefing',
+  },
+  {
+    kind: 'news',
+    id: 'seed-fc-05',
+    category: 'family-compounds',
+    title: 'Community kitchens: one stove, many households',
+    summary:
+      'A shared kitchen can cut cost and isolation — if cleaning, food storage, and allergy rules are posted and boringly consistent.',
+    url: 'https://www.resilience.org/stories/2026-09-10/climate-communication-needs-to-get-real-in-the-face-of-the-great-unraveling/',
+    source: 'Homestead Compound News',
+    publishedAt: '2026-08-30T12:00:00.000Z',
+    author: 'Editorial briefing',
+  },
+  {
+    kind: 'news',
+    id: 'seed-fc-06',
+    category: 'family-compounds',
+    title: 'The magic of hot composting at compound scale',
+    summary:
+      'Several households generate enough greens and browns to heat a pile properly. A shared compost pad is infrastructure, not a chore chart.',
+    url: 'https://www.resilience.org/stories/2026-09-08/the-magic-of-hot-composting/',
+    source: 'resilience',
+    publishedAt: '2026-09-08T08:00:15.000Z',
+    author: 'Brian Kaller',
+  },
+];
