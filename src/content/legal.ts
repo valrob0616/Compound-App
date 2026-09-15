@@ -22,7 +22,7 @@ export const privacyPolicy: LegalDocument = {
   blocks: [
     {
       type: 'p',
-      text: 'Homestead Compound News is operated by Imcon International Inc. Bundle ID: com.imconintl.homesteadcompound.',
+      text: 'Homestead Compound News is operated by Imcon International Inc. Bundle ID: com.loudfh.homesteadcompound.',
     },
     {
       type: 'p',
@@ -151,7 +151,7 @@ export const privacyPolicy: LegalDocument = {
     { type: 'h2', text: 'Contact' },
     {
       type: 'p',
-      text: `Imcon International Inc. Email: ${CONTACT}. App: Homestead Compound News (com.imconintl.homesteadcompound). If this contact address changes, the Account screen and a later revision of this policy will show the address in use.`,
+      text: `Imcon International Inc. Email: ${CONTACT}. App: Homestead Compound News (com.loudfh.homesteadcompound). If this contact address changes, the Account screen and a later revision of this policy will show the address in use.`,
     },
   ],
 };

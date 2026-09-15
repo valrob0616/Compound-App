@@ -9,14 +9,14 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.imconintl.homesteadcompound",
+      "bundleIdentifier": "com.loudfh.homesteadcompound",
       "infoPlist": {
         "CFBundleDisplayName": "Homestead Compound News",
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
-      "package": "com.imconintl.homesteadcompound",
+      "package": "com.loudfh.homesteadcompound",
       "adaptiveIcon": {
         "backgroundColor": "#2C4A3E",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -49,7 +49,7 @@
     "extra": {
       "privacyPolicyUrl": "https://valrob0616.github.io/Compound-App/privacy.html",
       "termsOfUseUrl": "https://valrob0616.github.io/Compound-App/terms.html",
-      "privacyContactEmail": "rob@imconintl.com",
+      "privacyContactEmail": "rob@loudfh.com",
       "router": {},
       "eas": {
         "projectId": "a1c843ff-c984-4177-9c91-e34e08256712"

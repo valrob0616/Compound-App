@@ -3,7 +3,7 @@
 Cross-platform Expo (React Native) app for homesteaders and family compounds: two clearly separated news + video feeds, a Store tab (Coming Soon for first publish), and email/password accounts.
 
 Display name: **Homestead Compound News**  
-Bundle ID / application ID: `com.imconintl.homesteadcompound`
+Bundle ID / application ID: `com.loudfh.homesteadcompound`
 
 ## Run it
 
@@ -58,7 +58,7 @@ Copy `.env.example` to `.env` or `.env.local`. Expo only inlines names that star
 | `EXPO_PUBLIC_SUPABASE_ANON_KEY` | For live Auth | Public anon key from the Supabase project API settings |
 | `EXPO_PUBLIC_PRIVACY_POLICY_URL` | For store listings | Public Privacy Policy URL. Default: GitHub Pages `…/Compound-App/privacy.html`. |
 | `EXPO_PUBLIC_TERMS_OF_USE_URL` | Optional | Public Terms of Use URL. Default: `…/Compound-App/terms.html`. |
-| `EXPO_PUBLIC_PRIVACY_CONTACT_EMAIL` | Optional | Privacy inbox. Default: `rob@imconintl.com` (change to `privacy@imconintl.com` if you create that alias). |
+| `EXPO_PUBLIC_PRIVACY_CONTACT_EMAIL` | Optional | Privacy inbox. Default: `rob@loudfh.com` (change to `privacy@loudfh.com` if you create that alias). |
 
 Do **not** put a service-role key, a real production Associates ID you are not ready to publish, or any other secret in the repo. The anon key is expected to be public in the client but should still be protected with Auth + RLS on any tables you add later.
 
@@ -175,18 +175,18 @@ Until Pages is enabled, open the HTML files in `docs/` locally or from the repo.
 
 **Alternative: your own domain**
 
-Copy `docs/privacy.html` (and `legal.css`, or inline the CSS) to something like `https://imconintl.com/privacy` (or a `/homestead-compound/` path). Then set:
+Copy `docs/privacy.html` (and `legal.css`, or inline the CSS) to something like `https://loudfh.com/privacy` (or a `/homestead-compound/` path). Then set:
 
 ```bash
-EXPO_PUBLIC_PRIVACY_POLICY_URL=https://imconintl.com/privacy
-EXPO_PUBLIC_TERMS_OF_USE_URL=https://imconintl.com/terms
+EXPO_PUBLIC_PRIVACY_POLICY_URL=https://loudfh.com/privacy
+EXPO_PUBLIC_TERMS_OF_USE_URL=https://loudfh.com/terms
 ```
 
 and the same values in EAS secrets / `app.json` extra.
 
 **Privacy contact email**
 
-The published address is **rob@imconintl.com**. To use `privacy@imconintl.com` (or another inbox), update:
+The published address is **rob@loudfh.com**. To use `privacy@loudfh.com` (or another inbox), update:
 
 - `EXPO_PUBLIC_PRIVACY_CONTACT_EMAIL` and `app.json` `expo.extra.privacyContactEmail`
 - `src/constants/config.ts` (`DEFAULT_PRIVACY_CONTACT_EMAIL`)
@@ -200,9 +200,11 @@ Matches the in-app policy. Summary:
 
 **Not collected in this MVP:** precise location, contacts, photos, payment cards, government IDs, ads SDK, analytics SDK. We do not sell personal data. YouTube/Google and RSS publishers apply when the user opens those features. Amazon Associates links are not shown in the first-publish Store UI (Coming Soon).
 
-**Deletion:** Account tab → Delete account. Demo mode wipes the local record immediately. Supabase mode clears this device and requires an email to `rob@imconintl.com` to erase the Auth user.
+**Deletion:** Account tab → Delete account. Demo mode wipes the local record immediately. Supabase mode clears this device and requires an email to `rob@loudfh.com` to erase the Auth user.
 
 Have an attorney review `docs/privacy-policy.md` before you treat it as final for a commercial launch.
+
+**Legal display name:** Identifier, email, and domain strings now use **loudfh** (`com.loudfh.homesteadcompound`, `rob@loudfh.com`, `loudfh.com`). Privacy and Terms still say **Imcon International Inc.** Confirm whether that remains the legal entity for Loudfh, or replace it with the Loudfh legal name before store submission.
 
 ## Project layout
 

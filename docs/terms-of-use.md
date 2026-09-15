@@ -14,7 +14,7 @@ Homestead Compound News offers news and video feeds for Homesteading and Family 
 
 Accounts are optional. You are responsible for the email and password you use and for the display name you choose. We may refuse or close accounts that are abusive or created in bulk.
 
-Use **Delete account** on the Account screen, or email rob@imconintl.com, if you want the account removed (see the Privacy Policy for demo vs cloud accounts).
+Use **Delete account** on the Account screen, or email rob@loudfh.com, if you want the account removed (see the Privacy Policy for demo vs cloud accounts).
 
 ## Affiliate disclosure
 
@@ -34,5 +34,5 @@ The app is provided as is, for general information. It is not professional legal
 
 ## Contact
 
-rob@imconintl.com  
+rob@loudfh.com  
 Imcon International Inc.

@@ -3,7 +3,7 @@ import Constants from 'expo-constants';
 import type { CategoryId, PreferredCategory } from '@/types';
 
 export const APP_DISPLAY_NAME = 'Homestead Compound News';
-export const BUNDLE_ID = 'com.imconintl.homesteadcompound';
+export const BUNDLE_ID = 'com.loudfh.homesteadcompound';
 
 export const CATEGORY_LABELS: Record<CategoryId, string> = {
   homesteading: 'Homesteading',
@@ -44,7 +44,7 @@ export function isPlaceholderAssociateTag(tag = amazonAssociateTag()): boolean {
 /** Intended GitHub Pages URL after Pages is enabled on this repo (docs/ folder). */
 export const DEFAULT_PRIVACY_POLICY_URL = 'https://valrob0616.github.io/Compound-App/privacy.html';
 export const DEFAULT_TERMS_OF_USE_URL = 'https://valrob0616.github.io/Compound-App/terms.html';
-export const DEFAULT_PRIVACY_CONTACT_EMAIL = 'rob@imconintl.com';
+export const DEFAULT_PRIVACY_CONTACT_EMAIL = 'rob@loudfh.com';
 
 type ExtraConfig = {
   privacyPolicyUrl?: string;
