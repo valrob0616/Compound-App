@@ -1,7 +1,7 @@
 # Terms of Use
 
 **Homestead Compound News**  
-Operated by Imcon International Inc.  
+Operated by LFH Inc  
 **Effective date:** September 15, 2026
 
 These terms are a short agreement for using the app. The [Privacy Policy](./privacy-policy.md) explains how information is handled.
@@ -18,7 +18,7 @@ Use **Delete account** on the Account screen, or email rob@loudfh.com, if you wa
 
 ## Affiliate disclosure
 
-When the Store includes product links, some may be Amazon Associates links. Imcon International Inc. may earn a commission if you buy something after following a link. Prices, stock, and Amazon’s checkout are Amazon’s, not ours. This first release does not show those links.
+When the Store includes product links, some may be Amazon Associates links. LFH Inc may earn a commission if you buy something after following a link. Prices, stock, and Amazon’s checkout are Amazon’s, not ours. This first release does not show those links.
 
 ## Third-party content
 
@@ -35,4 +35,4 @@ The app is provided as is, for general information. It is not professional legal
 ## Contact
 
 rob@loudfh.com  
-Imcon International Inc.
+LFH Inc

@@ -204,7 +204,7 @@ Matches the in-app policy. Summary:
 
 Have an attorney review `docs/privacy-policy.md` before you treat it as final for a commercial launch.
 
-**Legal display name:** Identifier, email, and domain strings now use **loudfh** (`com.loudfh.homesteadcompound`, `rob@loudfh.com`, `loudfh.com`). Privacy and Terms still say **Imcon International Inc.** Confirm whether that remains the legal entity for Loudfh, or replace it with the Loudfh legal name before store submission.
+**Legal display name:** Privacy and Terms use **LFH Inc** as the operator. Identifier, email, and domain strings use **loudfh** (`com.loudfh.homesteadcompound`, `rob@loudfh.com`, `loudfh.com`).
 
 ## Project layout
 

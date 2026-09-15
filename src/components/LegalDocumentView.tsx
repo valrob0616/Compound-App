@@ -26,7 +26,7 @@ export function LegalDocumentView({ document, hostedUrl }: Props) {
         {document.title}
       </Text>
       <Text style={[styles.meta, { color: colors.textMuted }]}>
-        Homestead Compound News · Imcon International Inc.{'\n'}
+        Homestead Compound News · LFH Inc{'\n'}
         Effective {document.effectiveDate}
       </Text>
       {document.blocks.map((block, index) => {
