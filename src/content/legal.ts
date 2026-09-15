@@ -22,7 +22,7 @@ export const privacyPolicy: LegalDocument = {
   blocks: [
     {
       type: 'p',
-      text: 'Homestead Compound News is operated by Imcon International Inc. Bundle ID: com.loudfh.homesteadcompound.',
+      text: 'Homestead Compound News is operated by LFH Inc. Bundle ID: com.loudfh.homesteadcompound.',
     },
     {
       type: 'p',
@@ -31,7 +31,7 @@ export const privacyPolicy: LegalDocument = {
     { type: 'h2', text: 'Who we are' },
     {
       type: 'p',
-      text: `Imcon International Inc. publishes Homestead Compound News, a news and video companion for homesteaders and family compounds. Privacy requests: ${CONTACT}.`,
+      text: `LFH Inc publishes Homestead Compound News, a news and video companion for homesteaders and family compounds. Privacy requests: ${CONTACT}.`,
     },
     { type: 'h2', text: 'What this app does' },
     {
@@ -105,7 +105,7 @@ export const privacyPolicy: LegalDocument = {
     {
       type: 'ul',
       items: [
-        'Amazon. The Store is Coming Soon in this first release. When affiliate product links are added, they will open Amazon using a product ID and an Associates tracking tag. If you continue on Amazon, Amazon may collect information under Amazon’s privacy policy. Affiliate clicks can earn Imcon International Inc. a commission if you buy something. We do not receive your Amazon account details.',
+        'Amazon. The Store is Coming Soon in this first release. When affiliate product links are added, they will open Amazon using a product ID and an Associates tracking tag. If you continue on Amazon, Amazon may collect information under Amazon’s privacy policy. Affiliate clicks can earn LFH Inc a commission if you buy something. We do not receive your Amazon account details.',
         'YouTube / Google. Video cards use YouTube video IDs. Playback uses an in-app player (a YouTube embed) and you can open the video on YouTube. Google’s policies apply.',
         'News publishers. Article cards open the publisher’s webpage in an in-app browser. RSS feeds are requested from public publisher URLs. Those sites may set their own cookies or logs when the page loads.',
         'Supabase. Only when Supabase mode is enabled, as described above.',
@@ -151,7 +151,7 @@ export const privacyPolicy: LegalDocument = {
     { type: 'h2', text: 'Contact' },
     {
       type: 'p',
-      text: `Imcon International Inc. Email: ${CONTACT}. App: Homestead Compound News (com.loudfh.homesteadcompound). If this contact address changes, the Account screen and a later revision of this policy will show the address in use.`,
+      text: `LFH Inc. Email: ${CONTACT}. App: Homestead Compound News (com.loudfh.homesteadcompound). If this contact address changes, the Account screen and a later revision of this policy will show the address in use.`,
     },
   ],
 };
@@ -163,7 +163,7 @@ export const termsOfUse: LegalDocument = {
   blocks: [
     {
       type: 'p',
-      text: 'These terms are a short agreement for using Homestead Compound News, operated by Imcon International Inc. The Privacy Policy explains how information is handled.',
+      text: 'These terms are a short agreement for using Homestead Compound News, operated by LFH Inc. The Privacy Policy explains how information is handled.',
     },
     { type: 'h2', text: 'The app' },
     {
@@ -178,7 +178,7 @@ export const termsOfUse: LegalDocument = {
     { type: 'h2', text: 'Affiliate disclosure' },
     {
       type: 'p',
-      text: 'When the Store includes product links, some may be Amazon Associates links. Imcon International Inc. may earn a commission if you buy something after following a link. Prices, stock, and Amazon’s checkout are Amazon’s, not ours. This first release does not show those links.',
+      text: 'When the Store includes product links, some may be Amazon Associates links. LFH Inc may earn a commission if you buy something after following a link. Prices, stock, and Amazon’s checkout are Amazon’s, not ours. This first release does not show those links.',
     },
     { type: 'h2', text: 'Third-party content' },
     {
@@ -198,7 +198,7 @@ export const termsOfUse: LegalDocument = {
     { type: 'h2', text: 'Contact' },
     {
       type: 'p',
-      text: `${CONTACT} — Imcon International Inc.`,
+      text: `${CONTACT} — LFH Inc`,
     },
   ],
 };

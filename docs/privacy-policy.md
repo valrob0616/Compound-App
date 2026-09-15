@@ -1,7 +1,7 @@
 # Privacy Policy
 
 **Homestead Compound News**  
-Operated by Imcon International Inc.  
+Operated by LFH Inc  
 Bundle ID: `com.loudfh.homesteadcompound`
 
 **Effective date:** September 15, 2026
@@ -10,7 +10,7 @@ This policy describes how Homestead Compound News (“the app,” “we,” “u
 
 ## Who we are
 
-Imcon International Inc. publishes Homestead Compound News, a news and video companion for homesteaders and family compounds.
+LFH Inc publishes Homestead Compound News, a news and video companion for homesteaders and family compounds.
 
 Privacy requests: **rob@loudfh.com**
 
@@ -78,7 +78,7 @@ We use technical connections (not your account profile) to:
 
 When you use certain features, you leave our screens or load third-party content. Those services have their own policies. We do not control them.
 
-**Amazon.** The Store is Coming Soon in this first release. When affiliate product links are added, they will open Amazon using a product ID and an Associates tracking tag. If you continue on Amazon, Amazon may collect information under [Amazon’s privacy policy](https://www.amazon.com/privacy). Affiliate clicks can earn Imcon International Inc. a commission if you buy something. We do not receive your Amazon account details.
+**Amazon.** The Store is Coming Soon in this first release. When affiliate product links are added, they will open Amazon using a product ID and an Associates tracking tag. If you continue on Amazon, Amazon may collect information under [Amazon’s privacy policy](https://www.amazon.com/privacy). Affiliate clicks can earn LFH Inc a commission if you buy something. We do not receive your Amazon account details.
 
 **YouTube / Google.** Video cards use YouTube video IDs. Playback uses an in-app player (a YouTube embed) and you can open the video on YouTube. Google’s policies apply, including [YouTube’s terms](https://www.youtube.com/t/terms) and [Google’s privacy policy](https://policies.google.com/privacy).
 
@@ -117,7 +117,7 @@ If we change this policy, we will update the effective date and the copy in the 
 
 ## Contact
 
-Imcon International Inc.  
+LFH Inc  
 Email: rob@loudfh.com  
 App: Homestead Compound News (`com.loudfh.homesteadcompound`)
 
