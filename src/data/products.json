@@ -1,0 +1,132 @@
+{
+  "products": [
+    {
+      "id": "lodge-skillet",
+      "asin": "B00006JSUA",
+      "title": "Lodge 12-Inch Cast Iron Skillet",
+      "blurb": "The homestead workhorse for hearth, camp stove, or wood range. Season it once and it will outlast the cabin.",
+      "category": "homesteading",
+      "tags": ["kitchen", "tools"]
+    },
+    {
+      "id": "presto-canner",
+      "asin": "B0000BYLZK",
+      "title": "Presto 23-Quart Pressure Canner",
+      "blurb": "Sized for a serious put-up season: vegetables, stocks, and beans when the garden comes in all at once.",
+      "category": "homesteading",
+      "tags": ["canning", "food-storage"]
+    },
+    {
+      "id": "ball-jars",
+      "asin": "B004C04HW2",
+      "title": "Ball Regular Mouth Mason Jars, 16 oz (12-pack)",
+      "blurb": "The standard pint for sauces, pickles, and dry goods. Buy more lids than you think you need.",
+      "category": "homesteading",
+      "tags": ["canning"]
+    },
+    {
+      "id": "fiskars-pruner",
+      "asin": "B00002N66H",
+      "title": "Fiskars Bypass Pruning Shears",
+      "blurb": "Clean cuts on fruit wood and cane. A small tool that saves trees if you keep it sharp.",
+      "category": "homesteading",
+      "tags": ["tools", "garden"]
+    },
+    {
+      "id": "soil-test",
+      "asin": "B0000DIWNI",
+      "title": "Luster Leaf Rapitest Soil Test Kit",
+      "blurb": "pH, N, P, and K without sending a sample to town. Enough for a season of beds and pasture edges.",
+      "category": "homesteading",
+      "tags": ["garden", "soil"]
+    },
+    {
+      "id": "heirloom-seeds",
+      "asin": "B07B4L9L9F",
+      "title": "Heirloom Vegetable Seed Variety Pack",
+      "blurb": "Open-pollinated garden staples for a first-year plot. Save the best plants and you own next year's seed.",
+      "category": "homesteading",
+      "tags": ["seeds", "garden"]
+    },
+    {
+      "id": "solar-panel",
+      "asin": "B07PNL5QGH",
+      "title": "100W 12V Monocrystalline Solar Panel",
+      "blurb": "A modest panel for a shed battery, fence charger, or cabin lighting circuit. Start small, measure loads.",
+      "category": "homesteading",
+      "tags": ["solar", "off-grid"]
+    },
+    {
+      "id": "hardware-cloth",
+      "asin": "B071J4C7KX",
+      "title": "1/2-Inch Galvanized Hardware Cloth",
+      "blurb": "Predator-wise poultry runs start here, not with chicken wire. Bury an apron if raccoons visit.",
+      "category": "homesteading",
+      "tags": ["livestock", "fencing"]
+    },
+    {
+      "id": "t-posts",
+      "asin": "B07G9SYQ5L",
+      "title": "Steel T-Posts (Fence Line Pack)",
+      "blurb": "The backbone of pasture and garden fencing. Pair with wire and clips; share a post driver on a compound.",
+      "category": "family-compounds",
+      "tags": ["fencing", "infrastructure"]
+    },
+    {
+      "id": "jackery",
+      "asin": "B07NZPQC6W",
+      "title": "Jackery Portable Power Station",
+      "blurb": "Quiet backup for lights, radios, and a fridge during outages. Useful as a shared compound asset.",
+      "category": "both",
+      "tags": ["solar", "compound-gear"]
+    },
+    {
+      "id": "gmrs-radios",
+      "asin": "B07NZZ1LD2",
+      "title": "Midland GMRS Two-Way Radios (Pair)",
+      "blurb": "When the lane is long and the cell tower is not. One channel for chores, one for emergencies.",
+      "category": "family-compounds",
+      "tags": ["compound-gear", "comms"]
+    },
+    {
+      "id": "rain-barrel",
+      "asin": "B00C1B2L6W",
+      "title": "50–80 Gallon Rain Barrel Kit",
+      "blurb": "Roof-to-garden water without a well permit. Several households can daisy-chain overflow.",
+      "category": "both",
+      "tags": ["water", "infrastructure"]
+    },
+    {
+      "id": "first-aid",
+      "asin": "B08L5F1P5T",
+      "title": "Comprehensive First Aid Kit",
+      "blurb": "A labeled kit for the common house or shop — not a substitute for training, but you will use the gauze.",
+      "category": "family-compounds",
+      "tags": ["compound-gear", "safety"]
+    },
+    {
+      "id": "wheelbarrow",
+      "asin": "B00004R9TL",
+      "title": "Heavy-Duty Contractor Wheelbarrow",
+      "blurb": "Mulch, gravel, firewood, and compost. One good barrow beats three cheap ones on a shared work day.",
+      "category": "family-compounds",
+      "tags": ["tools", "infrastructure"]
+    },
+    {
+      "id": "canning-kit",
+      "asin": "B0000DH8HQ",
+      "title": "Canning Utensil Set (Funnel, Lifter, Ladle)",
+      "blurb": "The unglamorous kit that makes a pressure canner usable: jar lifter, funnel, and bubble wand.",
+      "category": "homesteading",
+      "tags": ["canning"]
+    },
+    {
+      "id": "fence-charger",
+      "asin": "B000BQLR5A",
+      "title": "Electric Fence Energizer (Solar or Plug-in)",
+      "blurb": "Holds livestock in and wildlife out when wire is tight. Size the joules to the fence miles, not the box art.",
+      "category": "both",
+      "tags": ["livestock", "fencing"]
+    }
+  ]
+}

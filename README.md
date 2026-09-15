@@ -1,3 +1,184 @@
-# Compound App
+# Homestead Compound News
 
-Homestead & Family Compound news app (Expo). Scaffolding in progress.
+Cross-platform Expo (React Native) app for homesteaders and family compounds: two clearly separated news + video feeds, an Amazon affiliate store, and email/password accounts.
+
+Display name: **Homestead Compound News**  
+Bundle ID / application ID: `com.imconintl.homesteadcompound`
+
+## Run it
+
+Requirements: Node.js 22.13+ and npm.
+
+```bash
+npm install
+cp .env.example .env   # optional; demo auth works with empty Supabase vars
+npx expo start
+```
+
+Then:
+
+- Scan the QR code with **Expo Go** (SDK must match — this project targets **Expo SDK 57**), or
+- Press `i` / `a` for iOS Simulator / Android emulator, or
+- `npm run web` for a browser preview (some RSS hosts block CORS on web; the app falls back to seed stories).
+
+```bash
+npm run ios
+npm run android
+npm run web
+```
+
+Typecheck:
+
+```bash
+npm run typecheck
+```
+
+Affiliate URL helper tests:
+
+```bash
+npm test
+```
+
+## What you can demo without any keys
+
+1. **Feed** — switch **Homesteading** vs **Family Compounds**. Cards interleave news and YouTube. Pull to refresh. Tap news for an in-app WebView; tap video for an in-app player (plus Open in YouTube).
+2. **Store** — product grid by category. **View on Amazon** opens `https://www.amazon.com/dp/{ASIN}?tag={tag}`.
+3. **Account** — sign up, sign in, sign out, edit display name, set preferred category (Homesteading / Family Compounds / both). Session survives app restarts. Guests can browse; saving favorites prompts for an account.
+
+Until Supabase env vars are set, auth is **demo mode**: accounts live in local secure storage on the device (or `localStorage` on web).
+
+## Environment variables
+
+Copy `.env.example` to `.env` or `.env.local`. Expo only inlines names that start with `EXPO_PUBLIC_`.
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `EXPO_PUBLIC_AMAZON_ASSOCIATE_TAG` | For real affiliate commissions | Amazon Associates tracking ID. Default placeholder: `yourtag-20`. |
+| `EXPO_PUBLIC_SUPABASE_URL` | For live Auth | Project URL, e.g. `https://xxxx.supabase.co` |
+| `EXPO_PUBLIC_SUPABASE_ANON_KEY` | For live Auth | Public anon key from the Supabase project API settings |
+
+Do **not** put a service-role key, a real production Associates ID you are not ready to publish, or any other secret in the repo. The anon key is expected to be public in the client but should still be protected with Auth + RLS on any tables you add later.
+
+### Amazon Associates tag
+
+1. Join [Amazon Associates](https://affiliate-program.amazon.com/).
+2. Copy your tracking ID (often looks like `yourname-20`).
+3. Set `EXPO_PUBLIC_AMAZON_ASSOCIATE_TAG` and rebuild (`npx expo start -c` so Metro reloads env).
+4. Confirm a product URL includes `?tag=your-real-id`.
+
+The store also shows a notice while the placeholder tag is in use.
+
+### Flip demo auth → live Supabase
+
+1. Create a project at [supabase.com](https://supabase.com/).
+2. Authentication → Providers → enable **Email**. For a store build, turn off “Confirm email” or add email templates; otherwise sign-up may require a confirmation link before sign-in.
+3. Project Settings → API → copy **Project URL** and **anon public** key into `.env`:
+
+   ```bash
+   EXPO_PUBLIC_SUPABASE_URL=https://YOUR-project.supabase.co
+   EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJ...your-anon-key
+   ```
+
+4. Restart Expo with cache clear: `npx expo start -c`.
+5. The Account tab pill should read **Supabase auth**.
+
+Profile fields (display name, preferred category) are stored on the Auth user `user_metadata`. No extra database table is required for the MVP. Optional SQL if you later want a `profiles` table:
+
+```sql
+create table public.profiles (
+  id uuid primary key references auth.users (id) on delete cascade,
+  display_name text,
+  preferred_category text check (preferred_category in ('homesteading', 'family-compounds', 'both')),
+  updated_at timestamptz default now()
+);
+
+alter table public.profiles enable row level security;
+
+create policy "Users can read own profile"
+  on public.profiles for select using (auth.uid() = id);
+
+create policy "Users can update own profile"
+  on public.profiles for update using (auth.uid() = id);
+```
+
+Favorites remain on-device, keyed by user id (works in both auth modes).
+
+## Feeds and data
+
+- **Homesteading RSS (when reachable):** [Hobby Farms](https://www.hobbyfarms.com/feed/), [Off The Grid News](https://www.offthegridnews.com/feed/).
+- **Family Compounds RSS (when reachable):** [Foundation for Intentional Community](https://www.ic.org/feed/), [resilience.org](https://www.resilience.org/feed/) (keyword-filtered for land, community, food, stewardship, etc.).
+- If a host is down, blocks bots, or CORS blocks web, the app **merges in original seed briefings** so both feeds still look complete.
+- YouTube IDs are curated in `src/data/videos.ts` (permaculture, compost, ecovillage / co-housing). Playback uses an in-app WebView embed (`react-native-webview`).
+- Store catalog is `src/data/products.json` (ASIN + blurb). URLs are built in `src/lib/affiliate.ts`.
+
+## EAS / App Store / Google Play
+
+This repo is EAS-ready (`eas.json`, bundle IDs in `app.json`). You still need Expo and store accounts.
+
+```bash
+npm i -g eas-cli
+npx expo login          # or eas login
+eas init                # creates an Expo project and writes extra.eas.projectId
+eas build --platform ios --profile production
+eas build --platform android --profile production
+eas submit --platform ios
+eas submit --platform android
+```
+
+Use a [development build](https://docs.expo.dev/develop/development-builds/introduction/) if you outgrow Expo Go.
+
+Set production env vars in [EAS secrets](https://docs.expo.dev/build-reference/variables/) (`eas secret:create`) rather than committing `.env`.
+
+`eas.json` `submit.production.ios.ascAppId` is a placeholder — replace after the app exists in App Store Connect.
+
+## Remaining store-listing checklist
+
+Not finished by this scaffold (Apple and Google require your accounts and legal pages):
+
+- [ ] Replace adaptive/app icons and splash if you want photography or a designer mark (current assets are a simple homestead/compound mark on forest green).
+- [ ] 1024×1024 marketing icon, 5.5"/6.7" iPhone screenshots, Android feature graphic (1024×500) and phone screenshots.
+- [ ] Host a **privacy policy URL** (required for accounts). See notes below; this repo does not ship a public URL.
+- [ ] Apple Developer Program ($99/year) + App Store Connect app record, privacy nutrition labels, export compliance.
+- [ ] Google Play Developer account + Data safety form + content rating questionnaire.
+- [ ] Real Amazon Associates ID in EAS secrets.
+- [ ] Production Supabase project, email templates, and abuse controls (rate limits, captcha if needed).
+- [ ] Support URL, marketing URL, and age rating (likely 4+ / Everyone if content stays non-graphic).
+- [ ] Confirm YouTube ToS for in-app playback of third-party videos; keep “Open in YouTube”.
+- [ ] Review RSS attributions; do not scrape paywalled full text.
+
+## Privacy notes (accounts)
+
+**What we collect (when a user creates an account)**
+
+- Email address
+- Password (never stored in plaintext; demo mode stores a SHA-256 hash with salt in secure storage; Supabase hashes passwords on its servers)
+- Display name
+- Preferred category (Homesteading, Family Compounds, or both)
+- On-device favorites list (item ids)
+
+**What we do not collect in this MVP**
+
+- Precise location, contacts, photos, payment cards, or government IDs
+- Analytics SDKs are not bundled
+
+**Legal copy you should publish before store submission** (adapt and host):
+
+Homestead Compound News provides news, video links, and product links for homesteaders and multi-household rural living. If you create an account we store your email, display name, and category preference so the app can sign you back in and remember settings. In demo builds that data stays on your device. In production builds it is stored with our authentication provider (Supabase). We open Amazon product pages using an Associates tag; Amazon’s privacy policy applies on those pages. We open third-party news sites and YouTube; those services have their own policies. You may request deletion of your account by contacting the developer email listed on the store listing. Do not submit sensitive personal information in your display name.
+
+Add a real contact email and, if using Supabase, a link to [Supabase privacy](https://supabase.com/privacy) plus your deletion process (`auth.admin.deleteUser` from a trusted backend, or a support mailbox).
+
+## Project layout
+
+```
+app/                 Expo Router screens (tabs: Feed, Store, Account)
+src/components/      UI
+src/context/         Auth, preferences, theme
+src/data/            Seed news, videos, products, RSS source list
+src/lib/             RSS, feed interleave, affiliate URLs, auth backends
+src/theme/           Homestead palette
+src/types/           NewsItem | VideoItem | Product | UserProfile
+```
+
+## License
+
+Application code is MIT. Third-party articles, videos, and Amazon listings remain the property of their owners; this app only links to them.
