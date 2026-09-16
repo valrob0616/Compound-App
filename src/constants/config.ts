@@ -2,7 +2,7 @@ import Constants from 'expo-constants';
 
 import type { CategoryId, PreferredCategory } from '@/types';
 
-export const APP_DISPLAY_NAME = 'Homestead Compound News';
+export const APP_DISPLAY_NAME = 'Family Compound & Homestead Living';
 export const BUNDLE_ID = 'com.loudfh.homesteadcompound';
 
 export const CATEGORY_LABELS: Record<CategoryId, string> = {

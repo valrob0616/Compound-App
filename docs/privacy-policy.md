@@ -1,16 +1,16 @@
 # Privacy Policy
 
-**Homestead Compound News**  
+**Family Compound & Homestead Living**  
 Operated by LFH Inc  
 Bundle ID: `com.loudfh.homesteadcompound`
 
 **Effective date:** September 15, 2026
 
-This policy describes how Homestead Compound News (“the app,” “we,” “us”) handles information when you use the iOS or Android app, or a web preview of the same codebase.
+This policy describes how Family Compound & Homestead Living (“the app,” “we,” “us”) handles information when you use the iOS or Android app, or a web preview of the same codebase.
 
 ## Who we are
 
-LFH Inc publishes Homestead Compound News, a news and video companion for homesteaders and family compounds.
+LFH Inc publishes Family Compound & Homestead Living, a news and video companion for homesteaders and family compounds.
 
 Privacy requests: **rob@loudfh.com**
 
@@ -57,7 +57,7 @@ The app has two authentication modes. Which one you are in is shown on the Accou
 
 **Supabase mode (when the publisher has configured a Supabase project).** Sign-up and sign-in are handled by Supabase Auth. Email and password are processed by Supabase. Display name and preferred category are stored in your Auth user metadata. Supabase’s own privacy policy applies to that processing: [https://supabase.com/privacy](https://supabase.com/privacy).
 
-Sessions are kept so you stay signed in after restarting the app. Favorites stay on the device in both modes; they are not uploaded to a Homestead Compound News server in this version.
+Sessions are kept so you stay signed in after restarting the app. Favorites stay on the device in both modes; they are not uploaded to a Family Compound & Homestead Living server in this version.
 
 ## How we use information
 
@@ -105,7 +105,7 @@ When you use certain features, you leave our screens or load third-party content
 
 ## Children
 
-Homestead Compound News is not directed at children under 13, and we do not knowingly collect personal information from children under 13. If you believe a child under 13 created an account, contact us and we will delete it.
+Family Compound & Homestead Living is not directed at children under 13, and we do not knowingly collect personal information from children under 13. If you believe a child under 13 created an account, contact us and we will delete it.
 
 ## Security
 
@@ -119,6 +119,6 @@ If we change this policy, we will update the effective date and the copy in the 
 
 LFH Inc  
 Email: rob@loudfh.com  
-App: Homestead Compound News (`com.loudfh.homesteadcompound`)
+App: Family Compound & Homestead Living (`com.loudfh.homesteadcompound`)
 
 If this contact address changes, the Account screen and a later revision of this policy will show the address in use.

@@ -1,6 +1,6 @@
 # Terms of Use
 
-**Homestead Compound News**  
+**Family Compound & Homestead Living**  
 Operated by LFH Inc  
 **Effective date:** September 15, 2026
 
@@ -8,7 +8,7 @@ These terms are a short agreement for using the app. The [Privacy Policy](./priv
 
 ## The app
 
-Homestead Compound News offers news and video feeds for Homesteading and Family Compounds. The Store tab is Coming Soon. Features may change.
+Family Compound & Homestead Living offers news and video feeds for Homesteading and Family Compounds. The Store tab is Coming Soon. Features may change.
 
 ## Accounts
 

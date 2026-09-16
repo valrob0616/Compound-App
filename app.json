@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Homestead Compound News",
+    "name": "Family Compound & Homestead Living",
     "slug": "homestead-compound-news",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -11,12 +11,13 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.loudfh.homesteadcompound",
       "infoPlist": {
-        "CFBundleDisplayName": "Homestead Compound News",
+        "CFBundleDisplayName": "Family Compound & Homestead Living",
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
       "package": "com.loudfh.homesteadcompound",
+      "label": "Family Compound & Homestead Living",
       "adaptiveIcon": {
         "backgroundColor": "#2C4A3E",
         "foregroundImage": "./assets/images/android-icon-foreground.png",

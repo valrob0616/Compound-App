@@ -22,16 +22,16 @@ export const privacyPolicy: LegalDocument = {
   blocks: [
     {
       type: 'p',
-      text: 'Homestead Compound News is operated by LFH Inc. Bundle ID: com.loudfh.homesteadcompound.',
+      text: 'Family Compound & Homestead Living is operated by LFH Inc. Bundle ID: com.loudfh.homesteadcompound.',
     },
     {
       type: 'p',
-      text: 'This policy describes how Homestead Compound News (“the app,” “we,” “us”) handles information when you use the iOS or Android app, or a web preview of the same codebase.',
+      text: 'This policy describes how Family Compound & Homestead Living (“the app,” “we,” “us”) handles information when you use the iOS or Android app, or a web preview of the same codebase.',
     },
     { type: 'h2', text: 'Who we are' },
     {
       type: 'p',
-      text: `LFH Inc publishes Homestead Compound News, a news and video companion for homesteaders and family compounds. Privacy requests: ${CONTACT}.`,
+      text: `LFH Inc publishes Family Compound & Homestead Living, a news and video companion for homesteaders and family compounds. Privacy requests: ${CONTACT}.`,
     },
     { type: 'h2', text: 'What this app does' },
     {
@@ -90,7 +90,7 @@ export const privacyPolicy: LegalDocument = {
     },
     {
       type: 'p',
-      text: 'Sessions are kept so you stay signed in after restarting the app. Favorites stay on the device in both modes; they are not uploaded to a Homestead Compound News server in this version.',
+      text: 'Sessions are kept so you stay signed in after restarting the app. Favorites stay on the device in both modes; they are not uploaded to a Family Compound & Homestead Living server in this version.',
     },
     { type: 'h2', text: 'How we use information' },
     {
@@ -136,7 +136,7 @@ export const privacyPolicy: LegalDocument = {
     { type: 'h2', text: 'Children' },
     {
       type: 'p',
-      text: 'Homestead Compound News is not directed at children under 13, and we do not knowingly collect personal information from children under 13. If you believe a child under 13 created an account, contact us and we will delete it.',
+      text: 'Family Compound & Homestead Living is not directed at children under 13, and we do not knowingly collect personal information from children under 13. If you believe a child under 13 created an account, contact us and we will delete it.',
     },
     { type: 'h2', text: 'Security' },
     {
@@ -151,7 +151,7 @@ export const privacyPolicy: LegalDocument = {
     { type: 'h2', text: 'Contact' },
     {
       type: 'p',
-      text: `LFH Inc. Email: ${CONTACT}. App: Homestead Compound News (com.loudfh.homesteadcompound). If this contact address changes, the Account screen and a later revision of this policy will show the address in use.`,
+      text: `LFH Inc. Email: ${CONTACT}. App: Family Compound & Homestead Living (com.loudfh.homesteadcompound). If this contact address changes, the Account screen and a later revision of this policy will show the address in use.`,
     },
   ],
 };
@@ -163,12 +163,12 @@ export const termsOfUse: LegalDocument = {
   blocks: [
     {
       type: 'p',
-      text: 'These terms are a short agreement for using Homestead Compound News, operated by LFH Inc. The Privacy Policy explains how information is handled.',
+      text: 'These terms are a short agreement for using Family Compound & Homestead Living, operated by LFH Inc. The Privacy Policy explains how information is handled.',
     },
     { type: 'h2', text: 'The app' },
     {
       type: 'p',
-      text: 'Homestead Compound News offers news and video feeds for Homesteading and Family Compounds. The Store tab is Coming Soon. Features may change.',
+      text: 'Family Compound & Homestead Living offers news and video feeds for Homesteading and Family Compounds. The Store tab is Coming Soon. Features may change.',
     },
     { type: 'h2', text: 'Accounts' },
     {
