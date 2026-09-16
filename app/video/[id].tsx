@@ -2,12 +2,12 @@ import * as WebBrowser from 'expo-web-browser';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import { WebView } from 'react-native-webview';
 
 import { PrimaryButton } from '@/components/ui';
 import { VideoDisclaimer } from '@/components/VideoDisclaimer';
+import { YoutubeEmbed } from '@/components/YoutubeEmbed';
 import { useAppTheme } from '@/context/ThemeContext';
-import { youtubeEmbedUrl, youtubeWatchUrl } from '@/lib/affiliate';
+import { youtubeWatchUrl } from '@/lib/affiliate';
 import { lookupFeedItem } from '@/lib/feed';
 import { spacing } from '@/theme';
 
@@ -21,13 +21,15 @@ export default function VideoScreen() {
   const { colors } = useAppTheme();
   const item = id ? lookupFeedItem(id) : undefined;
   const videoId = youtubeId ?? (item && item.kind === 'video' ? item.youtubeId : undefined);
+  const resolvedVideoId = Array.isArray(videoId) ? videoId[0] : videoId;
   const heading = title ?? (item && item.kind === 'video' ? item.title : 'Video');
+  const headingText = Array.isArray(heading) ? heading[0] : heading;
 
   useEffect(() => {
-    navigation.setOptions({ title: heading?.slice(0, 42) ?? 'Video' });
-  }, [heading, navigation]);
+    navigation.setOptions({ title: headingText?.slice(0, 42) ?? 'Video' });
+  }, [headingText, navigation]);
 
-  if (!videoId) {
+  if (!resolvedVideoId) {
     return (
       <View style={[styles.fallback, { backgroundColor: colors.background }]}>
         <Text style={{ color: colors.text }}>This video could not be found.</Text>
@@ -38,17 +40,10 @@ export default function VideoScreen() {
   return (
     <View style={[styles.wrap, { backgroundColor: colors.background }]}>
       <View style={styles.player}>
-        <WebView
-          source={{ uri: youtubeEmbedUrl(videoId) }}
-          style={styles.web}
-          allowsFullscreenVideo
-          allowsInlineMediaPlayback
-          mediaPlaybackRequiresUserAction={false}
-          javaScriptEnabled
-        />
+        <YoutubeEmbed youtubeId={resolvedVideoId} title={headingText ?? 'YouTube video'} />
       </View>
       <ScrollView contentContainerStyle={styles.meta} style={{ backgroundColor: colors.background }}>
-        <Text style={[styles.title, { color: colors.text }]}>{heading}</Text>
+        <Text style={[styles.title, { color: colors.text }]}>{headingText}</Text>
         {item && item.kind === 'video' ? (
           <Text style={[styles.summary, { color: colors.textMuted }]}>{item.summary}</Text>
         ) : null}
@@ -59,7 +54,7 @@ export default function VideoScreen() {
         <PrimaryButton
           label="Open in YouTube"
           variant="secondary"
-          onPress={() => void WebBrowser.openBrowserAsync(youtubeWatchUrl(videoId))}
+          onPress={() => void WebBrowser.openBrowserAsync(youtubeWatchUrl(resolvedVideoId))}
         />
       </ScrollView>
     </View>
@@ -69,7 +64,6 @@ export default function VideoScreen() {
 const styles = StyleSheet.create({
   wrap: { flex: 1 },
   player: { width: '100%', aspectRatio: 16 / 9, backgroundColor: '#000' },
-  web: { flex: 1 },
   meta: { padding: spacing.md, gap: spacing.md, paddingBottom: 48 },
   title: { fontSize: 22, fontWeight: '700' },
   summary: { fontSize: 15, lineHeight: 22 },
