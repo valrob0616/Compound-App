@@ -1,6 +1,6 @@
 # Family Compound & Homestead Living
 
-Cross-platform Expo (React Native) app for homesteaders and family compounds: two clearly separated news + video feeds, a Store tab (Coming Soon for first publish), and email/password accounts.
+Cross-platform Expo (React Native) app for homesteaders and family compounds: two clearly separated news feeds, a dedicated Featured Videos / YouTube tab for each category, a Store tab (Coming Soon for first publish), and email/password accounts.
 
 Display name: **Family Compound & Homestead Living**  
 Bundle ID / application ID: `com.loudfh.homesteadcompound`
@@ -33,7 +33,7 @@ Typecheck:
 npm run typecheck
 ```
 
-Tests (affiliate URLs, RSS parse, Family Compound topic filter):
+Tests (affiliate URLs, RSS parse, Family Compound topic filter, featured videos):
 
 ```bash
 npm test
@@ -47,9 +47,10 @@ npm run preview:feeds
 
 ## What you can demo without any keys
 
-1. **Feed** — switch **Homesteading** vs **Family Compounds**. Cards interleave news and YouTube. Pull to refresh. Tap news for an in-app WebView; tap video for an in-app player (plus Open in YouTube).
-2. **Store** — **Coming Soon** for first publish. Homesteading and Family Compounds shopping (Amazon affiliate picks) will be added after launch. Catalog JSON and URL helpers stay in the repo; set `STORE_CATALOG_ENABLED` in `src/constants/config.ts` when you are ready.
-3. **Account** — sign up, sign in, sign out, edit display name, set preferred category (Homesteading / Family Compounds / both). Session survives app restarts. Guests can browse; saving favorites prompts for an account. **Privacy Policy** and **Terms of Use** are on the Account tab without signing in.
+1. **Feed** — switch **Homesteading** vs **Family Compounds**. Cards interleave news and YouTube. Pull to refresh. Tap news for an in-app WebView; tap video for an in-app player (plus Open in YouTube). A shortcut opens the dedicated Videos tab for the active category.
+2. **Videos** — **Featured YouTube videos** for the active category (Homesteading or Family Compounds), not mixed into the news list. A prominent disclaimer states the clips are third-party YouTube content, not owned or created by LFH Inc or this app. Tap a card for the same in-app player and **Open in YouTube**.
+3. **Store** — **Coming Soon** for first publish. Homesteading and Family Compounds shopping (Amazon affiliate picks) will be added after launch. Catalog JSON and URL helpers stay in the repo; set `STORE_CATALOG_ENABLED` in `src/constants/config.ts` when you are ready.
+4. **Account** — sign up, sign in, sign out, edit display name, set preferred category (Homesteading / Family Compounds / both). Session survives app restarts. Guests can browse; saving favorites prompts for an account. **Privacy Policy** and **Terms of Use** are on the Account tab without signing in.
 
 Until Supabase env vars are set, auth is **demo mode**: accounts live in local secure storage on the device (or `localStorage` on web).
 
@@ -117,7 +118,7 @@ Favorites remain on-device, keyed by user id (works in both auth modes).
 - **Homesteading RSS (when reachable):** [Hobby Farms](https://www.hobbyfarms.com/feed/), [Off The Grid News](https://www.offthegridnews.com/feed/). Unfiltered on purpose — this category is gardening, livestock, off-grid, and rural DIY.
 - **Family Compounds RSS (when reachable):** dedicated multi-gen / compound blogs ([Four Generations One Roof](https://www.fourgenerationsoneroof.com/category/multigenerational-living/feed/), [Our Multi-Gen Life](https://ourmultigenlife.com/feed/), [Feels Like Homestead](https://feelslikehomestead.com/category/multigenerational-living/feed/) multi-gen category), plus [Foundation for Intentional Community](https://www.ic.org/feed/) and [Cohousing Alliance](https://cohousingalliance.org/feed/) after a **compound-living topic filter** (family compounds, multi-household / multi-generation living, ADUs, kin-based land sharing — not generic homesteading).
 - If a host is down, blocks bots, or CORS blocks web, the app **merges in original seed briefings** so both feeds still look complete.
-- YouTube IDs are curated in `src/data/videos.ts` (homesteading: permaculture and compost; family compounds: multi-generational living, ADUs, co-housing on shared land). Playback uses an in-app WebView embed (`react-native-webview`).
+- YouTube IDs are curated in `src/data/videos.ts` (homesteading: permaculture and compost; family compounds: multi-generational living, ADUs, co-housing on shared land). The **Videos** tab lists featured clips for the active category; the Feed still interleaves a subset with news. Playback uses an in-app WebView embed (`react-native-webview`). Videos are third-party YouTube content — not owned or created by LFH Inc or the app.
 - Store catalog JSON and affiliate URL builder remain in `src/data/products.json` and `src/lib/affiliate.ts` for a later release. The Store tab currently shows Coming Soon.
 
 ## EAS / App Store / Google Play
@@ -215,7 +216,7 @@ Have an attorney review `docs/privacy-policy.md` before you treat it as final fo
 ## Project layout
 
 ```
-app/                 Expo Router screens (tabs: Feed, Store, Account; legal screens)
+app/                 Expo Router screens (tabs: Feed, Videos, Store, Account; legal screens)
 src/components/      UI
 src/content/         In-app Privacy Policy and Terms
 src/context/         Auth, preferences, theme
