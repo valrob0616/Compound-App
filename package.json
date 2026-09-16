@@ -9,7 +9,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test src/lib/affiliate.test.ts src/lib/rss.test.ts"
+    "test": "node --experimental-strip-types --test src/lib/affiliate.test.ts src/lib/rss.test.ts src/lib/topic-filter.test.ts src/lib/feed-relevance.test.ts",
+    "preview:feeds": "node --experimental-strip-types scripts/preview-feeds.ts"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",

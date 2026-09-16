@@ -1,6 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { FavoriteButton } from '@/components/FavoriteButton';
+import { CATEGORY_LABELS } from '@/constants/config';
 import { useAppTheme } from '@/context/ThemeContext';
 import { formatRelativeDate } from '@/lib/format';
 import { radii, spacing } from '@/theme';
@@ -28,7 +29,9 @@ export function NewsCard({ item, favorite, onOpen, onToggleFavorite }: Props) {
         <Image source={{ uri: item.imageUrl }} style={styles.image} accessibilityIgnoresInvertColors />
       ) : (
         <View style={[styles.imageFallback, { backgroundColor: colors.cardMuted }]}>
-          <Text style={[styles.fallbackText, { color: colors.tint }]}>News</Text>
+          <Text style={[styles.fallbackText, { color: colors.tint }]}>
+            {CATEGORY_LABELS[item.category]}
+          </Text>
         </View>
       )}
       <View style={styles.body}>

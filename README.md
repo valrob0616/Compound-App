@@ -33,10 +33,16 @@ Typecheck:
 npm run typecheck
 ```
 
-Affiliate URL helper tests:
+Tests (affiliate URLs, RSS parse, Family Compound topic filter):
 
 ```bash
 npm test
+```
+
+Preview live RSS titles after Family Compound topic filters (network required):
+
+```bash
+npm run preview:feeds
 ```
 
 ## What you can demo without any keys
@@ -108,10 +114,10 @@ Favorites remain on-device, keyed by user id (works in both auth modes).
 
 ## Feeds and data
 
-- **Homesteading RSS (when reachable):** [Hobby Farms](https://www.hobbyfarms.com/feed/), [Off The Grid News](https://www.offthegridnews.com/feed/).
-- **Family Compounds RSS (when reachable):** [Foundation for Intentional Community](https://www.ic.org/feed/), [resilience.org](https://www.resilience.org/feed/) (keyword-filtered for land, community, food, stewardship, etc.).
+- **Homesteading RSS (when reachable):** [Hobby Farms](https://www.hobbyfarms.com/feed/), [Off The Grid News](https://www.offthegridnews.com/feed/). Unfiltered on purpose — this category is gardening, livestock, off-grid, and rural DIY.
+- **Family Compounds RSS (when reachable):** dedicated multi-gen / compound blogs ([Four Generations One Roof](https://www.fourgenerationsoneroof.com/category/multigenerational-living/feed/), [Our Multi-Gen Life](https://ourmultigenlife.com/feed/), [Feels Like Homestead](https://feelslikehomestead.com/category/multigenerational-living/feed/) multi-gen category), plus [Foundation for Intentional Community](https://www.ic.org/feed/) and [Cohousing Alliance](https://cohousingalliance.org/feed/) after a **compound-living topic filter** (family compounds, multi-household / multi-generation living, ADUs, kin-based land sharing — not generic homesteading).
 - If a host is down, blocks bots, or CORS blocks web, the app **merges in original seed briefings** so both feeds still look complete.
-- YouTube IDs are curated in `src/data/videos.ts` (permaculture, compost, ecovillage / co-housing). Playback uses an in-app WebView embed (`react-native-webview`).
+- YouTube IDs are curated in `src/data/videos.ts` (homesteading: permaculture and compost; family compounds: multi-generational living, ADUs, co-housing on shared land). Playback uses an in-app WebView embed (`react-native-webview`).
 - Store catalog JSON and affiliate URL builder remain in `src/data/products.json` and `src/lib/affiliate.ts` for a later release. The Store tab currently shows Coming Soon.
 
 ## EAS / App Store / Google Play
