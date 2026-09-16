@@ -9,7 +9,7 @@ export const SEED_NEWS: NewsItem[] = [
     summary:
       'A practical briefing on cool-season beds — garlic, leafy greens, and cover crops — so homestead plots keep producing after summer harvests wind down.',
     url: 'https://www.nrcs.usda.gov/conservation-basics/conservation-by-state/cover-crops',
-    source: 'Homestead Compound News',
+    source: 'Family Compound & Homestead Living',
     publishedAt: '2026-09-08T12:00:00.000Z',
     author: 'Editorial briefing',
   },
@@ -21,7 +21,7 @@ export const SEED_NEWS: NewsItem[] = [
     summary:
       'Keep poultry and small ruminants hydrated when overnight lows drop. We outline low-tech backups that work when grid power is unreliable.',
     url: 'https://www.nrcs.usda.gov/resources/guides-and-instructions',
-    source: 'Homestead Compound News',
+    source: 'Family Compound & Homestead Living',
     publishedAt: '2026-09-06T12:00:00.000Z',
     author: 'Editorial briefing',
   },
@@ -33,7 +33,7 @@ export const SEED_NEWS: NewsItem[] = [
     summary:
       'Home food preservation is only as safe as the process. A short checklist drawn from public extension guidance before the autumn put-up rush.',
     url: 'https://nchfp.uga.edu/',
-    source: 'Homestead Compound News',
+    source: 'Family Compound & Homestead Living',
     publishedAt: '2026-09-04T12:00:00.000Z',
     author: 'Editorial briefing',
   },
@@ -45,7 +45,7 @@ export const SEED_NEWS: NewsItem[] = [
     summary:
       'How to think about daily watt-hours, winter sun hours, and battery days of autonomy without overbuying gear you will not use.',
     url: 'https://www.energy.gov/energysaver/solar-photovoltaic-system-design-basics',
-    source: 'Homestead Compound News',
+    source: 'Family Compound & Homestead Living',
     publishedAt: '2026-09-01T12:00:00.000Z',
     author: 'Editorial briefing',
   },
@@ -57,7 +57,7 @@ export const SEED_NEWS: NewsItem[] = [
     summary:
       'Hardware cloth, buried aprons, and gate discipline prevent more flock losses than any gadget. A field-notes approach to a tight chicken run.',
     url: 'https://www.hobbyfarms.com/how-to-keep-free-range-chickens-safe-adding-cover/',
-    source: 'Homestead Compound News',
+    source: 'Family Compound & Homestead Living',
     publishedAt: '2026-08-28T12:00:00.000Z',
     author: 'Editorial briefing',
   },
@@ -69,7 +69,7 @@ export const SEED_NEWS: NewsItem[] = [
     summary:
       'Open-pollinated varieties earn their keep when you can replant them. Three drying methods and a simple winter storage protocol.',
     url: 'https://www.hobbyfarms.com/how-to-dry-seeds-3-techniques/',
-    source: 'Homestead Compound News',
+    source: 'Family Compound & Homestead Living',
     publishedAt: '2026-08-24T12:00:00.000Z',
     author: 'Editorial briefing',
   },
@@ -81,7 +81,7 @@ export const SEED_NEWS: NewsItem[] = [
     summary:
       'Multi-household land works only if water, waste, and access are sized for everyone. A planning order that avoids expensive do-overs.',
     url: 'https://www.epa.gov/septic',
-    source: 'Homestead Compound News',
+    source: 'Family Compound & Homestead Living',
     publishedAt: '2026-09-09T12:00:00.000Z',
     author: 'Editorial briefing',
   },
@@ -105,7 +105,7 @@ export const SEED_NEWS: NewsItem[] = [
     summary:
       'Rural multi-home sites need a common wildfire plan: defensible space, labeled caches, and one radio channel everybody actually uses.',
     url: 'https://www.firewise.org/',
-    source: 'Homestead Compound News',
+    source: 'Family Compound & Homestead Living',
     publishedAt: '2026-09-05T12:00:00.000Z',
     author: 'Editorial briefing',
   },
@@ -117,7 +117,7 @@ export const SEED_NEWS: NewsItem[] = [
     summary:
       'Write use, maintenance, and exit rules while everyone is still friendly. Easements, cost-shares, and a simple annual work day beat informal promises.',
     url: 'https://www.ic.org/',
-    source: 'Homestead Compound News',
+    source: 'Family Compound & Homestead Living',
     publishedAt: '2026-09-02T12:00:00.000Z',
     author: 'Editorial briefing',
   },
@@ -129,7 +129,7 @@ export const SEED_NEWS: NewsItem[] = [
     summary:
       'A shared kitchen can cut cost and isolation — if cleaning, food storage, and allergy rules are posted and boringly consistent.',
     url: 'https://www.resilience.org/stories/2026-09-10/climate-communication-needs-to-get-real-in-the-face-of-the-great-unraveling/',
-    source: 'Homestead Compound News',
+    source: 'Family Compound & Homestead Living',
     publishedAt: '2026-08-30T12:00:00.000Z',
     author: 'Editorial briefing',
   },

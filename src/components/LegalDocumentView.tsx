@@ -2,7 +2,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { PrimaryButton } from '@/components/ui';
-import { privacyContactEmail } from '@/constants/config';
+import { APP_DISPLAY_NAME, privacyContactEmail } from '@/constants/config';
 import { useAppTheme } from '@/context/ThemeContext';
 import type { LegalDocument } from '@/content/legal';
 import { spacing } from '@/theme';
@@ -26,7 +26,7 @@ export function LegalDocumentView({ document, hostedUrl }: Props) {
         {document.title}
       </Text>
       <Text style={[styles.meta, { color: colors.textMuted }]}>
-        Homestead Compound News · LFH Inc{'\n'}
+        {APP_DISPLAY_NAME} · LFH Inc{'\n'}
         Effective {document.effectiveDate}
       </Text>
       {document.blocks.map((block, index) => {

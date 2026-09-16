@@ -1,8 +1,8 @@
-# Homestead Compound News
+# Family Compound & Homestead Living
 
 Cross-platform Expo (React Native) app for homesteaders and family compounds: two clearly separated news + video feeds, a Store tab (Coming Soon for first publish), and email/password accounts.
 
-Display name: **Homestead Compound News**  
+Display name: **Family Compound & Homestead Living**  
 Bundle ID / application ID: `com.loudfh.homesteadcompound`
 
 ## Run it

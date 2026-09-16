@@ -97,5 +97,5 @@ export const radii = {
   pill: 999,
 } as const;
 
-export const APP_NAME = 'Homestead Compound News';
+export const APP_NAME = 'Family Compound & Homestead Living';
 export const APP_TAGLINE = 'News, video, and gear for the land and the people on it.';
