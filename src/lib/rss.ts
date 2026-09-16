@@ -1,24 +1,25 @@
-import type { RssSource } from '@/data/rss-sources';
+import { CATEGORY_TOPIC_FILTERS, type RssSource } from '@/data/rss-sources';
 import type { NewsItem } from '@/types';
 
 import { parseRssItems, type ParsedRssItem } from './rss-parse';
+import { itemMatchesSource } from './topic-filter';
 
 export { parseRssItems } from './rss-parse';
+export { itemMatchesSource, matchesTopicFilter } from './topic-filter';
 
-function matchesKeywords(item: ParsedRssItem, keywords?: string[]): boolean {
-  if (!keywords?.length) return true;
-  const hay = `${item.title} ${item.description}`.toLowerCase();
-  return keywords.some((word) => hay.includes(word.toLowerCase()));
-}
+const CARD_SUMMARY_LENGTH = 280;
 
 function toNews(source: RssSource, item: ParsedRssItem, index: number): NewsItem {
   const published = item.pubDate ? new Date(item.pubDate) : new Date();
+  const summary = item.description
+    ? item.description.slice(0, CARD_SUMMARY_LENGTH)
+    : `From ${source.name}.`;
   return {
     kind: 'news',
     id: `rss-${source.id}-${index}-${hashId(item.link)}`,
     category: source.category,
     title: item.title,
-    summary: item.description || `From ${source.name}.`,
+    summary,
     url: item.link,
     source: source.name,
     publishedAt: Number.isNaN(published.getTime()) ? new Date().toISOString() : published.toISOString(),
@@ -48,7 +49,9 @@ export async function fetchRssSource(source: RssSource, timeoutMs = 8000): Promi
     }
     const xml = await response.text();
     return parseRssItems(xml)
-      .filter((item) => matchesKeywords(item, source.keywords))
+      .filter((item) =>
+        itemMatchesSource(item, source, CATEGORY_TOPIC_FILTERS[source.category]),
+      )
       .map((item, index) => toNews(source, item, index));
   } finally {
     clearTimeout(timer);

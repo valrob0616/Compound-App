@@ -14,7 +14,7 @@ export const CATEGORY_BLURBS: Record<CategoryId, string> = {
   homesteading:
     'Gardening, livestock, off-grid systems, DIY, and rural self-reliance.',
   'family-compounds':
-    'Multi-household living, shared infrastructure, land stewardship, and compound planning.',
+    'Multi-household and multi-generation living on shared family land: compounds, ADUs, kin-based land sharing, and compound planning — not generic homesteading.',
 };
 
 export const PREFERRED_LABELS: Record<PreferredCategory, string> = {

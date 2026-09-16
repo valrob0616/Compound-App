@@ -54,7 +54,8 @@ export function parseRssItems(xml: string): ParsedRssItem[] {
       return {
         title,
         link,
-        description: description.slice(0, 280),
+        // Keep enough body text for topic filters; cards slice this later.
+        description: description.slice(0, 2000),
         pubDate,
         imageUrl: mediaUrl(block),
         author,

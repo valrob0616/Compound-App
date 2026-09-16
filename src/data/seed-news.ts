@@ -1,4 +1,4 @@
-import type { NewsItem } from '@/types';
+import type { NewsItem } from '../types/index.ts';
 
 export const SEED_NEWS: NewsItem[] = [
   {
@@ -125,10 +125,10 @@ export const SEED_NEWS: NewsItem[] = [
     kind: 'news',
     id: 'seed-fc-05',
     category: 'family-compounds',
-    title: 'Community kitchens: one stove, many households',
+    title: 'Community kitchens: one stove, many related households',
     summary:
-      'A shared kitchen can cut cost and isolation — if cleaning, food storage, and allergy rules are posted and boringly consistent.',
-    url: 'https://www.resilience.org/stories/2026-09-10/climate-communication-needs-to-get-real-in-the-face-of-the-great-unraveling/',
+      'A shared kitchen on family land can cut cost and isolation — if cleaning, food storage, and allergy rules are posted and boringly consistent across households.',
+    url: 'https://www.ic.org/',
     source: 'Family Compound & Homestead Living',
     publishedAt: '2026-08-30T12:00:00.000Z',
     author: 'Editorial briefing',
@@ -137,12 +137,12 @@ export const SEED_NEWS: NewsItem[] = [
     kind: 'news',
     id: 'seed-fc-06',
     category: 'family-compounds',
-    title: 'The magic of hot composting at compound scale',
+    title: 'ADUs and guest houses: a second household on family land',
     summary:
-      'Several households generate enough greens and browns to heat a pile properly. A shared compost pad is infrastructure, not a chore chart.',
-    url: 'https://www.resilience.org/stories/2026-09-08/the-magic-of-hot-composting/',
-    source: 'resilience',
-    publishedAt: '2026-09-08T08:00:15.000Z',
-    author: 'Brian Kaller',
+      'A detached ADU, casita, or guest house lets parents, adult children, or siblings live independently on the same acreage — shared well and driveway, separate front doors.',
+    url: 'https://www.huduser.gov/portal/periodicals/em/winter21/highlight1.html',
+    source: 'Family Compound & Homestead Living',
+    publishedAt: '2026-09-08T08:00:00.000Z',
+    author: 'Editorial briefing',
   },
 ];
