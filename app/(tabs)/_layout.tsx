@@ -38,6 +38,17 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="videos"
+        options={{
+          title: 'Videos',
+          headerTitle: 'Featured Videos',
+          tabBarAccessibilityLabel: 'Featured YouTube videos',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name={Platform.OS === 'ios' ? 'play-circle' : 'play-circle-outline'} size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="store"
         options={{
           title: 'Store',

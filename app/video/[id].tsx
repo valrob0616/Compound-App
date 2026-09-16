@@ -1,10 +1,11 @@
 import * as WebBrowser from 'expo-web-browser';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 import { PrimaryButton } from '@/components/ui';
+import { VideoDisclaimer } from '@/components/VideoDisclaimer';
 import { useAppTheme } from '@/context/ThemeContext';
 import { youtubeEmbedUrl, youtubeWatchUrl } from '@/lib/affiliate';
 import { lookupFeedItem } from '@/lib/feed';
@@ -46,17 +47,21 @@ export default function VideoScreen() {
           javaScriptEnabled
         />
       </View>
-      <View style={styles.meta}>
+      <ScrollView contentContainerStyle={styles.meta} style={{ backgroundColor: colors.background }}>
         <Text style={[styles.title, { color: colors.text }]}>{heading}</Text>
         {item && item.kind === 'video' ? (
           <Text style={[styles.summary, { color: colors.textMuted }]}>{item.summary}</Text>
         ) : null}
+        {item && item.kind === 'video' ? (
+          <Text style={[styles.channel, { color: colors.tint }]}>YouTube · {item.channel}</Text>
+        ) : null}
+        <VideoDisclaimer compact />
         <PrimaryButton
           label="Open in YouTube"
           variant="secondary"
           onPress={() => void WebBrowser.openBrowserAsync(youtubeWatchUrl(videoId))}
         />
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -65,8 +70,9 @@ const styles = StyleSheet.create({
   wrap: { flex: 1 },
   player: { width: '100%', aspectRatio: 16 / 9, backgroundColor: '#000' },
   web: { flex: 1 },
-  meta: { padding: spacing.md, gap: spacing.md },
+  meta: { padding: spacing.md, gap: spacing.md, paddingBottom: 48 },
   title: { fontSize: 22, fontWeight: '700' },
   summary: { fontSize: 15, lineHeight: 22 },
+  channel: { fontSize: 13, fontWeight: '700', letterSpacing: 0.3 },
   fallback: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: spacing.lg },
 });

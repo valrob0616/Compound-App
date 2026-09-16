@@ -3,6 +3,7 @@ import { Alert, FlatList, RefreshControl, StyleSheet, Text, View } from 'react-n
 import { useRouter } from 'expo-router';
 
 import { CategorySwitcher } from '@/components/CategorySwitcher';
+import { FeaturedVideosLink } from '@/components/FeaturedVideosLink';
 import { GuestBanner } from '@/components/GuestBanner';
 import { NewsCard } from '@/components/NewsCard';
 import { VideoCard } from '@/components/VideoCard';
@@ -108,6 +109,7 @@ export default function FeedScreen() {
         <View>
           <CategorySwitcher value={category} onChange={setCategory} />
           <GuestBanner />
+          <FeaturedVideosLink category={category} />
           <Text style={[styles.source, { color: colors.textMuted }]}>{sourceLabel}</Text>
           {error ? <Text style={[styles.error, { color: colors.danger }]}>{error}</Text> : null}
         </View>

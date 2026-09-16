@@ -3,6 +3,7 @@ import { SEED_NEWS } from '@/data/seed-news';
 import { CURATED_VIDEOS } from '@/data/videos';
 import type { CategoryId, FeedItem, FeedLoadResult, NewsItem, VideoItem } from '@/types';
 import { fetchRssSource } from './rss';
+import { videosForCategory } from './videos';
 
 function byDateDesc(a: { publishedAt: string }, b: { publishedAt: string }): number {
   return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
@@ -64,7 +65,7 @@ export async function loadCategoryFeed(category: CategoryId): Promise<FeedLoadRe
   const live = liveChunks.flat();
   const seed = SEED_NEWS.filter((item) => item.category === category);
   const merged = mergeNews(live, seed);
-  const videos = CURATED_VIDEOS.filter((item) => item.category === category);
+  const videos = videosForCategory(category);
   return {
     items: interleaveFeed(merged.items, videos),
     newsSource: merged.source,
