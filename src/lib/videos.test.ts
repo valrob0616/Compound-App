@@ -55,7 +55,34 @@ test('videosForCategory does not mix the other category into the list', () => {
 });
 
 test('family-compound featured videos match the compound editorial bar', () => {
-  for (const item of videosForCategory('family-compounds')) {
+  const compound = videosForCategory('family-compounds');
+  const haystacks = compound.map((item) => `${item.title} ${item.summary}`.toLowerCase());
+  assert.equal(
+    haystacks.some((hay) => hay.includes('barndominium')),
+    true,
+    'expected a barndominium clip',
+  );
+  assert.equal(
+    haystacks.some((hay) => hay.includes('financ') || hay.includes('construction loan')),
+    true,
+    'expected a financing clip',
+  );
+  assert.equal(
+    haystacks.some((hay) => hay.includes('micro farm') || hay.includes('micro-farm')),
+    true,
+    'expected a micro-farm clip',
+  );
+  assert.equal(
+    haystacks.some((hay) => hay.includes('site plan') || hay.includes('compound design')),
+    true,
+    'expected a compound-design clip',
+  );
+  assert.equal(
+    compound.some((item) => /tedx|four generations living together/i.test(item.title)),
+    false,
+    'de-emphasize TEDx / four-generation-only clips',
+  );
+  for (const item of compound) {
     const hay = `${item.title} ${item.summary}`;
     assert.equal(matchesTopicFilter(hay, FAMILY_COMPOUND_TOPIC), true, item.title);
   }
