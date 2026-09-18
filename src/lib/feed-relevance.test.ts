@@ -19,24 +19,51 @@ test('homesteading RSS sources stay on the original homestead publishers', () =>
   );
 });
 
-test('family-compound RSS favors compound-specific feeds and drops resilience.org', () => {
+test('family-compound RSS widens past multi-gen-only blogs and still drops resilience.org', () => {
   const compound = RSS_SOURCES.filter((source) => source.category === 'family-compounds');
   const ids = compound.map((source) => source.id);
   assert.equal(ids.includes('resilience'), false);
+  assert.equal(ids.includes('our-multi-gen-life'), false);
   assert.equal(ids.includes('four-gen-one-roof'), true);
-  assert.equal(ids.includes('our-multi-gen-life'), true);
   assert.equal(ids.includes('feels-like-homestead-multigen'), true);
+  assert.equal(ids.includes('barndos'), true);
+  assert.equal(ids.includes('buildmax'), true);
+  assert.equal(ids.includes('locke-buildings'), true);
+  assert.equal(ids.includes('homestead-org'), true);
   assert.equal(ids.includes('fic'), true);
   assert.equal(ids.includes('cohousing-alliance'), true);
   assert.equal(
     compound.some((source) => /resilience\.org/i.test(source.url)),
     false,
   );
+  const curated = compound.filter((source) => source.curatedFeed).map((source) => source.id);
+  assert.deepEqual(curated, ['four-gen-one-roof', 'feels-like-homestead-multigen', 'barndos']);
 });
 
 test('family-compound seed stories and videos match the compound topic bar', () => {
   const seeds = SEED_NEWS.filter((item) => item.category === 'family-compounds');
   assert.equal(seeds.length >= 6, true);
+  const haystacks = seeds.map((item) => `${item.title} ${item.summary}`.toLowerCase());
+  assert.equal(
+    haystacks.some((hay) => hay.includes('financ')),
+    true,
+    'expected a financing seed',
+  );
+  assert.equal(
+    haystacks.some((hay) => hay.includes('micro farm') || hay.includes('micro-farm')),
+    true,
+    'expected a micro-farm seed',
+  );
+  assert.equal(
+    haystacks.some((hay) => hay.includes('barndominium')),
+    true,
+    'expected a barndominium seed',
+  );
+  assert.equal(
+    haystacks.some((hay) => hay.includes('compound design') || hay.includes('site plan')),
+    true,
+    'expected a compound-design seed',
+  );
   for (const item of seeds) {
     const hay = `${item.title} ${item.summary}`;
     assert.equal(matchesTopicFilter(hay, FAMILY_COMPOUND_TOPIC), true, item.title);

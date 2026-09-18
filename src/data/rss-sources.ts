@@ -10,7 +10,8 @@ export type RssSource = {
   keywords?: string[];
   /**
    * When true, skip the category-wide topic filter. Use for feeds that are
-   * already a dedicated Family Compound / multi-gen category, not a mixed site.
+   * already a dedicated Family Compound, barndominium, or compound-living
+   * category — not a mixed site.
    */
   curatedFeed?: boolean;
 };
@@ -41,18 +42,36 @@ export const RSS_SOURCES: RssSource[] = [
     curatedFeed: true,
   },
   {
-    id: 'our-multi-gen-life',
-    name: 'Our Multi-Gen Life',
-    url: 'https://ourmultigenlife.com/feed/',
-    category: 'family-compounds',
-    curatedFeed: true,
-  },
-  {
     id: 'feels-like-homestead-multigen',
     name: 'Feels Like Homestead',
     url: 'https://feelslikehomestead.com/category/multigenerational-living/feed/',
     category: 'family-compounds',
     curatedFeed: true,
+  },
+  {
+    id: 'barndos',
+    name: 'Barndos',
+    url: 'https://barndos.com/feed',
+    category: 'family-compounds',
+    curatedFeed: true,
+  },
+  {
+    id: 'buildmax',
+    name: 'BuildMax',
+    url: 'https://buildmax.com/feed',
+    category: 'family-compounds',
+  },
+  {
+    id: 'locke-buildings',
+    name: 'Locke Buildings',
+    url: 'https://lockebuildings.com/feed/',
+    category: 'family-compounds',
+  },
+  {
+    id: 'homestead-org',
+    name: 'Homestead.org',
+    url: 'https://www.homestead.org/feed/',
+    category: 'family-compounds',
   },
   {
     id: 'fic',
