@@ -1,6 +1,6 @@
 # Family Compound & Homestead Living
 
-Cross-platform Expo (React Native) app for homesteaders and family compounds: a Family Compound RSS news section, a dedicated Featured Videos / YouTube tab for Homesteading and Family Compounds, a Store tab (Coming Soon for first publish), and email/password accounts.
+Cross-platform Expo (React Native) app for homesteaders and family compounds: a Family Compound RSS news section, a dedicated Featured Videos / YouTube tab for Homesteading and Family Compounds, a Learn tab (Compound Scout), a Store tab (Coming Soon for first publish), and email/password accounts.
 
 Display name: **Family Compound & Homestead Living**  
 Bundle ID / application ID: `com.loudfh.homesteadcompound`
@@ -33,7 +33,7 @@ Typecheck:
 npm run typecheck
 ```
 
-Tests (affiliate URLs, RSS parse, Family Compound topic filter, featured videos):
+Tests (affiliate URLs, RSS parse, Family Compound topic filter, featured videos, Compound Scout content and scoring):
 
 ```bash
 npm test
@@ -49,8 +49,9 @@ npm run preview:feeds
 
 1. **News** — Family Compound RSS only (multi-household living, financing, compound design, barndominiums, micro farms). There is no Homesteading switcher on this tab. Pull to refresh. Tap an article for an in-app WebView. A shortcut opens the Videos tab.
 2. **Videos** — **Featured YouTube videos** for Homesteading or Family Compounds, not mixed into the news list. A prominent disclaimer states the clips are third-party YouTube content, not owned or created by LFH Inc or this app. Tap a card for an in-app player and **Open in YouTube**.
-3. **Store** — **Coming Soon** for first publish. Homesteading and Family Compounds shopping (Amazon affiliate picks) will be added after launch. Catalog JSON and URL helpers stay in the repo; set `STORE_CATALOG_ENABLED` in `src/constants/config.ts` when you are ready.
-4. **Account** — sign up, sign in, sign out, edit display name, set preferred category (Homesteading / Family Compounds / both). That preference applies to Featured Videos, not the news RSS. Session survives app restarts. Guests can browse; saving favorites prompts for an account. **Privacy Policy** and **Terms of Use** are on the Account tab without signing in.
+3. **Learn** — **Compound Scout**, an offline scenario game about what to look for when buying land and building a family compound (access, water and septic, zoning, layout, utilities, financing and ownership). Progress and stage badges stay on the device. Replay a stage or the whole round. It is educational, not legal or financial advice.
+4. **Store** — **Coming Soon** for first publish. Homesteading and Family Compounds shopping (Amazon affiliate picks) will be added after launch. Catalog JSON and URL helpers stay in the repo; set `STORE_CATALOG_ENABLED` in `src/constants/config.ts` when you are ready.
+5. **Account** — sign up, sign in, sign out, edit display name, set preferred category (Homesteading / Family Compounds / both). That preference applies to Featured Videos, not the news RSS. Session survives app restarts. Guests can browse; saving favorites prompts for an account. **Privacy Policy** and **Terms of Use** are on the Account tab without signing in.
 
 Until Supabase env vars are set, auth is **demo mode**: accounts live in local secure storage on the device (or `localStorage` on web).
 
@@ -120,6 +121,17 @@ Favorites remain on-device, keyed by user id (works in both auth modes).
 - If a host is down, blocks bots, or CORS blocks web, the app **merges in Family Compound seed briefings** so the news list still has articles. Homesteading seed stories are not shown in News.
 - YouTube IDs are curated in `src/data/videos.ts` (homesteading: permaculture and compost; family compounds: family-compound living, barndominiums, financing, compound site design, and micro farms — not only TEDx multi-gen / ADU clips). The **Videos** tab lists featured clips for the active category. Playback uses an in-app WebView embed (`react-native-webview`). Videos are third-party YouTube content — not owned or created by LFH Inc or the app.
 - Store catalog JSON and affiliate URL builder remain in `src/data/products.json` and `src/lib/affiliate.ts` for a later release. The Store tab currently shows Coming Soon.
+- **Compound Scout** scenarios are bundled in `src/data/compound-scout.json` and shown on the Learn tab. Nothing is fetched for the game. Answers are stored on the device (`hcn.compoundScout.answers`).
+
+## Extend Compound Scout
+
+The Learn tab reads `src/data/compound-scout.json` at build time. To add a look:
+
+1. Open the stage that fits (`land-access`, `water-septic`, `zoning-rules`, `layout-buildings`, `utilities-resilience`, `financing-ownership`), or append a new stage after those six.
+2. Add a scenario object with a unique `id`, a `title`, a `prompt`, `choices` (2–4 items, exactly one `"correct": true`), and `lookFor` (the teach-back the player reads after answering).
+3. Run `npm test` and `npm run typecheck`. The tests check the content shape and the scoring helpers in `src/lib/compound-scout.ts`.
+
+Keep the six original stages first, in that order. A new stage is picked up by the trail automatically; add its id to `REQUIRED_STAGE_IDS` in `src/lib/compound-scout.ts` only if it should become part of the required curriculum. The `disclaimer` field is the footer on the Learn tab — leave it educational, and not legal or financial advice.
 
 ## EAS / App Store / Google Play
 
@@ -216,12 +228,12 @@ Have an attorney review `docs/privacy-policy.md` before you treat it as final fo
 ## Project layout
 
 ```
-app/                 Expo Router screens (tabs: News, Videos, Store, Account; legal screens)
-src/components/      UI
+app/                 Expo Router screens (tabs: News, Videos, Learn, Store, Account; legal screens)
+src/components/      UI, including Compound Scout
 src/content/         In-app Privacy Policy and Terms
 src/context/         Auth, preferences, theme
-src/data/            Seed news, videos, products, RSS source list
-src/lib/             RSS, Family Compound news assembly, affiliate URLs, auth backends
+src/data/            Seed news, videos, products, RSS source list, Compound Scout JSON
+src/lib/             RSS, Family Compound news assembly, affiliate URLs, scout scoring, auth backends
 src/theme/           Homestead palette
 src/types/           NewsItem | VideoItem | Product | UserProfile
 docs/                Hostable Privacy Policy and Terms (GitHub Pages)

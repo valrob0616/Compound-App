@@ -62,4 +62,5 @@ export const storageKeys = {
   demoUsers: 'hcn.demo.users',
   favorites: (userId: string) => `hcn.favorites.${userId}`,
   lastCategory: 'hcn.lastCategory',
+  compoundScout: 'hcn.compoundScout.answers',
 } as const;

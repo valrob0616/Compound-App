@@ -1,0 +1,464 @@
+{
+  "id": "compound-scout",
+  "title": "Compound Scout",
+  "subtitle": "A short field course for families who want to buy land and build more than one home on it. Each card is a decision people actually face. Pick what you would look for, then read the teach-back.",
+  "disclaimer": "Educational only — not legal, financial, engineering, or land-use advice. Zoning, water, septic, and lending rules change by county. Confirm what you find here with local officials and licensed professionals before you buy or build.",
+  "stages": [
+    {
+      "id": "land-access",
+      "title": "Land & access",
+      "summary": "Can you legally reach it, and is the acreage you can build on the acreage you are paying for?",
+      "scenarios": [
+        {
+          "id": "lane-handshake",
+          "title": "The lane everyone uses",
+          "prompt": "The parcel is priced under the neighbors: 18 acres at the end of a gravel lane that crosses the property to the north. The seller says that family has always let people through, and there is no reason that would change.",
+          "choices": [
+            {
+              "id": "offer-now",
+              "label": "Make the offer this week. A lane the neighbors already use is the access plan.",
+              "correct": false
+            },
+            {
+              "id": "title-access",
+              "label": "Before you rely on that lane, have title show legal access: public-road frontage or a recorded easement.",
+              "correct": true
+            },
+            {
+              "id": "measure-lane",
+              "label": "Measure the lane. If two trucks can pass, access is settled.",
+              "correct": false
+            }
+          ],
+          "lookFor": "Buy the right to reach a public road, not a neighbor's habit. Ask the title company for a commitment that shows frontage you own or an easement that is recorded, runs with the land, and actually reaches your buildable area. A verbal \"we've always allowed it\" can end at the next sale, a dispute, or a lender who will not close. While you are in those documents, see who has to maintain the lane."
+        },
+        {
+          "id": "acres-vs-usable",
+          "title": "Twenty acres, on paper",
+          "prompt": "The listing is 20 acres, enough in your head for three households and a micro farm. The map shows a creek along the south line, a steep ridge, and a note that part of the ground is in the floodplain. The seller says the high spot by the mailbox is plenty of room.",
+          "choices": [
+            {
+              "id": "total-acres",
+              "label": "Count on the 20 acres. Floodplain still counts as land you own.",
+              "correct": false
+            },
+            {
+              "id": "usable-pads",
+              "label": "Sketch where pads, a well, and septic could actually go, then compare that usable ground to the acreage you are paying for.",
+              "correct": true
+            },
+            {
+              "id": "mailbox-pad",
+              "label": "If one high spot fits a house, the rest of the compound can sort itself out after closing.",
+              "correct": false
+            }
+          ],
+          "lookFor": "Total acres are not buildable acres. Walk the floodplain, wetlands, steep slopes, easements, and setbacks, and mark what is left for homes, a shop, and a garden. One dry knob by the road may fit a single house and nothing else. Ask for a soils map and a flood view before you picture three kitchens on that parcel."
+        },
+        {
+          "id": "shared-drive",
+          "title": "One drive, three households",
+          "prompt": "You plan three households on one gravel drive. It is a single lane, with no pull-out and no place at the top to turn around. Everyone agrees you will figure out grading and snow later.",
+          "choices": [
+            {
+              "id": "later-handshake",
+              "label": "Leave maintenance as a handshake. You are family, and the drive can be improved after you build.",
+              "correct": false
+            },
+            {
+              "id": "written-access",
+              "label": "Write down who grades, who pays, and whether an ambulance can enter and turn around — and ask the fire district what they require.",
+              "correct": true
+            },
+            {
+              "id": "pave-first",
+              "label": "Pave it before anyone moves in. A paved drive removes the shared-access problem.",
+              "correct": false
+            }
+          ],
+          "lookFor": "A shared drive is shared infrastructure. Look for a turnaround, winter access, and a written agreement for grading, gravel, snow, and repairs. Paving does not decide who pays or whether a responder can get in. Ask the fire district what they expect in that county instead of guessing a universal width. Get the agreement in place before the second household spends money."
+        }
+      ]
+    },
+    {
+      "id": "water-septic",
+      "title": "Water & septic",
+      "summary": "Several kitchens and a garden need water and wastewater sized for the households, not the old cabin.",
+      "scenarios": [
+        {
+          "id": "well-yield",
+          "title": "There's a well",
+          "prompt": "The survey shows a well that served a weekend cabin. You want three full-time households and a garden. The seller has no recent pump test, only a drill log from 1998 that lists the depth.",
+          "choices": [
+            {
+              "id": "depth-is-enough",
+              "label": "Depth on the old log means the well can carry three houses. Wells do not shrink.",
+              "correct": false
+            },
+            {
+              "id": "yield-test",
+              "label": "Get a current yield and recovery test, then compare gallons per minute with peak use for every kitchen and the garden.",
+              "correct": true
+            },
+            {
+              "id": "haul-water",
+              "label": "Skip the test and plan to haul drinking water. The well can stay as a backup you never measure.",
+              "correct": false
+            }
+          ],
+          "lookFor": "A dot on the survey is not water for a compound. Look for a recent yield and recovery test — how many gallons per minute, and how fast the well refills — plus water quality and the pump's condition. Add up peak demand: several showers, laundry, and a garden on the same evening. If households will share the well, write down who maintains it, how use is limited in a dry year, and what a repair costs."
+        },
+        {
+          "id": "septic-bedrooms",
+          "title": "The tank has room",
+          "prompt": "A three-bedroom septic serves the existing house. You want a barndominium with its own kitchen and two more bedrooms for your sister's household. The seller says the tank is oversized, so adding on should be fine.",
+          "choices": [
+            {
+              "id": "oversized-tank",
+              "label": "Trust the oversized tank. Extra capacity in the ground is permission to add a kitchen.",
+              "correct": false
+            },
+            {
+              "id": "permit-and-reserve",
+              "label": "Ask whether a second dwelling needs its own permit, and confirm design flow, soil, and a reserve area for the field.",
+              "correct": true
+            },
+            {
+              "id": "compost-toilets",
+              "label": "Skip septic permits by using composting toilets in the new building and leaving the tank as it is.",
+              "correct": false
+            }
+          ],
+          "lookFor": "Septic is sized for design flow — often counted in bedrooms — and a second housekeeping unit is usually a new permit, not leftover room in an old tank. Look for the permit record, soil conditions, setbacks from wells and property lines, and a reserve area so the field can be replaced. Composting toilets do not erase the permit question if the building still has a kitchen and wastewater."
+        },
+        {
+          "id": "spring-vs-right",
+          "title": "The spring on the map",
+          "prompt": "A spring is marked on the parcel, and the listing calls it year-round water. You visit in April and it is running. You would use it for three households. Nobody has a water-quality test or paperwork for a water right.",
+          "choices": [
+            {
+              "id": "april-flow",
+              "label": "April flow is enough. If water is on the land, the households can use it.",
+              "correct": false
+            },
+            {
+              "id": "right-and-season",
+              "label": "Ask whether you have a permitted, reliable supply you can document, and test quality, seasonal flow, and storage.",
+              "correct": true
+            },
+            {
+              "id": "divert-creek",
+              "label": "Pipe the spring into a cistern this summer and treat the paperwork as optional.",
+              "correct": false
+            }
+          ],
+          "lookFor": "Water on a map is not water you can count on in August, or water you are allowed to use the way a compound needs. Rules differ by state: a spring may not include a right you can rely on. Look for a permitted well or a documented right, a dry-season visit or flow record, a quality test, and storage if the source dips. Do not divert first and ask later."
+        }
+      ]
+    },
+    {
+      "id": "zoning-rules",
+      "title": "Zoning & multi-home rules",
+      "summary": "A second house is a dwelling unit. County rules and private deed limits both count.",
+      "scenarios": [
+        {
+          "id": "guest-house-adu",
+          "title": "Just a guest house",
+          "prompt": "The county site says the zone allows a single-family home. The seller adds that you can put a guest house for family — it is not a rental, so it does not count as another house. You want your parents in a separate kitchen on the same parcel.",
+          "choices": [
+            {
+              "id": "family-doesnt-count",
+              "label": "A separate kitchen for relatives is not a second dwelling. Zoning cares about rentals, not family.",
+              "correct": false
+            },
+            {
+              "id": "dwelling-cap",
+              "label": "Read the dwelling-unit cap and the ADU rules: size, owner-occupancy, and whether a second kitchen still counts.",
+              "correct": true
+            },
+            {
+              "id": "call-it-cohousing",
+              "label": "Call the project cohousing. Intentional communities are treated as one household under the code.",
+              "correct": false
+            }
+          ],
+          "lookFor": "A dwelling is usually defined by housekeeping — a place to sleep, cook, and bathe — not by whether the people are related or whether you charge rent. Look up how many units the zoning district allows, and the accessory-dwelling rules if a smaller second unit is the path: size caps, owner-occupancy, and parking. Guest house, in-law suite, and cohousing do not change that count. Confirm it with the planning department, not from the listing."
+        },
+        {
+          "id": "acres-per-dwelling",
+          "title": "Ten acres, three homes",
+          "prompt": "You are looking at 10 acres and three small homes. A neighbor says the area is one house per five acres. You have not opened the zoning ordinance, and you hope a family compound is counted as one use.",
+          "choices": [
+            {
+              "id": "one-use",
+              "label": "A family compound is one use, so the five-acre rule does not apply to relatives.",
+              "correct": false
+            },
+            {
+              "id": "density-check",
+              "label": "Check the minimum lot area or dwellings allowed per acre, and whether a future lot split is even available.",
+              "correct": true
+            },
+            {
+              "id": "split-first",
+              "label": "Split into three lots before you know the density rule. The surveyor will sort out zoning.",
+              "correct": false
+            }
+          ],
+          "lookFor": "Density is a zoning fact: minimum acres per dwelling, or a cap on units. Ten acres at one dwelling per five acres may allow two homes, not three — and related households still count. A lot split can add road, perc, and frontage requirements, and it can change how you finance. Read the district standard before you sketch three foundations or pay for a split."
+        },
+        {
+          "id": "deed-restrictions",
+          "title": "The county said yes",
+          "prompt": "Planning says the zone allows two dwellings, a metal building, and small livestock. You want a barndominium and a micro farm. The parcel sits in an old recorded subdivision whose covenants the seller calls outdated and unenforced.",
+          "choices": [
+            {
+              "id": "county-wins",
+              "label": "Follow the county. Private covenants cannot block a use the zoning code allows.",
+              "correct": false
+            },
+            {
+              "id": "read-exceptions",
+              "label": "Read the deed restrictions in the title work, including bans on extra dwellings, metal buildings, or livestock.",
+              "correct": true
+            },
+            {
+              "id": "ignore-old",
+              "label": "Ignore covenants older than twenty years. If nobody has enforced them, they are gone.",
+              "correct": false
+            }
+          ],
+          "lookFor": "Zoning is the public rule. Deed restrictions and covenants are private rules, and they can forbid a second house, a barndominium, or animals even when the county would allow them. Unenforced is not the same as expired. Read the restrictions in the title commitment, and ask a local attorney whether a covenant still runs with the land before you plan the shop and the flock."
+        }
+      ]
+    },
+    {
+      "id": "layout-buildings",
+      "title": "Layout & buildings",
+      "summary": "Where the homes, shop, and micro farm sit decides cost, privacy, and whether the land still works.",
+      "scenarios": [
+        {
+          "id": "cluster-pads",
+          "title": "Spread out for privacy",
+          "prompt": "The family wants three houses far apart so nobody hears anyone else's kitchen. That layout puts each pad hundreds of feet from the well, with its own long driveway and its own power trench. A common fire pit is the only shared space anyone has mentioned.",
+          "choices": [
+            {
+              "id": "scatter-always",
+              "label": "Scatter the houses. Privacy matters more than repeating driveways and trenches, and those can be added later.",
+              "correct": false
+            },
+            {
+              "id": "cluster-with-yards",
+              "label": "Cluster the homes near shared water, power, and septic lanes, and give each household its own private outdoor side.",
+              "correct": true
+            },
+            {
+              "id": "one-yard",
+              "label": "Put all three front doors on one shared lawn so the compound feels like a single yard.",
+              "correct": false
+            }
+          ],
+          "lookFor": "Layout is a cost question and a privacy question at the same time. Long separated pads multiply driveway, electric, and water runs, and they can break well and septic setbacks. Look for a cluster that shares trenches and still gives each household a door that closes and a private outdoor side — porch, garden, or a buffer of shop and trees. A common fire pit or shared barn kitchen works when it is opt-in. One lawn with every window in the next kitchen does not. A common house, the cohousing pattern, still has to be checked as its own building."
+        },
+        {
+          "id": "barndo-shell",
+          "title": "The metal shell",
+          "prompt": "A barndominium kit is the plan for the second household: a shop bay in front and bedrooms in back, under one metal roof. The quote covers the shell, posts, and a slab. Insulation, a vapor plan, and engineered drawings for your snow load are listed as owner items. The lender has not said whether they will finance it.",
+          "choices": [
+            {
+              "id": "shell-price",
+              "label": "Use the shell price as the building cost. Insulation and drawings are small tasks after the slab is poured.",
+              "correct": false
+            },
+            {
+              "id": "envelope-and-lender",
+              "label": "Price an engineered envelope for your climate, separate the shop from sleeping space, and ask a lender who has closed a barndo nearby.",
+              "correct": true
+            },
+            {
+              "id": "shop-only",
+              "label": "Skip the living space on paper and call the whole building a shop so financing and fire separation do not apply.",
+              "correct": false
+            }
+          ],
+          "lookFor": "A barndominium can earn its place — shop, storage, and a household under one roof — but the shell price is not the home. Look for engineered plans for local wind and snow, a real insulation and condensation strategy, and a separation between the shop bay (fumes, fire, noise) and the rooms people sleep in. Ask a lender who has financed this building type nearby, because some loans and appraisals assume a conventional house. Calling it only a shop does not fix a plan that still has bedrooms."
+        },
+        {
+          "id": "micro-farm-siting",
+          "title": "Where the garden goes",
+          "prompt": "You want a shared micro farm: beds, a small orchard, and a few animals. The sunniest flat ground is also the obvious place for a replacement septic field. The well sits just uphill of that flat. Irrigation would come off the same well as the three kitchens.",
+          "choices": [
+            {
+              "id": "sunniest-flat",
+              "label": "Put the beds and the animals on the sunniest flat. Septic can move to whatever ground is left.",
+              "correct": false
+            },
+            {
+              "id": "reserve-and-water",
+              "label": "Keep the septic reserve clear, set animals away from the well, and plan irrigation so the garden does not drain the kitchens.",
+              "correct": true
+            },
+            {
+              "id": "drop-the-farm",
+              "label": "Drop the micro farm. Any garden on a compound will ruin the septic and the well.",
+              "correct": false
+            }
+          ],
+          "lookFor": "The best garden soil is often the same ground a drain field will need later. Look for a reserved septic area you do not plant, pave, or pen animals on. Keep livestock, manure, and compost set back from the well — ask the health department for the distances they enforce. Then split water in your head: household peak use versus irrigation, with storage or another source if one well cannot do both. A micro farm belongs on a compound. It cannot sit on the only repair area for the wastewater."
+        }
+      ]
+    },
+    {
+      "id": "utilities-resilience",
+      "title": "Utilities & resilience",
+      "summary": "Power, backup, drainage, and a drive an ambulance can use are part of the purchase.",
+      "scenarios": [
+        {
+          "id": "power-run",
+          "title": "The cheap back parcel",
+          "prompt": "The back parcel is cheaper because the meter is at the county road and your pads would sit about a thousand feet in. The seller says the power company usually does not charge much to extend a line. You have no written quote. You are also unsure whether each household should have its own meter.",
+          "choices": [
+            {
+              "id": "seller-estimate",
+              "label": "Take the discount on the land and the seller's estimate. Line extensions are a minor closing cost.",
+              "correct": false
+            },
+            {
+              "id": "written-quote",
+              "label": "Get a written utility quote for the extension, and decide on separate meters versus one service before you call the land a bargain.",
+              "correct": true
+            },
+            {
+              "id": "cabin-kit",
+              "label": "Ignore power until after closing. You can always go off-grid with a cabin-sized kit.",
+              "correct": false
+            }
+          ],
+          "lookFor": "A long service drop can cost more than the discount on the land. Look for a written extension quote, the route across trees, rock, or wetlands, and any easement the line needs. Separate meters are often cleaner when households split bills. One master meter needs a written way to divide the bill. Off-grid is a real option, but size it for a well pump and more than one kitchen, not a weekend cabin kit chosen after you already own the parcel."
+        },
+        {
+          "id": "backup-loads",
+          "title": "One generator for everyone",
+          "prompt": "Storms knock out power for days. The plan is a single generator for the compound, with no list of what it must run and no agreement on fuel or maintenance. One household uses a medical device. The well pump is shared.",
+          "choices": [
+            {
+              "id": "one-fridge",
+              "label": "Buy a generator sized for one refrigerator. The other loads can wait their turn.",
+              "correct": false
+            },
+            {
+              "id": "critical-loads",
+              "label": "List the critical loads — well-pump surge, freezers, medical devices, phones — and write who fuels and maintains a shared backup.",
+              "correct": true
+            },
+            {
+              "id": "wait-it-out",
+              "label": "Skip backup power. Rural households should expect to do without water until the utility returns.",
+              "correct": false
+            }
+          ],
+          "lookFor": "Backup power is a shared system with a job. List critical loads: the well pump, whose starting surge is often the surprise, plus freezers, medical equipment, and a way to charge phones. Then decide on a generator, a battery, or both, and write who buys fuel, who starts it, and which circuits stay on when there is not enough for every convenience. One fridge circuit does not water three houses."
+        },
+        {
+          "id": "drainage-access",
+          "title": "The pretty hollow",
+          "prompt": "The prettiest building sites are in a gentle hollow. After a wet week, water sits in the grass. The drive in is one lane and ends at the hollow with no turnaround. Wildfire season is part of life in this county, and there is one way out.",
+          "choices": [
+            {
+              "id": "pretty-hollow",
+              "label": "Build in the hollow. Standing water after one wet week is cosmetic, and the drive can be widened someday.",
+              "correct": false
+            },
+            {
+              "id": "dry-and-access",
+              "label": "Put pads on ground that sheds water, keep drainage off the septic area, and confirm emergency vehicles can enter, turn around, and leave.",
+              "correct": true
+            },
+            {
+              "id": "skip-fire",
+              "label": "Ignore fire access. Defensible space is a suburban rule and does not apply on family land.",
+              "correct": false
+            }
+          ],
+          "lookFor": "Look at the land after rain, not only on a dry listing day. Pads want ground that sheds water, and runoff should not pond on a septic field or dump onto a neighbor. Walk the drive the way an ambulance would: in, turn around, and out. In fire country, ask the fire district about defensible space and whether they expect more than one way out. A hollow that looks sheltered can flood, and it can be a poor place to evacuate from."
+        }
+      ]
+    },
+    {
+      "id": "financing-ownership",
+      "title": "Financing & ownership",
+      "summary": "Who signs, who holds title, and how someone can leave matters as much as the price per acre.",
+      "scenarios": [
+        {
+          "id": "whose-loan",
+          "title": "One mortgage, three roofs",
+          "prompt": "A relative with the strongest credit offers to sign for everything: the land and two new buildings on one parcel. Everyone else will pay them back. You have not asked a lender whether a standard house loan even covers more than one dwelling, or a barndominium, in this county.",
+          "choices": [
+            {
+              "id": "strongest-credit",
+              "label": "Let the strongest credit sign a normal house mortgage. Payback between family does not need the lender involved.",
+              "correct": false
+            },
+            {
+              "id": "lender-who-closed",
+              "label": "Find a lender who has closed multi-dwelling or barndo loans in that county, and decide whose credit signs before anyone promises payback.",
+              "correct": true
+            },
+            {
+              "id": "cash-only",
+              "label": "Assume no lender will touch a compound, so the only honest plan is all cash.",
+              "correct": false
+            }
+          ],
+          "lookFor": "One parcel with more than one home often does not fit a standard single-family mortgage. Look for a lender who has already closed this pattern nearby — a construction-to-permanent loan, a rural lender, or a product that allows another unit — and ask what they will not finance, such as a second kitchen or a metal shop bay. The name on the note carries the debt if someone stops paying. All cash is not the only path, and a handshake payback is not a loan structure."
+        },
+        {
+          "id": "names-on-deed",
+          "title": "Just put everyone on the deed",
+          "prompt": "Four adults want to own the land together. Someone suggests joint tenancy because it is simple, and if one of you dies the land stays in the family. There is no buyout number, no rule for a divorce, and no plan if one household wants to leave in five years.",
+          "choices": [
+            {
+              "id": "joint-tenants",
+              "label": "Deed it to all four as joint tenants. Survivorship is the exit plan.",
+              "correct": false
+            },
+            {
+              "id": "written-exit",
+              "label": "Have a local attorney match the deed or an entity to a written agreement: who may live there, how costs split, and how someone buys out.",
+              "correct": true
+            },
+            {
+              "id": "shared-checking",
+              "label": "Skip the paperwork and use a shared checking account. Families who meant well can sort title later.",
+              "correct": false
+            }
+          ],
+          "lookFor": "How you hold title decides death, debt, and departure. Joint tenancy with survivorship can pass a share to the other owners instead of to someone's children. Tenancy in common can often be willed, and in many places one owner can force a sale. A family LLC or another entity, plus an operating agreement, can spell out buyout, contributions, and who may live on the land — if a local attorney says it fits your state. Look for a written exit before anyone is on the deed. No single form fits every family."
+        },
+        {
+          "id": "shared-bills",
+          "title": "We'll split it later",
+          "prompt": "The tax bill, the insurance, and a failing culvert on the shared drive are in one owner's name today. An agricultural exemption lowers the taxes, and it depends on farm use. Two households are ready to build. Nobody has written what each household pays, or what happens if one stops.",
+          "choices": [
+            {
+              "id": "split-later",
+              "label": "Start building. You can divide taxes and insurance evenly once everyone has a house.",
+              "correct": false
+            },
+            {
+              "id": "written-budget",
+              "label": "Write the shared budget now — taxes, insurance, the road, the well, and a septic reserve — and ask whether new houses change the ag exemption.",
+              "correct": true
+            },
+            {
+              "id": "one-pays",
+              "label": "Leave every bill in the original owner's name. The others can reimburse when they feel able.",
+              "correct": false
+            }
+          ],
+          "lookFor": "A compound has carrying costs that do not wait for the last house: property tax, insurance, road work, the well, and money set aside to replace a drain field. Look at the current tax bill and ask the assessor whether an agricultural exemption depends on a use you might lose when you add dwellings. Write who pays, when, and what the others may do if one household stops. Otherwise the first name on the bill carries the land alone."
+        }
+      ]
+    }
+  ]
+}

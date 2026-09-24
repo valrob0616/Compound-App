@@ -48,6 +48,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="learn"
+        options={{
+          title: 'Learn',
+          headerTitle: 'Learn',
+          tabBarAccessibilityLabel: 'Compound Scout, a learning game',
+          tabBarIcon: ({ color, size }) => <Ionicons name="compass-outline" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="store"
         options={{
           title: 'Store',

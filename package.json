@@ -9,7 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test src/lib/affiliate.test.ts src/lib/rss.test.ts src/lib/topic-filter.test.ts src/lib/feed-relevance.test.ts src/lib/videos.test.ts",
+    "test": "node --experimental-strip-types --test src/lib/affiliate.test.ts src/lib/rss.test.ts src/lib/topic-filter.test.ts src/lib/feed-relevance.test.ts src/lib/videos.test.ts src/lib/compound-scout.test.ts",
     "preview:feeds": "node --experimental-strip-types scripts/preview-feeds.ts"
   },
   "dependencies": {
