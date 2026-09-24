@@ -82,6 +82,9 @@ export default function SignUpScreen() {
           error={errors.password}
         />
         <Text style={[styles.label, { color: colors.textMuted }]}>Preferred category</Text>
+        <Text style={[styles.prefHint, { color: colors.textMuted }]}>
+          Used for Featured Videos. News stays on Family Compound RSS.
+        </Text>
         <View style={styles.row}>
           {PREFERRED.map((option) => {
             const active = preferredCategory === option;
@@ -126,6 +129,7 @@ export default function SignUpScreen() {
 const styles = StyleSheet.create({
   content: { padding: spacing.md, paddingBottom: 48 },
   label: { fontSize: 13, fontWeight: '600', marginBottom: 8 },
+  prefHint: { fontSize: 13, lineHeight: 18, marginTop: -4, marginBottom: 8 },
   row: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: spacing.md },
   chip: {
     borderWidth: 1,

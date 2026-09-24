@@ -8,7 +8,7 @@ These terms are a short agreement for using the app. The [Privacy Policy](./priv
 
 ## The app
 
-Family Compound & Homestead Living offers news and video feeds for Homesteading and Family Compounds. The Store tab is Coming Soon. Features may change.
+Family Compound & Homestead Living offers Family Compound news (RSS) and featured YouTube videos for Homesteading and Family Compounds. The Store tab is Coming Soon. Features may change.
 
 ## Accounts
 

@@ -75,6 +75,9 @@ export default function AccountScreen() {
       />
 
       <Text style={[styles.label, { color: colors.textMuted }]}>Preferred category</Text>
+      <Text style={[styles.prefHint, { color: colors.textMuted }]}>
+        Used for Featured Videos. News stays on Family Compound RSS.
+      </Text>
       <View style={styles.prefRow}>
         {PREFERRED.map((option) => {
           const active = (user.preferredCategory ?? 'both') === option;
@@ -196,6 +199,7 @@ const styles = StyleSheet.create({
   name: { fontFamily: serif, fontSize: 24, fontWeight: '700' },
   email: { marginTop: 4, fontSize: 14 },
   label: { fontSize: 13, fontWeight: '600', marginBottom: 8 },
+  prefHint: { fontSize: 13, lineHeight: 18, marginTop: -4, marginBottom: 8 },
   prefRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: spacing.md },
   prefChip: {
     borderWidth: 1,

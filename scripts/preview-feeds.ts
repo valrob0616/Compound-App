@@ -1,6 +1,7 @@
 /**
  * Print live RSS titles kept vs dropped by the Family Compound topic filter.
- * Homesteading sources are listed unfiltered so we can confirm they still parse.
+ * News uses the family-compounds sources only. Homesteading sources are still
+ * listed, unfiltered, so we can confirm they parse — they are not shown in News.
  *
  *   npm run preview:feeds
  */

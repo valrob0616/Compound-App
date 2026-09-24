@@ -4,7 +4,6 @@ import { Platform } from 'react-native';
 
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 import { useAppTheme } from '@/context/ThemeContext';
-import { APP_NAME } from '@/theme';
 
 export default function TabLayout() {
   const { colors } = useAppTheme();
@@ -29,9 +28,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Feed',
-          headerTitle: APP_NAME,
-          tabBarAccessibilityLabel: 'News and videos feed',
+          title: 'News',
+          headerTitle: 'Family Compound news',
+          tabBarAccessibilityLabel: 'Family Compound news',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name={Platform.OS === 'ios' ? 'newspaper' : 'newspaper-outline'} size={size} color={color} />
           ),

@@ -21,7 +21,14 @@ export const CATEGORY_TOPIC_FILTERS: Partial<Record<CategoryId, TopicFilter>> = 
   'family-compounds': FAMILY_COMPOUND_TOPIC,
 };
 
+/**
+ * The News tab loads this category only. Homesteading stays on Featured Videos
+ * (and the store catalog, once it opens) — not in the article list.
+ */
+export const NEWS_CATEGORY: CategoryId = 'family-compounds';
+
 export const RSS_SOURCES: RssSource[] = [
+  // Kept for reference. The News tab does not request these — see sourcesForNews().
   {
     id: 'hobby-farms',
     name: 'Hobby Farms',
@@ -86,3 +93,8 @@ export const RSS_SOURCES: RssSource[] = [
     category: 'family-compounds',
   },
 ];
+
+/** Publishers that fill the News tab. Homesteading RSS is not included. */
+export function sourcesForNews(): RssSource[] {
+  return RSS_SOURCES.filter((source) => source.category === NEWS_CATEGORY);
+}

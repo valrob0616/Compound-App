@@ -16,7 +16,7 @@ Privacy requests: **rob@loudfh.com**
 
 ## What this app does
 
-You can browse two category feeds (Homesteading and Family Compounds), watch curated YouTube videos, and open news articles. The Store tab is Coming Soon; Amazon affiliate picks will be added after this first release. You may create an optional account to save a display name, a preferred category, and favorites.
+News articles come from Family Compound RSS feeds. Featured Videos switch between Homesteading and Family Compounds. The Store tab is Coming Soon; Amazon affiliate picks will be added after this first release. You may create an optional account to save a display name, a preferred category (used for Videos), and favorites.
 
 You can use the feeds without an account.
 
@@ -24,7 +24,7 @@ You can use the feeds without an account.
 
 ### If you browse as a guest
 
-- The last feed category you selected (Homesteading or Family Compounds), stored on the device so the app can reopen to that area.
+- The last Videos category you selected (Homesteading or Family Compounds), stored on the device so the Videos tab can reopen to that area. News does not switch categories.
 - We do not ask for your name or email unless you create an account.
 
 ### If you create an account
@@ -82,7 +82,7 @@ When you use certain features, you leave our screens or load third-party content
 
 **YouTube / Google.** Video cards use YouTube video IDs. Playback uses an in-app player (a YouTube embed) and you can open the video on YouTube. Google’s policies apply, including [YouTube’s terms](https://www.youtube.com/t/terms) and [Google’s privacy policy](https://policies.google.com/privacy).
 
-**News publishers.** Article cards open the publisher’s webpage in an in-app browser. RSS feeds are requested from public publisher URLs (for example Hobby Farms, Off The Grid News, the Foundation for Intentional Community, and resilience.org). Those sites may set their own cookies or logs when the page loads.
+**News publishers.** Article cards open the publisher’s webpage in an in-app browser. RSS feeds for news are requested from public Family Compound publisher URLs (for example Four Generations One Roof, Barndos, and the Foundation for Intentional Community). Those sites may set their own cookies or logs when the page loads.
 
 **Supabase.** Only when Supabase mode is enabled, as described above.
 
