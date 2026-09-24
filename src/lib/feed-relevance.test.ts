@@ -2,10 +2,72 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import { FAMILY_COMPOUND_TOPIC } from '../data/family-compound-topic.ts';
-import { RSS_SOURCES } from '../data/rss-sources.ts';
+import { NEWS_CATEGORY, RSS_SOURCES, sourcesForNews } from '../data/rss-sources.ts';
 import { SEED_NEWS } from '../data/seed-news.ts';
 import { CURATED_VIDEOS } from '../data/videos.ts';
+import { assembleNewsArticles } from './news-feed.ts';
 import { matchesTopicFilter } from './topic-filter.ts';
+
+test('news section RSS is the family-compound list and nothing else', () => {
+  assert.equal(NEWS_CATEGORY, 'family-compounds');
+  const news = sourcesForNews();
+  assert.deepEqual(
+    news.map((source) => source.id),
+    [
+      'four-gen-one-roof',
+      'feels-like-homestead-multigen',
+      'barndos',
+      'buildmax',
+      'locke-buildings',
+      'homestead-org',
+      'fic',
+      'cohousing-alliance',
+    ],
+  );
+  assert.equal(
+    news.every((source) => source.category === 'family-compounds'),
+    true,
+  );
+  assert.equal(
+    news.some((source) => source.id === 'hobby-farms' || source.id === 'off-the-grid-news'),
+    false,
+  );
+});
+
+test('assembled news drops homesteading stories and keeps family-compound RSS', () => {
+  const live: typeof SEED_NEWS = [
+    {
+      ...SEED_NEWS.find((item) => item.category === 'homesteading')!,
+      id: 'live-hs',
+      url: 'https://www.hobbyfarms.com/example',
+    },
+    {
+      kind: 'news',
+      id: 'live-fc',
+      category: 'family-compounds',
+      title: 'How to finance a barndominium on shared family land',
+      summary: 'A land loan and a construction-to-permanent close for a second dwelling.',
+      url: 'https://barndos.com/example-financing',
+      source: 'Barndos',
+      publishedAt: '2026-09-12T12:00:00.000Z',
+    },
+  ];
+  const assembled = assembleNewsArticles(live, SEED_NEWS);
+  assert.equal(assembled.source, 'mixed');
+  assert.equal(
+    assembled.items.every((item) => item.kind === 'news' && item.category === 'family-compounds'),
+    true,
+  );
+  assert.equal(
+    assembled.items.some((item) => item.id === 'live-hs'),
+    false,
+  );
+  assert.equal(assembled.items[0]?.id, 'live-fc');
+  assert.equal(
+    assembled.items.some((item) => item.id === 'seed-fc-02'),
+    true,
+  );
+});
 
 test('homesteading RSS sources stay on the original homestead publishers', () => {
   const homestead = RSS_SOURCES.filter((source) => source.category === 'homesteading');

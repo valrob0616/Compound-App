@@ -2,25 +2,18 @@ import { Ionicons } from '@expo/vector-icons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 
-import { CATEGORY_LABELS } from '@/constants/config';
 import { useAppTheme } from '@/context/ThemeContext';
 import { radii, spacing } from '@/theme';
-import type { CategoryId } from '@/types';
 
-type Props = {
-  category: CategoryId;
-};
-
-export function FeaturedVideosLink({ category }: Props) {
+export function FeaturedVideosLink() {
   const { colors } = useAppTheme();
   const router = useRouter();
-  const label = CATEGORY_LABELS[category];
 
   return (
     <Pressable
       onPress={() => router.push('/videos')}
       accessibilityRole="link"
-      accessibilityLabel={`Open featured YouTube videos for ${label}`}
+      accessibilityLabel="Open featured YouTube videos"
       style={[styles.wrap, { backgroundColor: colors.card, borderColor: colors.border }]}
     >
       <View style={[styles.iconWrap, { backgroundColor: colors.cardMuted }]}>
@@ -29,7 +22,8 @@ export function FeaturedVideosLink({ category }: Props) {
       <View style={styles.copy}>
         <Text style={[styles.title, { color: colors.text }]}>Featured YouTube videos</Text>
         <Text style={[styles.body, { color: colors.textMuted }]}>
-          See {label} videos in a dedicated section — not mixed into the news feed.
+          Homesteading and Family Compounds clips are on the Videos tab, separate from this news
+          feed.
         </Text>
       </View>
       <Ionicons name="chevron-forward" size={20} color={colors.textMuted} />

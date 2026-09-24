@@ -67,8 +67,8 @@ export default function VideosScreen() {
           <Text style={[styles.kicker, { color: colors.accent }]}>YouTube</Text>
           <Text style={[styles.title, { color: colors.text }]}>Featured videos</Text>
           <Text style={[styles.lede, { color: colors.textMuted }]}>
-            Curated {CATEGORY_LABELS[category]} videos, separate from the news feed. Switch categories
-            to see Homesteading or Family Compounds featured content.
+            Curated {CATEGORY_LABELS[category]} videos, separate from Family Compound news. Switch
+            categories to see Homesteading or Family Compounds featured content.
           </Text>
           <CategorySwitcher value={category} onChange={setCategory} />
           <VideoDisclaimer />

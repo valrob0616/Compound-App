@@ -2,20 +2,20 @@ import { useCallback, useEffect, useState } from 'react';
 import { Alert, FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 
-import { CategorySwitcher } from '@/components/CategorySwitcher';
 import { FeaturedVideosLink } from '@/components/FeaturedVideosLink';
 import { GuestBanner } from '@/components/GuestBanner';
 import { NewsCard } from '@/components/NewsCard';
-import { VideoCard } from '@/components/VideoCard';
+import { CATEGORY_BLURBS } from '@/constants/config';
 import { useAppPrefs } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
-import { loadCategoryFeed, rememberFeedItems } from '@/lib/feed';
+import { loadNewsFeed, rememberFeedItems } from '@/lib/feed';
 import { spacing } from '@/theme';
-import type { FeedItem, FeedLoadResult } from '@/types';
+import { serif } from '@/theme/typography';
+import type { FeedLoadResult, NewsItem } from '@/types';
 
 export default function FeedScreen() {
   const { colors } = useAppTheme();
-  const { category, setCategory, isFavorite, toggleFavorite } = useAppPrefs();
+  const { isFavorite, toggleFavorite } = useAppPrefs();
   const router = useRouter();
   const [result, setResult] = useState<FeedLoadResult | null>(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -24,13 +24,13 @@ export default function FeedScreen() {
   const load = useCallback(async () => {
     setError(null);
     try {
-      const next = await loadCategoryFeed(category);
+      const next = await loadNewsFeed();
       rememberFeedItems(next.items);
       setResult(next);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not load the feed.');
     }
-  }, [category]);
+  }, []);
 
   useEffect(() => {
     void load();
@@ -57,16 +57,18 @@ export default function FeedScreen() {
 
   const sourceLabel =
     result?.newsSource === 'live'
-      ? 'Live RSS plus curated video'
+      ? 'Live Family Compound RSS'
       : result?.newsSource === 'mixed'
-        ? 'Live RSS, seed stories, and curated video'
-        : 'Seed stories and curated video (RSS unavailable on this network or blocked by CORS on web)';
+        ? 'Live Family Compound RSS, plus seed briefings where a feed was short'
+        : 'Seed briefings (Family Compound RSS unavailable on this network or blocked by CORS on web)';
 
-  const items = result?.items ?? [];
+  const items = (result?.items ?? []) as NewsItem[];
 
-  const renderItem = ({ item }: { item: FeedItem }) => {
-    if (item.kind === 'news') {
-      return (
+  return (
+    <FlatList
+      data={items}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
         <NewsCard
           item={item}
           favorite={isFavorite(item.id)}
@@ -78,28 +80,7 @@ export default function FeedScreen() {
             })
           }
         />
-      );
-    }
-    return (
-      <VideoCard
-        item={item}
-        favorite={isFavorite(item.id)}
-        onToggleFavorite={() => void onToggleFavorite(item.id)}
-        onOpen={() =>
-          router.push({
-            pathname: '/video/[id]',
-            params: { id: item.id, youtubeId: item.youtubeId, title: item.title },
-          })
-        }
-      />
-    );
-  };
-
-  return (
-    <FlatList
-      data={items}
-      keyExtractor={(item) => item.id}
-      renderItem={renderItem}
+      )}
       contentContainerStyle={[styles.content, { backgroundColor: colors.background }]}
       style={{ backgroundColor: colors.background }}
       refreshControl={
@@ -107,15 +88,19 @@ export default function FeedScreen() {
       }
       ListHeaderComponent={
         <View>
-          <CategorySwitcher value={category} onChange={setCategory} />
+          <Text style={[styles.kicker, { color: colors.accent }]}>RSS</Text>
+          <Text style={[styles.title, { color: colors.text }]}>Family Compound news</Text>
+          <Text style={[styles.lede, { color: colors.textMuted }]}>
+            {CATEGORY_BLURBS['family-compounds']}
+          </Text>
           <GuestBanner />
-          <FeaturedVideosLink category={category} />
+          <FeaturedVideosLink />
           <Text style={[styles.source, { color: colors.textMuted }]}>{sourceLabel}</Text>
           {error ? <Text style={[styles.error, { color: colors.danger }]}>{error}</Text> : null}
         </View>
       }
       ListEmptyComponent={
-        <Text style={[styles.empty, { color: colors.textMuted }]}>Pull to refresh the feed.</Text>
+        <Text style={[styles.empty, { color: colors.textMuted }]}>Pull to refresh Family Compound news.</Text>
       }
     />
   );
@@ -123,6 +108,20 @@ export default function FeedScreen() {
 
 const styles = StyleSheet.create({
   content: { padding: spacing.md, paddingBottom: 48 },
+  kicker: {
+    fontSize: 12,
+    fontWeight: '700',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+    marginBottom: 4,
+  },
+  title: {
+    fontFamily: serif,
+    fontSize: 28,
+    fontWeight: '700',
+    marginBottom: 6,
+  },
+  lede: { fontSize: 15, lineHeight: 21, marginBottom: spacing.md },
   source: { fontSize: 12, marginBottom: spacing.md },
   error: { marginBottom: spacing.md, fontSize: 13 },
   empty: { textAlign: 'center', marginTop: 24 },
