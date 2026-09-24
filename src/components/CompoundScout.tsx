@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { PrimaryButton } from '@/components/ui';
 import { useAppTheme } from '@/context/ThemeContext';
@@ -57,6 +57,9 @@ export function CompoundScout() {
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ y: 0, animated: false });
+    if (Platform.OS === 'web') {
+      window.scrollTo(0, 0);
+    }
     setConfirm(null);
   }, [phaseKey]);
 
@@ -122,8 +125,9 @@ export function CompoundScout() {
 
   return (
     <ScrollView
+      key={phaseKey}
       ref={scrollRef}
-      style={{ backgroundColor: colors.background }}
+      style={[styles.screen, { backgroundColor: colors.background }]}
       contentContainerStyle={[styles.content, { backgroundColor: colors.background }]}
     >
       {phase.name === 'trail' ? (
@@ -646,6 +650,7 @@ function Disclaimer() {
 
 const styles = StyleSheet.create({
   loading: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  screen: { flex: 1 },
   content: { padding: spacing.md, paddingBottom: 48 },
   kicker: {
     fontSize: 12,
