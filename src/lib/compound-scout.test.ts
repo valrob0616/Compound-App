@@ -97,6 +97,53 @@ test('disclaimer stays educational and is not legal or financial advice', () => 
   assert.equal(disclaimer.includes('financial'), true);
 });
 
+test('bundled scenarios teach the Family Compound checklist', () => {
+  const haystack = content.stages
+    .flatMap((stage) =>
+      stage.scenarios.flatMap((scenario) => [
+        scenario.title,
+        scenario.prompt,
+        scenario.lookFor,
+        ...scenario.choices.filter((choice) => choice.correct).map((choice) => choice.label),
+      ]),
+    )
+    .join('\n')
+    .toLowerCase();
+
+  const required = [
+    '55–80',
+    '5–7 acre',
+    '30–45',
+    'tca 13-7-114',
+    'tdec',
+    'pavilion',
+    'rv dump',
+    'fixed-wireless',
+    '20 feet',
+    '13 feet 6 inches',
+    '150 feet',
+    '1.5–2 acres per cow-calf',
+    'downwind',
+    'sacrifice lot',
+    'greenbelt',
+    'rollback',
+    'conditional use',
+    'land llc',
+    'buy-out',
+    'separate entity',
+    'owner-operator',
+    '$600,000',
+    'fsa guarantee',
+    'golf',
+    'sight line',
+    'cleared',
+  ];
+
+  for (const phrase of required) {
+    assert.equal(haystack.includes(phrase), true, `missing checklist phrase: ${phrase}`);
+  }
+});
+
 test('stage badge requires every scenario correct', () => {
   const stage = fixtureStage();
   const none = stageScore(stage, {});

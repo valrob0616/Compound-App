@@ -1,462 +1,485 @@
 {
   "id": "compound-scout",
   "title": "Compound Scout",
-  "subtitle": "A short field course for families who want to buy land and build more than one home on it. Each card is a decision people actually face. Pick what you would look for, then read the teach-back.",
-  "disclaimer": "Educational only — not legal, financial, engineering, or land-use advice. Zoning, water, septic, and lending rules change by county. Confirm what you find here with local officials and licensed professionals before you buy or build.",
+  "subtitle": "A field course on the Family Compound model: about five homes on their own envelopes, a shared gathering core, and a working ranch. Each card is a decision on the land. Pick what you would look for, then read the teach-back.",
+  "disclaimer": "Educational only — not legal, financial, engineering, or land-use advice. Acreage bands, fire clearances, stocking rates, and loan caps here are a teaching model. Zoning, septic, greenbelt, and lending rules change by county and by year. Confirm them with local officials and licensed professionals before you buy or build.",
   "stages": [
     {
       "id": "land-access",
-      "title": "Land & access",
-      "summary": "Can you legally reach it, and is the acreage you can build on the acreage you are paying for?",
+      "title": "Land & acreage",
+      "summary": "Five homes need enough land, a dry core, and a buffer from uses you cannot live beside.",
       "scenarios": [
         {
-          "id": "lane-handshake",
-          "title": "The lane everyone uses",
-          "prompt": "The parcel is priced under the neighbors: 18 acres at the end of a gravel lane that crosses the property to the north. The seller says that family has always let people through, and there is no reason that would change.",
+          "id": "acreage-band",
+          "title": "Fifty-five, or make it smaller",
+          "prompt": "You want five households, each with room of its own, plus a real pasture. A 38-acre listing is the bargain. The seller says five small houses will fit and the pasture can have what is left. A 68-acre place down the road costs more and is mostly open.",
           "choices": [
             {
-              "id": "offer-now",
-              "label": "Make the offer this week. A lane the neighbors already use is the access plan.",
+              "id": "take-38",
+              "label": "Take the 38 acres. Five small houses do not need several acres each, and the pasture can be the leftovers.",
               "correct": false
             },
             {
-              "id": "title-access",
-              "label": "Before you rely on that lane, have title show legal access: public-road frontage or a recorded easement.",
+              "id": "prefer-55-80",
+              "label": "Prefer about 55–80 acres so each of five homes can have a 5–7 acre envelope plus pasture. Use 30–45 only if soils and zoning already hold and the ranch stays light.",
               "correct": true
             },
             {
-              "id": "measure-lane",
-              "label": "Measure the lane. If two trucks can pass, access is settled.",
+              "id": "need-200",
+              "label": "Hold out for 200 acres. Anything under 100 cannot be a family compound.",
               "correct": false
             }
           ],
-          "lookFor": "Buy the right to reach a public road, not a neighbor's habit. Ask the title company for a commitment that shows frontage you own or an easement that is recorded, runs with the land, and actually reaches your buildable area. A verbal \"we've always allowed it\" can end at the next sale, a dispute, or a lender who will not close. While you are in those documents, see who has to maintain the lane."
+          "lookFor": "For five homes, look for about 55–80 acres: roughly 5–7 acres of envelope per house, plus a contiguous pasture. A 30–45 acre tract can work only when the soils and the written zoning already support the dwellings and the ranch stays light — a few animals, not a full hay-and-cattle program fighting the drain fields. Do not sketch five kitchens onto the corners of a small tract and call the rest a ranch."
         },
         {
-          "id": "acres-vs-usable",
-          "title": "Twenty acres, on paper",
-          "prompt": "The listing is 20 acres, enough in your head for three households and a micro farm. The map shows a creek along the south line, a steep ridge, and a note that part of the ground is in the floodplain. The seller says the high spot by the mailbox is plenty of room.",
+          "id": "flood-wetlands",
+          "title": "The pretty bottom",
+          "prompt": "The prettiest ground is a creek bottom the seller calls the heart of the place. After a wet week, water stands in that grass. You pictured the pavilion and two of the homes there. The ridges are steeper and wooded.",
           "choices": [
             {
-              "id": "total-acres",
-              "label": "Count on the 20 acres. Floodplain still counts as land you own.",
+              "id": "build-the-bottom",
+              "label": "Put the pavilion and the first two homes in the bottom. Standing water for one week is just seasonal character.",
               "correct": false
             },
             {
-              "id": "usable-pads",
-              "label": "Sketch where pads, a well, and septic could actually go, then compare that usable ground to the acreage you are paying for.",
+              "id": "protect-the-core",
+              "label": "Keep floodplain and wetlands out of the buildable core. Homes, the pavilion, and drain fields belong on ground that stays dry.",
               "correct": true
             },
             {
-              "id": "mailbox-pad",
-              "label": "If one high spot fits a house, the rest of the compound can sort itself out after closing.",
+              "id": "fill-it",
+              "label": "Buy it and fill the bottom. A little dirt work removes a floodplain.",
               "correct": false
             }
           ],
-          "lookFor": "Total acres are not buildable acres. Walk the floodplain, wetlands, steep slopes, easements, and setbacks, and mark what is left for homes, a shop, and a garden. One dry knob by the road may fit a single house and nothing else. Ask for a soils map and a flood view before you picture three kitchens on that parcel."
+          "lookFor": "Floodplain and wetlands cannot be the core you build on. Walk the land after rain. Mark flood zones, wet soils, and standing water, then see what is left for the five envelopes, the pavilion, and the septic fields. Filling a mapped floodplain or a wetland is not a site plan. If the dry ground cannot hold the core, the acreage on the listing is not the acreage you can use."
         },
         {
-          "id": "shared-drive",
-          "title": "One drive, three households",
-          "prompt": "You plan three households on one gravel drive. It is a single lane, with no pull-out and no place at the top to turn around. Everyone agrees you will figure out grading and snow later.",
+          "id": "neighbors-privacy",
+          "title": "The use next door",
+          "prompt": "The west line shares a fence with a busy equipment yard and a night-lit shop. Inside the tract, the sketch puts all five houses in one cleared pocket so every porch faces the others. The seller says a family compound should feel like one yard.",
           "choices": [
             {
-              "id": "later-handshake",
-              "label": "Leave maintenance as a handshake. You are family, and the drive can be improved after you build.",
+              "id": "one-yard",
+              "label": "Take the shared yard. Relatives do not need screens, and the equipment yard is the neighbor's business.",
               "correct": false
             },
             {
-              "id": "written-access",
-              "label": "Write down who grades, who pays, and whether an ambulance can enter and turn around — and ask the fire district what they require.",
+              "id": "buffer-and-screens",
+              "label": "Buffer the compound from that incompatible use, and plan planted screens so the homes do not sit on each other's sight lines.",
               "correct": true
             },
             {
-              "id": "pave-first",
-              "label": "Pave it before anyone moves in. A paved drive removes the shared-access problem.",
+              "id": "one-hedge",
+              "label": "Plant one row of shrubs on the west line and still cluster the houses. A single hedge fixes both problems.",
               "correct": false
             }
           ],
-          "lookFor": "A shared drive is shared infrastructure. Look for a turnaround, winter access, and a written agreement for grading, gravel, snow, and repairs. Paving does not decide who pays or whether a responder can get in. Ask the fire district what they expect in that county instead of guessing a universal width. Get the agreement in place before the second household spends money."
+          "lookFor": "Look at what touches the boundary, not only at your own sketch. An equipment yard, a busy road, or another use you cannot live beside needs a real buffer — distance and planting, not a token hedge. Between the homes, planted screens are the right way to break sight lines. One shared lawn where every porch watches the next kitchen fights the five-envelope model. The shared life belongs at the pavilion."
         }
       ]
     },
     {
       "id": "water-septic",
       "title": "Water & septic",
-      "summary": "Several kitchens and a garden need water and wastewater sized for the households, not the old cabin.",
+      "summary": "A perc before the offer, a TDEC path sized for the whole compound, and a well you can keep away from the fields.",
       "scenarios": [
         {
-          "id": "well-yield",
-          "title": "There's a well",
-          "prompt": "The survey shows a well that served a weekend cabin. You want three full-time households and a garden. The seller has no recent pump test, only a drill log from 1998 that lists the depth.",
+          "id": "soils-septic",
+          "title": "We'll perc after closing",
+          "prompt": "The seller has no soil letter. They say the county is relaxed and you can perc after you own it. The plan is five houses, a pavilion with an outdoor kitchen, and a family RV pad with a dump.",
           "choices": [
             {
-              "id": "depth-is-enough",
-              "label": "Depth on the old log means the well can carry three houses. Wells do not shrink.",
+              "id": "perc-later",
+              "label": "Close first. A perc test is a building-permit detail, and a pavilion does not count as sewage.",
               "correct": false
             },
             {
-              "id": "yield-test",
-              "label": "Get a current yield and recovery test, then compare gallons per minute with peak use for every kitchen and the garden.",
+              "id": "perc-before-offer",
+              "label": "Get a perc or a soil letter before the offer, on a TDEC path sized for every bedroom, the pavilion, and any RV dump.",
               "correct": true
             },
             {
-              "id": "haul-water",
-              "label": "Skip the test and plan to haul drinking water. The well can stay as a backup you never measure.",
+              "id": "compost-only",
+              "label": "Use composting toilets in the outer homes so only the first house needs a permit.",
               "correct": false
             }
           ],
-          "lookFor": "A dot on the survey is not water for a compound. Look for a recent yield and recovery test — how many gallons per minute, and how fast the well refills — plus water quality and the pump's condition. Add up peak demand: several showers, laundry, and a garden on the same evening. If households will share the well, write down who maintains it, how use is limited in a dry year, and what a repair costs."
+          "lookFor": "Do not offer on a promise that the ground will perc. Look for a perc test or a soil letter on this parcel, then a TDEC path — or a county the state has delegated — for the subsurface permit. Size the systems for all the bedrooms you plan, the pavilion, and any RV dump. Those are sewage, not extras you mention later. Composting toilets do not erase a kitchen, a pavilion sink, or a dump station. Draw the primary and reserve fields before the pasture fence goes in, so the hay does not eat the repair area."
         },
         {
-          "id": "septic-bedrooms",
-          "title": "The tank has room",
-          "prompt": "A three-bedroom septic serves the existing house. You want a barndominium with its own kitchen and two more bedrooms for your sister's household. The seller says the tank is oversized, so adding on should be fine.",
+          "id": "well-and-creek",
+          "title": "The creek is the water plan",
+          "prompt": "A creek crosses the south line, and the listing calls it year-round water. There is no well and no utility water. The seller says a creek beats a well, so you can skip the driller. The future drain fields would sit on the same bench above the creek.",
           "choices": [
             {
-              "id": "oversized-tank",
-              "label": "Trust the oversized tank. Extra capacity in the ground is permission to add a kitchen.",
+              "id": "creek-is-enough",
+              "label": "Treat the creek as the water system. A well is optional when water already crosses the land.",
               "correct": false
             },
             {
-              "id": "permit-and-reserve",
-              "label": "Ask whether a second dwelling needs its own permit, and confirm design flow, soil, and a reserve area for the field.",
+              "id": "well-then-creek",
+              "label": "Confirm well potential or a utility connection, keep septic the required distance from that source, and treat a creek as a plus, not the plan.",
               "correct": true
             },
             {
-              "id": "compost-toilets",
-              "label": "Skip septic permits by using composting toilets in the new building and leaving the tank as it is.",
+              "id": "well-in-field",
+              "label": "Drill the well in the middle of the future drain field so the pipe runs stay short.",
               "correct": false
             }
           ],
-          "lookFor": "Septic is sized for design flow — often counted in bedrooms — and a second housekeeping unit is usually a new permit, not leftover room in an old tank. Look for the permit record, soil conditions, setbacks from wells and property lines, and a reserve area so the field can be replaced. Composting toilets do not erase the permit question if the building still has a kitchen and wastewater."
+          "lookFor": "Water for five households is a well with real potential, or a utility connection, proven before you rely on it. Septic and that well have to keep the setbacks the health rules require — do not site one on top of the other. A creek or a river on the place is a soft preference, not a requirement and not a substitute for the well or the utility. Ask about yield, quality, and whether you may use the surface water the way a compound would."
         },
         {
-          "id": "spring-vs-right",
-          "title": "The spring on the map",
-          "prompt": "A spring is marked on the parcel, and the listing calls it year-round water. You visit in April and it is running. You would use it for three households. Nobody has a water-quality test or paperwork for a water right.",
+          "id": "fields-vs-pasture",
+          "title": "The only flat hay",
+          "prompt": "The only flat, open ground is a 12-acre hay meadow. It is also the obvious repair area for five homes and the pavilion. The cattle plan needs that same meadow. Someone says you can fence the hay now and slide the septic wherever soil remains.",
           "choices": [
             {
-              "id": "april-flow",
-              "label": "April flow is enough. If water is on the land, the households can use it.",
+              "id": "fence-the-hay",
+              "label": "Fence the hay and stock it. Septic can use the woods or whatever soil is left.",
               "correct": false
             },
             {
-              "id": "right-and-season",
-              "label": "Ask whether you have a permitted, reliable supply you can document, and test quality, seasonal flow, and storage.",
+              "id": "fields-first",
+              "label": "Master-plan the drain fields and the pasture as different ground. Do not let the hay or the cattle take the reserve area.",
               "correct": true
             },
             {
-              "id": "divert-creek",
-              "label": "Pipe the spring into a cistern this summer and treat the paperwork as optional.",
+              "id": "fields-under-pavilion",
+              "label": "Put every drain field under the pavilion pad so the meadow stays pure pasture.",
               "correct": false
             }
           ],
-          "lookFor": "Water on a map is not water you can count on in August, or water you are allowed to use the way a compound needs. Rules differ by state: a spring may not include a right you can rely on. Look for a permitted well or a documented right, a dry-season visit or flow record, a quality test, and storage if the source dips. Do not divert first and ask later."
+          "lookFor": "The best pasture is often the only ground a repair field can use. Draw the primary and reserve drain fields for every home and the pavilion first, then lay the contiguous hay and pasture around them. Cattle, the barn, and a sacrifice lot stay off those reserves. If the meadow is the only legal soil, the ranch has to stay light or the tract is the wrong size — the same warning as a tight 30–45 acre place."
         }
       ]
     },
     {
       "id": "zoning-rules",
-      "title": "Zoning & multi-home rules",
-      "summary": "A second house is a dwelling unit. County rules and private deed limits both count.",
+      "title": "Zoning & entitlements",
+      "summary": "A written dwelling count for this parcel, a tax program that is not a permit, and a hard line between family RV use and a business.",
       "scenarios": [
         {
-          "id": "guest-house-adu",
-          "title": "Just a guest house",
-          "prompt": "The county site says the zone allows a single-family home. The seller adds that you can put a guest house for family — it is not a rental, so it does not count as another house. You want your parents in a separate kitchen on the same parcel.",
+          "id": "dwelling-count",
+          "title": "It's ag land, so build",
+          "prompt": "The parcel is agricultural and already in a tax-relief program. A relative says Tennessee law, TCA 13-7-114, stops the county from limiting agriculture, so five houses are already allowed and you do not need a letter. Planning has not looked at this parcel.",
           "choices": [
             {
-              "id": "family-doesnt-count",
-              "label": "A separate kitchen for relatives is not a second dwelling. Zoning cares about rentals, not family.",
+              "id": "statute-is-the-pass",
+              "label": "Skip the county. Ag zoning plus TCA 13-7-114 is the multi-home approval.",
               "correct": false
             },
             {
-              "id": "dwelling-cap",
-              "label": "Read the dwelling-unit cap and the ADU rules: size, owner-occupancy, and whether a second kitchen still counts.",
+              "id": "written-verification",
+              "label": "Get written county verification for this parcel. Ag land is not unlimited houses, and that statute is not a multi-home pass.",
               "correct": true
             },
             {
-              "id": "call-it-cohousing",
-              "label": "Call the project cohousing. Intentional communities are treated as one household under the code.",
+              "id": "split-later",
+              "label": "Split into five lots after closing. The surveyor will create the entitlements the zoning map does not show.",
               "correct": false
             }
           ],
-          "lookFor": "A dwelling is usually defined by housekeeping — a place to sleep, cook, and bathe — not by whether the people are related or whether you charge rent. Look up how many units the zoning district allows, and the accessory-dwelling rules if a smaller second unit is the path: size caps, owner-occupancy, and parking. Guest house, in-law suite, and cohousing do not change that count. Confirm it with the planning department, not from the listing."
+          "lookFor": "Agricultural land is not a license for as many houses as a family wants. Look for a written answer from the county on this exact parcel: how many dwellings, whether a pavilion or an RV pad counts, and what an accessory unit may be. Do not treat TCA 13-7-114 as a pass for a multi-home compound. That citation is not a substitute for the dwelling count. A lot split after closing is a new set of rules, not a shortcut around the letter you skipped. Have a local attorney read the answer with you — this card is not that advice."
         },
         {
-          "id": "acres-per-dwelling",
-          "title": "Ten acres, three homes",
-          "prompt": "You are looking at 10 acres and three small homes. A neighbor says the area is one house per five acres. You have not opened the zoning ordinance, and you hope a family compound is counted as one use.",
+          "id": "greenbelt-tax",
+          "title": "The tax break means five houses",
+          "prompt": "The assessor has the tract in greenbelt, and the tax bill is low. About 20 acres are in hay. A family member says greenbelt is why you can add houses, and that the tax treatment stays as long as someone mows.",
           "choices": [
             {
-              "id": "one-use",
-              "label": "A family compound is one use, so the five-acre rule does not apply to relatives.",
+              "id": "greenbelt-is-zoning",
+              "label": "Count greenbelt as the entitlement for the extra homes, and assume the tax bill never changes.",
               "correct": false
             },
             {
-              "id": "density-check",
-              "label": "Check the minimum lot area or dwellings allowed per acre, and whether a future lot split is even available.",
+              "id": "tax-not-permit",
+              "label": "Use greenbelt as tax help when you have enough agricultural acres. It is not a dwelling permit, and a change of use can trigger rollback.",
               "correct": true
             },
             {
-              "id": "split-first",
-              "label": "Split into three lots before you know the density rule. The surveyor will sort out zoning.",
+              "id": "exit-greenbelt",
+              "label": "Pull the whole tract out of greenbelt before you ask the county anything, so the tax question disappears.",
               "correct": false
             }
           ],
-          "lookFor": "Density is a zoning fact: minimum acres per dwelling, or a cap on units. Ten acres at one dwelling per five acres may allow two homes, not three — and related households still count. A lot split can add road, perc, and frontage requirements, and it can change how you finance. Read the district standard before you sketch three foundations or pay for a split."
+          "lookFor": "Greenbelt, where a county uses it, is a property-tax classification for qualifying farm, forest, or open-space land. In this model it is tax help when you have on the order of 15 acres or more actually in agricultural use. It does not entitle you to dwellings. Ask the assessor whether this tract qualifies and what happens if houses, a commercial RV use, or a drop in farm acres changes the use. Rollback tax is the surprise. Get the dwelling count from planning, not from the tax bill."
         },
         {
-          "id": "deed-restrictions",
-          "title": "The county said yes",
-          "prompt": "Planning says the zone allows two dwellings, a metal building, and small livestock. You want a barndominium and a micro farm. The parcel sits in an old recorded subdivision whose covenants the seller calls outdated and unenforced.",
+          "id": "rv-vs-commercial",
+          "title": "The cousins will rent the pads",
+          "prompt": "You want two family cottages and a couple of RV pads for reunions. A sibling wants to list them nightly and call the place a small campground so the land payment is easier. They say family use and short-term rental are the same septic and the same zoning if nobody builds a motel.",
           "choices": [
             {
-              "id": "county-wins",
-              "label": "Follow the county. Private covenants cannot block a use the zoning code allows.",
+              "id": "same-use",
+              "label": "Market the pads now. Family RV spots and a campground are the same use if the guests are relatives or friends.",
               "correct": false
             },
             {
-              "id": "read-exceptions",
-              "label": "Read the deed restrictions in the title work, including bans on extra dwellings, metal buildings, or livestock.",
+              "id": "split-entitlements",
+              "label": "Keep family cottages and family RV use on the family entitlement. Commercial campground or short-term rental needs its own zoning — often a conditional use permit — and transient septic.",
               "correct": true
             },
             {
-              "id": "ignore-old",
-              "label": "Ignore covenants older than twenty years. If nobody has enforced them, they are gone.",
+              "id": "skip-the-dump",
+              "label": "Avoid the question by never permitting the RV dump. Guests can use the house tanks.",
               "correct": false
             }
           ],
-          "lookFor": "Zoning is the public rule. Deed restrictions and covenants are private rules, and they can forbid a second house, a barndominium, or animals even when the county would allow them. Unenforced is not the same as expired. Read the restrictions in the title commitment, and ask a local attorney whether a covenant still runs with the land before you plan the shop and the flock."
+          "lookFor": "Family cottages and a reunion RV pad are not a campground and not a short-term-rental business. Commercial hospitality is a different entitlement: expect a conditional use permit or short-term-rental zoning, plus septic sized for transient flow, not only for the house bedrooms. Dumping guest rigs into a household tank does not make the use allowed. If someone wants that income, it needs its own approval and its own entity. Do not assume the family compound's permits cover it."
         }
       ]
     },
     {
       "id": "layout-buildings",
-      "title": "Layout & buildings",
-      "summary": "Where the homes, shop, and micro farm sit decides cost, privacy, and whether the land still works.",
+      "title": "Layout & the core",
+      "summary": "Dispersed envelopes, a pavilion early, shops that still get permits, and cart trails that are not the driveway.",
       "scenarios": [
         {
-          "id": "cluster-pads",
-          "title": "Spread out for privacy",
-          "prompt": "The family wants three houses far apart so nobody hears anyone else's kitchen. That layout puts each pad hundreds of feet from the well, with its own long driveway and its own power trench. A common fire pit is the only shared space anyone has mentioned.",
+          "id": "home-envelopes",
+          "title": "One cluster, five doors",
+          "prompt": "To save driveway, the sketch puts houses 1 through 5 on a single two-acre pad, windows facing windows. The rest of a 70-acre tract is woods the seller says you will clear later. Clearing bids are not in the budget. Someone likes the village look.",
           "choices": [
             {
-              "id": "scatter-always",
-              "label": "Scatter the houses. Privacy matters more than repeating driveways and trenches, and those can be added later.",
+              "id": "one-pad",
+              "label": "Cluster all five on the pad. Private envelopes are a luxury, and you can clear the woods after everyone moves in.",
               "correct": false
             },
             {
-              "id": "cluster-with-yards",
-              "label": "Cluster the homes near shared water, power, and septic lanes, and give each household its own private outdoor side.",
+              "id": "five-envelopes",
+              "label": "Give each home about 5–7 acres, break sight lines with planting, and prefer ground that is already cleared so you are not buying a clearing bill.",
               "correct": true
             },
             {
-              "id": "one-yard",
-              "label": "Put all three front doors on one shared lawn so the compound feels like a single yard.",
+              "id": "half-mile",
+              "label": "Scatter the houses a half-mile apart with no shared core. Distance alone is the whole layout.",
               "correct": false
             }
           ],
-          "lookFor": "Layout is a cost question and a privacy question at the same time. Long separated pads multiply driveway, electric, and water runs, and they can break well and septic setbacks. Look for a cluster that shares trenches and still gives each household a door that closes and a private outdoor side — porch, garden, or a buffer of shop and trees. A common fire pit or shared barn kitchen works when it is opt-in. One lawn with every window in the next kitchen does not. A common house, the cohousing pattern, still has to be checked as its own building."
+          "lookFor": "Disperse homes 1 through 5, each on about a 5–7 acre envelope, so a household can live without staring into the next kitchen. Planted buffers break sight lines. You do not need a blank quarter-mile of isolation, and you do not want a straight alley cut through the trees from window to window. Prefer land that is already cleared where the homes and the core will sit. Clearing cost is part of the purchase if the tract is solid woods. The shared life belongs at the pavilion, not on one common front yard."
         },
         {
-          "id": "barndo-shell",
-          "title": "The metal shell",
-          "prompt": "A barndominium kit is the plan for the second household: a shop bay in front and bedrooms in back, under one metal roof. The quote covers the shell, posts, and a slab. Insulation, a vapor plan, and engineered drawings for your snow load are listed as owner items. The lender has not said whether they will finance it.",
+          "id": "gathering-core",
+          "title": "Houses first, pavilion someday",
+          "prompt": "The budget puts all the money into the first two houses. The pavilion, outdoor kitchens, and a recreation spot are phase five, after everyone has a private kitchen. A parent says the compound will knit together once the houses exist.",
           "choices": [
             {
-              "id": "shell-price",
-              "label": "Use the shell price as the building cost. Insulation and drawings are small tasks after the slab is poured.",
+              "id": "houses-first",
+              "label": "Build the private houses first and let the common wait. Families can gather in someone's dining room.",
               "correct": false
             },
             {
-              "id": "envelope-and-lender",
-              "label": "Price an engineered envelope for your climate, separate the shop from sleeping space, and ask a lender who has closed a barndo nearby.",
+              "id": "core-early",
+              "label": "Build the central pavilion, outdoor kitchens, and recreation early. That core is the social glue, not a leftover.",
               "correct": true
             },
             {
-              "id": "shop-only",
-              "label": "Skip the living space on paper and call the whole building a shop so financing and fire separation do not apply.",
+              "id": "largest-kitchen",
+              "label": "Skip a pavilion and make one house the required common. The largest kitchen can host every meal.",
               "correct": false
             }
           ],
-          "lookFor": "A barndominium can earn its place — shop, storage, and a household under one roof — but the shell price is not the home. Look for engineered plans for local wind and snow, a real insulation and condensation strategy, and a separation between the shop bay (fumes, fire, noise) and the rooms people sleep in. Ask a lender who has financed this building type nearby, because some loans and appraisals assume a conventional house. Calling it only a shop does not fix a plan that still has bedrooms."
+          "lookFor": "The gathering core — a central pavilion, outdoor kitchens, and a place to play — is what makes five separate envelopes feel like one compound. Build it early, with the spine, before the outer homes sprawl. A private dining room can host a Sunday. It cannot be the only commons, or one household becomes the hotel. Plan septic and power for that pavilion on day one so it is not an afterthought sink on a house tank."
         },
         {
-          "id": "micro-farm-siting",
-          "title": "Where the garden goes",
-          "prompt": "You want a shared micro farm: beds, a small orchard, and a few animals. The sunniest flat ground is also the obvious place for a replacement septic field. The well sits just uphill of that flat. Irrigation would come off the same well as the three kitchens.",
+          "id": "barndo-shop",
+          "title": "The ag-exempt barn",
+          "prompt": "You want a barndominium that is a shop and barn on the ground floor and a small dwelling above for household three. The builder says agricultural buildings are exempt, so you can skip septic, permits, and the dwelling count. The shop will have a bathroom.",
           "choices": [
             {
-              "id": "sunniest-flat",
-              "label": "Put the beds and the animals on the sunniest flat. Septic can move to whatever ground is left.",
+              "id": "ag-exempt-skip",
+              "label": "File it as an ag barn and skip septic and zoning. An exemption covers any use inside a metal shell.",
               "correct": false
             },
             {
-              "id": "reserve-and-water",
-              "label": "Keep the septic reserve clear, set animals away from the well, and plan irrigation so the garden does not drain the kitchens.",
+              "id": "barn-still-permitted",
+              "label": "A barndo can be the barn, the shop, or an accessory dwelling, and it still has to pass septic and the zoning dwelling rules.",
               "correct": true
             },
             {
-              "id": "drop-the-farm",
-              "label": "Drop the micro farm. Any garden on a compound will ruin the septic and the well.",
+              "id": "call-it-storage",
+              "label": "Call the upstairs storage so the bathroom does not count, and move a family in anyway.",
               "correct": false
             }
           ],
-          "lookFor": "The best garden soil is often the same ground a drain field will need later. Look for a reserved septic area you do not plant, pave, or pen animals on. Keep livestock, manure, and compost set back from the well — ask the health department for the distances they enforce. Then split water in your head: household peak use versus irrigation, with storage or another source if one well cannot do both. A micro farm belongs on a compound. It cannot sit on the only repair area for the wastewater."
+          "lookFor": "A barndominium is a useful barn, shop, or an accessory-dwelling path for one household. It does not skip the rules because someone calls it agricultural. Look for the same zoning letter and the same septic path as any other dwelling or bathroom, including the pavilion load if they share a field. An ag exemption from a tax category or a building category is not a pass on health codes or on the county's dwelling cap. Confirm both before the slab."
+        },
+        {
+          "id": "golf-cart-trails",
+          "title": "The cart path is the driveway",
+          "prompt": "To keep the place pretty, the plan uses one narrow gravel track for trucks, fire apparatus, and golf carts. It runs straight between the five houses so everyone can see who is coming. The carts are how people reach the pavilion. Nobody has said who pays to maintain the path.",
+          "choices": [
+            {
+              "id": "one-lane",
+              "label": "One scenic lane can do both jobs if the golf carts yield to trucks.",
+              "correct": false
+            },
+            {
+              "id": "separate-trail",
+              "label": "Keep a separate cart trail, winding through the buffers so it does not open sight-line alleys, and fund it from the commons dues.",
+              "correct": true
+            },
+            {
+              "id": "no-carts",
+              "label": "Skip carts. Five households should drive the public road to see each other.",
+              "correct": false
+            }
+          ],
+          "lookFor": "Golf carts are how a dispersed compound stays neighborly, and they need their own trail. Do not merge them into the vehicle spine, and do not cut a straight alley between house windows to make the carts happy. Wind the trail through the planted buffers. Build and maintain it as a commons, paid from dues, not as a favor the first household finishes alone."
         }
       ]
     },
     {
       "id": "utilities-resilience",
-      "title": "Utilities & resilience",
-      "summary": "Power, backup, drainage, and a drive an ambulance can use are part of the purchase.",
+      "title": "Access, utilities & ranch",
+      "summary": "An all-weather spine, power and data on day one, and a pasture that stays a pasture.",
       "scenarios": [
         {
-          "id": "power-run",
-          "title": "The cheap back parcel",
-          "prompt": "The back parcel is cheaper because the meter is at the county road and your pads would sit about a thousand feet in. The seller says the power company usually does not charge much to extend a line. You have no written quote. You are also unsure whether each household should have its own meter.",
+          "id": "fire-spine",
+          "title": "A pretty one-lane drive",
+          "prompt": "The entrance drive is a dead-end a little over 200 feet, about 12 feet of gravel between trees, with limbs at 10 feet. There is no turnaround. The seller says the fire department has never complained, and you can widen it after the houses are in.",
           "choices": [
             {
-              "id": "seller-estimate",
-              "label": "Take the discount on the land and the seller's estimate. Line extensions are a minor closing cost.",
+              "id": "leave-the-lane",
+              "label": "Leave the lane. A family drive does not have to meet a fire-access standard.",
               "correct": false
             },
             {
-              "id": "written-quote",
-              "label": "Get a written utility quote for the extension, and decide on separate meters versus one service before you call the land a bargain.",
+              "id": "spine-standard",
+              "label": "Build an all-weather spine about 20 feet clear and 13 feet 6 inches of vertical clearance, with a turnaround because the dead-end is longer than 150 feet.",
               "correct": true
             },
             {
-              "id": "cabin-kit",
-              "label": "Ignore power until after closing. You can always go off-grid with a cabin-sized kit.",
+              "id": "pave-narrow",
+              "label": "Pave a 10-foot path. Pavement replaces width, height, and a place to turn around.",
               "correct": false
             }
           ],
-          "lookFor": "A long service drop can cost more than the discount on the land. Look for a written extension quote, the route across trees, rock, or wetlands, and any easement the line needs. Separate meters are often cleaner when households split bills. One master meter needs a written way to divide the bill. Off-grid is a real option, but size it for a well pump and more than one kitchen, not a weekend cabin kit chosen after you already own the parcel."
+          "lookFor": "The spine that serves the homes has to be all-weather, not a fair-weather track. Check the sketch against about 20 feet of clear width and 13 feet 6 inches of vertical clearance, and give a dead-end longer than about 150 feet a turnaround fire apparatus can use. Confirm those figures with the fire district, because adoption varies, and put them on the plan before the houses lock the edges. Golf carts do not belong in this width. They get their own trail."
         },
         {
-          "id": "backup-loads",
-          "title": "One generator for everyone",
-          "prompt": "Storms knock out power for days. The plan is a single generator for the compound, with no list of what it must run and no agreement on fuel or maintenance. One household uses a medical device. The well pump is shared.",
+          "id": "power-and-fiber",
+          "title": "Power can wait",
+          "prompt": "The meter is at the road and the core is a long run in. The seller has no extension quote. Cell service is one bar at the mailbox and none in the hollow where the pavilion would sit. Someone says satellite later is a plan, and fiber is a luxury.",
           "choices": [
             {
-              "id": "one-fridge",
-              "label": "Buy a generator sized for one refrigerator. The other loads can wait their turn.",
+              "id": "satellite-later",
+              "label": "Close, then ask the power company. Satellite internet can cover five households whenever you get to it.",
               "correct": false
             },
             {
-              "id": "critical-loads",
-              "label": "List the critical loads — well-pump surge, freezers, medical devices, phones — and write who fuels and maintains a shared backup.",
+              "id": "day-one-utilities",
+              "label": "Have a power path and either fiber or a solid fixed-wireless path on day one, before you treat the price as a bargain.",
               "correct": true
             },
             {
-              "id": "wait-it-out",
-              "label": "Skip backup power. Rural households should expect to do without water until the utility returns.",
+              "id": "cabin-hotspot",
+              "label": "Share one cabin-sized hotspot. The ranch does not need real connectivity.",
               "correct": false
             }
           ],
-          "lookFor": "Backup power is a shared system with a job. List critical loads: the well pump, whose starting surge is often the surprise, plus freezers, medical equipment, and a way to charge phones. Then decide on a generator, a battery, or both, and write who buys fuel, who starts it, and which circuits stay on when there is not enough for every convenience. One fridge circuit does not water three houses."
+          "lookFor": "Power and a real data path are day-one utilities, not a punch-list item. Get the extension quote for power to the core and the envelopes. For data, look for fiber or a fixed-wireless path that actually works at the pavilion and the houses. A bar of cell service at the mailbox is not that path. Five households, a well, and a barn office will feel the gap immediately. Put the cost next to the land price before you call the tract cheap."
         },
         {
-          "id": "drainage-access",
-          "title": "The pretty hollow",
-          "prompt": "The prettiest building sites are in a gentle hollow. After a wet week, water sits in the grass. The drive in is one lane and ends at the hollow with no turnaround. Wildfire season is part of life in this county, and there is one way out.",
+          "id": "pasture-block",
+          "title": "Cows between the porches",
+          "prompt": "The cattle plan is eight cow-calf pairs on the same 70 acres as five home envelopes. The sketch breaks the grass into strips between the houses. The barn sits upwind of the pavilion. In winter the herd would stand in the front grass because there is no mud lot. Someone says one acre per pair is plenty anywhere.",
           "choices": [
             {
-              "id": "pretty-hollow",
-              "label": "Build in the hollow. Standing water after one wet week is cosmetic, and the drive can be widened someday.",
+              "id": "strips-and-one-acre",
+              "label": "Weave the pasture between the porches and size the herd at about one acre per pair. The barn can face the pavilion.",
               "correct": false
             },
             {
-              "id": "dry-and-access",
-              "label": "Put pads on ground that sheds water, keep drainage off the septic area, and confirm emergency vehicles can enter, turn around, and leave.",
+              "id": "contiguous-ranch",
+              "label": "Keep one contiguous pasture and hay block, put the barn downwind, stock about 1.5–2 acres per cow-calf pair, and give the herd a sacrifice lot for mud.",
               "correct": true
             },
             {
-              "id": "skip-fire",
-              "label": "Ignore fire access. Defensible space is a suburban rule and does not apply on family land.",
+              "id": "drop-the-ranch",
+              "label": "Drop the ranch. Five homes and cattle cannot share a tract.",
               "correct": false
             }
           ],
-          "lookFor": "Look at the land after rain, not only on a dry listing day. Pads want ground that sheds water, and runoff should not pond on a septic field or dump onto a neighbor. Walk the drive the way an ambulance would: in, turn around, and out. In fire country, ask the fire district about defensible space and whether they expect more than one way out. A hollow that looks sheltered can flood, and it can be a poor place to evacuate from."
+          "lookFor": "The ranch wants a contiguous block of pasture and hay, not ribbons of grass between kitchens. Site the barn downwind of the homes and the pavilion. A working stocking rate in this model is about 1.5–2 acres per cow-calf pair, counted on the pasture block — not on the 5–7 acre envelopes and not on the septic reserves. Add a sacrifice lot so mud season does not destroy the hay ground. If the envelopes, the fields, and that stocking rate do not all fit, the herd gets smaller or the tract is too tight."
         }
       ]
     },
     {
       "id": "financing-ownership",
-      "title": "Financing & ownership",
-      "summary": "Who signs, who holds title, and how someone can leave matters as much as the price per acre.",
+      "title": "Money & phasing",
+      "summary": "A land LLC with an exit, a farm loan that is actually a farm, and an order of work that proves the paper first.",
       "scenarios": [
         {
-          "id": "whose-loan",
-          "title": "One mortgage, three roofs",
-          "prompt": "A relative with the strongest credit offers to sign for everything: the land and two new buildings on one parcel. Everyone else will pay them back. You have not asked a lender whether a standard house loan even covers more than one dwelling, or a barndominium, in this county.",
+          "id": "land-llc",
+          "title": "Everyone on the deed",
+          "prompt": "Four households will buy together. The plan is every adult on the deed, one checking account for taxes and the future pavilion, and a sibling's nightly-rental income deposited in that same account. Buyout is a promise to be fair. There is no occupancy rule.",
           "choices": [
             {
-              "id": "strongest-credit",
-              "label": "Let the strongest credit sign a normal house mortgage. Payback between family does not need the lender involved.",
+              "id": "names-on-deed",
+              "label": "Put joint names on the deed and use one family account. Rental cash can help the dues if everyone agrees by text.",
               "correct": false
             },
             {
-              "id": "lender-who-closed",
-              "label": "Find a lender who has closed multi-dwelling or barndo loans in that county, and decide whose credit signs before anyone promises payback.",
+              "id": "llc-and-separate",
+              "label": "Hold the land in an LLC with occupancy agreements, dues, reserves, and a written buy-in and buy-out. Keep hospitality money in a separate entity.",
+              "correct": true
+            },
+            {
+              "id": "handshake",
+              "label": "Skip the company and use a handshake. Families who meant well can sort the title later.",
+              "correct": false
+            }
+          ],
+          "lookFor": "Hold the land in a land LLC, with occupancy agreements that say who may live there. Dues and reserves have to cover tax, insurance, the spine, the pavilion, and septic before someone comes up short. Write the buy-in and the buy-out while everyone is still friendly. Do not drop short-term-rental or campground cash into the family dues account. Hospitality, if you do it at all, sits in a separate entity so a guest business cannot sink the compound or confuse a farm-loan file. Have a local attorney draft it. This card is the checklist, not the legal work."
+        },
+        {
+          "id": "fsa-path",
+          "title": "The farm loan will cover the inn",
+          "prompt": "The price is well above a house mortgage. A relative plans an FSA direct farm-ownership loan and wants a glamping website in the business plan, because guest income makes the payment easier. The cattle are a hobby herd. They had a recent late mortgage. They heard there is no minimum credit score, so the late payment does not matter.",
+          "choices": [
+            {
+              "id": "hobby-and-inn",
+              "label": "Lead with hospitality income and a hobby herd. No minimum credit score means the late mortgage is irrelevant.",
+              "correct": false
+            },
+            {
+              "id": "owner-operator",
+              "label": "Use this path only as owner-operator of a family farm selling production. Direct farm-ownership funds top out around $600k; a larger buy is often a bank loan with an FSA guarantee. No minimum score, but the repayment pattern still has to show good faith.",
               "correct": true
             },
             {
               "id": "cash-only",
-              "label": "Assume no lender will touch a compound, so the only honest plan is all cash.",
+              "label": "Assume no agricultural lender will touch five homes, so the only honest path is all cash.",
               "correct": false
             }
           ],
-          "lookFor": "One parcel with more than one home often does not fit a standard single-family mortgage. Look for a lender who has already closed this pattern nearby — a construction-to-permanent loan, a rural lender, or a product that allows another unit — and ask what they will not finance, such as a second kitchen or a metal shop bay. The name on the note carries the debt if someone stops paying. All cash is not the only path, and a handshake payback is not a loan structure."
+          "lookFor": "An FSA farm-ownership loan fits someone who will be the owner-operator of a family farm — production for sale, not a hobby herd and not a hospitality brand. Direct farm-ownership funds in this model top out around $600,000, and that cap moves, so confirm the current figure. A larger purchase is often a commercial bank loan with an FSA guarantee, not a bigger direct check. There is no minimum credit score. There is still a repayment test: a pattern of unpaid debt without a good-faith explanation is a problem. Marketing the place as an inn or a campground weakens the FSA fit. Keep that business out of the farm story and out of the family dues."
         },
         {
-          "id": "names-on-deed",
-          "title": "Just put everyone on the deed",
-          "prompt": "Four adults want to own the land together. Someone suggests joint tenancy because it is simple, and if one of you dies the land stays in the family. There is no buyout number, no rule for a divorce, and no plan if one household wants to leave in five years.",
+          "id": "phasing",
+          "title": "Clear all five pads now",
+          "prompt": "The family wants to clear five house pads and a mile of trails before anyone has a letter from the county or a soil result. The pavilion is drawn as phase four. The pasture fence is already staked across the ground a septic contractor would need. They say momentum matters more than paper.",
           "choices": [
             {
-              "id": "joint-tenants",
-              "label": "Deed it to all four as joint tenants. Survivorship is the exit plan.",
+              "id": "dozers-first",
+              "label": "Clear and fence now. Paperwork can chase the dozers, and the pavilion can follow the last house.",
               "correct": false
             },
             {
-              "id": "written-exit",
-              "label": "Have a local attorney match the deed or an entity to a written agreement: who may live there, how costs split, and how someone buys out.",
+              "id": "prove-then-core",
+              "label": "Prove zoning and septic first. Build the spine and the gathering core before the outer homes sprawl, and keep the master-planned drain fields out of the pasture.",
               "correct": true
             },
             {
-              "id": "shared-checking",
-              "label": "Skip the paperwork and use a shared checking account. Families who meant well can sort title later.",
+              "id": "all-five-at-once",
+              "label": "Build all five houses in one season and skip the core. Speed is the phasing plan.",
               "correct": false
             }
           ],
-          "lookFor": "How you hold title decides death, debt, and departure. Joint tenancy with survivorship can pass a share to the other owners instead of to someone's children. Tenancy in common can often be willed, and in many places one owner can force a sale. A family LLC or another entity, plus an operating agreement, can spell out buyout, contributions, and who may live on the land — if a local attorney says it fits your state. Look for a written exit before anyone is on the deed. No single form fits every family."
-        },
-        {
-          "id": "shared-bills",
-          "title": "We'll split it later",
-          "prompt": "The tax bill, the insurance, and a failing culvert on the shared drive are in one owner's name today. An agricultural exemption lowers the taxes, and it depends on farm use. Two households are ready to build. Nobody has written what each household pays, or what happens if one stops.",
-          "choices": [
-            {
-              "id": "split-later",
-              "label": "Start building. You can divide taxes and insurance evenly once everyone has a house.",
-              "correct": false
-            },
-            {
-              "id": "written-budget",
-              "label": "Write the shared budget now — taxes, insurance, the road, the well, and a septic reserve — and ask whether new houses change the ag exemption.",
-              "correct": true
-            },
-            {
-              "id": "one-pays",
-              "label": "Leave every bill in the original owner's name. The others can reimburse when they feel able.",
-              "correct": false
-            }
-          ],
-          "lookFor": "A compound has carrying costs that do not wait for the last house: property tax, insurance, road work, the well, and money set aside to replace a drain field. Look at the current tax bill and ask the assessor whether an agricultural exemption depends on a use you might lose when you add dwellings. Write who pays, when, and what the others may do if one household stops. Otherwise the first name on the bill carries the land alone."
+          "lookFor": "Phasing is the order that keeps a family from paying twice. First, written zoning for the dwelling count and a septic path you can build — perc or soil letter, the TDEC route, fields drawn so the pasture does not take the reserve. Then the all-weather spine and the pavilion, outdoor kitchens, and recreation, before houses 3 through 5 sprawl. Cart trails and the outer envelopes come after that core is real. Momentum without the letter is how a family clears land it cannot live on."
         }
       ]
     }

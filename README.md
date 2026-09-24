@@ -49,7 +49,7 @@ npm run preview:feeds
 
 1. **News** — Family Compound RSS only (multi-household living, financing, compound design, barndominiums, micro farms). There is no Homesteading switcher on this tab. Pull to refresh. Tap an article for an in-app WebView. A shortcut opens the Videos tab.
 2. **Videos** — **Featured YouTube videos** for Homesteading or Family Compounds, not mixed into the news list. A prominent disclaimer states the clips are third-party YouTube content, not owned or created by LFH Inc or this app. Tap a card for an in-app player and **Open in YouTube**.
-3. **Learn** — **Compound Scout**, an offline scenario game about what to look for when buying land and building a family compound (access, water and septic, zoning, layout, utilities, financing and ownership). Progress and stage badges stay on the device. Replay a stage or the whole round. It is educational, not legal or financial advice.
+3. **Learn** — **Compound Scout**, an offline scenario game of Family Compound look-fors: acreage for five homes, written zoning, TDEC septic, water, a dispersed layout and pavilion, fire access, power and data, the ranch, ownership, FSA financing, and phasing. Progress and stage badges stay on the device. Replay a stage or the whole round. It is educational, not legal or financial advice.
 4. **Store** — **Coming Soon** for first publish. Homesteading and Family Compounds shopping (Amazon affiliate picks) will be added after launch. Catalog JSON and URL helpers stay in the repo; set `STORE_CATALOG_ENABLED` in `src/constants/config.ts` when you are ready.
 5. **Account** — sign up, sign in, sign out, edit display name, set preferred category (Homesteading / Family Compounds / both). That preference applies to Featured Videos, not the news RSS. Session survives app restarts. Guests can browse; saving favorites prompts for an account. **Privacy Policy** and **Terms of Use** are on the Account tab without signing in.
 
@@ -125,7 +125,7 @@ Favorites remain on-device, keyed by user id (works in both auth modes).
 
 ## Extend Compound Scout
 
-The Learn tab reads `src/data/compound-scout.json` at build time. To add a look:
+The Learn tab reads `src/data/compound-scout.json` at build time. The shipped cards follow the Family Compound checklist (acreage band, written dwelling count, TDEC septic, envelopes, pavilion, fire spine, ranch, LLC, FSA, phasing, and the rest). New cards should stay that specific. To add a look:
 
 1. Open the stage that fits (`land-access`, `water-septic`, `zoning-rules`, `layout-buildings`, `utilities-resilience`, `financing-ownership`), or append a new stage after those six.
 2. Add a scenario object with a unique `id`, a `title`, a `prompt`, `choices` (2–4 items, exactly one `"correct": true`), and `lookFor` (the teach-back the player reads after answering).
