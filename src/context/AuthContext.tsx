@@ -10,13 +10,12 @@ import {
 
 import * as auth from '@/lib/auth';
 import { getJson, setJson, storageKeys } from '@/lib/storage';
-import type { AuthMode, CategoryId, PreferredCategory, UserProfile } from '@/types';
+import type { CategoryId, FavoriteDraft, FavoriteItem, PreferredCategory, UserProfile } from '@/types';
 
 type AuthContextValue = {
   user: UserProfile | null;
   loading: boolean;
   busy: boolean;
-  authMode: AuthMode;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (input: {
     email: string;
@@ -26,7 +25,7 @@ type AuthContextValue = {
   }) => Promise<void>;
   signOut: () => Promise<void>;
   updateProfile: (patch: Partial<Pick<UserProfile, 'displayName' | 'preferredCategory'>>) => Promise<void>;
-  deleteAccount: () => Promise<{ cloudDeletionPending: boolean }>;
+  deleteAccount: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -35,7 +34,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
-  const authMode = auth.getAuthMode();
 
   useEffect(() => {
     let cancelled = false;
@@ -68,7 +66,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       user,
       loading,
       busy,
-      authMode,
       signIn: (email, password) =>
         wrap(async () => {
           setUser(await auth.signIn(email, password));
@@ -85,17 +82,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       updateProfile: (patch) =>
         wrap(async () => {
           if (!user) throw new Error('Sign in to update your profile.');
-          setUser(await auth.updateProfile(user, patch));
+          setUser(await auth.updateProfile(patch));
         }),
       deleteAccount: () =>
         wrap(async () => {
           if (!user) throw new Error('Sign in to delete your account.');
-          const result = await auth.deleteAccount(user);
+          await auth.deleteAccount();
           setUser(null);
-          return result;
         }),
     }),
-    [authMode, busy, loading, user, wrap],
+    [busy, loading, user, wrap],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -110,9 +106,10 @@ export function useAuth(): AuthContextValue {
 type AppPrefsValue = {
   category: CategoryId;
   setCategory: (category: CategoryId) => void;
-  favoriteIds: string[];
+  favorites: FavoriteItem[];
+  favoritesNote: string | null;
   isFavorite: (id: string) => boolean;
-  toggleFavorite: (id: string) => Promise<boolean>;
+  toggleFavorite: (draft: FavoriteDraft) => Promise<boolean>;
 };
 
 const AppPrefsContext = createContext<AppPrefsValue | null>(null);
@@ -120,7 +117,8 @@ const AppPrefsContext = createContext<AppPrefsValue | null>(null);
 export function AppPrefsProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [category, setCategoryState] = useState<CategoryId>('homesteading');
-  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+  const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
+  const [favoritesNote, setFavoritesNote] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -140,14 +138,23 @@ export function AppPrefsProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let cancelled = false;
-    (async () => {
-      if (!user) {
-        setFavoriteIds([]);
-        return;
-      }
-      const ids = await getJson<string[]>(storageKeys.favorites(user.id), []);
-      if (!cancelled) setFavoriteIds(ids);
-    })();
+    if (!user) {
+      setFavorites([]);
+      setFavoritesNote(null);
+      return;
+    }
+    setFavoritesNote(null);
+    void auth
+      .loadFavorites()
+      .then((items) => {
+        if (!cancelled) setFavorites(items);
+      })
+      .catch((err: unknown) => {
+        if (!cancelled) {
+          setFavorites([]);
+          setFavoritesNote(err instanceof Error ? err.message : 'Could not load favorites.');
+        }
+      });
     return () => {
       cancelled = true;
     };
@@ -159,25 +166,26 @@ export function AppPrefsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const toggleFavorite = useCallback(
-    async (id: string): Promise<boolean> => {
+    async (draft: FavoriteDraft): Promise<boolean> => {
       if (!user) return false;
-      const next = favoriteIds.includes(id) ? favoriteIds.filter((item) => item !== id) : [...favoriteIds, id];
-      setFavoriteIds(next);
-      await setJson(storageKeys.favorites(user.id), next);
+      const next = await auth.toggleFavorite(draft);
+      setFavorites(next);
+      setFavoritesNote(null);
       return true;
     },
-    [favoriteIds, user],
+    [user],
   );
 
   const value = useMemo<AppPrefsValue>(
     () => ({
       category,
       setCategory,
-      favoriteIds,
-      isFavorite: (id) => favoriteIds.includes(id),
+      favorites,
+      favoritesNote,
+      isFavorite: (id) => favorites.some((item) => item.id === id),
       toggleFavorite,
     }),
-    [category, favoriteIds, setCategory, toggleFavorite],
+    [category, favorites, favoritesNote, setCategory, toggleFavorite],
   );
 
   return <AppPrefsContext.Provider value={value}>{children}</AppPrefsContext.Provider>;

@@ -34,6 +34,9 @@ yarn-error.*
 .env
 .env*.local
 
+# account server data (bcrypt hashes, sessions, favorites)
+server/data/
+
 # typescript
 *.tsbuildinfo
 

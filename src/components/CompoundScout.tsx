@@ -1,8 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
+import { FavoriteButton } from '@/components/FavoriteButton';
 import { PrimaryButton } from '@/components/ui';
+import { useAppPrefs } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
 import rawScout from '@/data/compound-scout.json';
 import {
@@ -24,14 +27,24 @@ import { serif } from '@/theme/typography';
 
 const scout = assertScoutContent(rawScout);
 
+function locateScenario(scenarioId: string): { stageIndex: number; scenarioIndex: number } | null {
+  for (let stageIndex = 0; stageIndex < scout.stages.length; stageIndex += 1) {
+    const scenarioIndex = scout.stages[stageIndex]!.scenarios.findIndex((scenario) => scenario.id === scenarioId);
+    if (scenarioIndex >= 0) return { stageIndex, scenarioIndex };
+  }
+  return null;
+}
+
 type Phase =
   | { name: 'trail' }
   | { name: 'scenario'; stageIndex: number; scenarioIndex: number }
   | { name: 'stage-done'; stageIndex: number }
   | { name: 'round-done' };
 
-export function CompoundScout() {
+export function CompoundScout({ focusScenarioId }: { focusScenarioId?: string }) {
   const { colors } = useAppTheme();
+  const router = useRouter();
+  const { isFavorite, toggleFavorite } = useAppPrefs();
   const [answers, setAnswers] = useState<ScoutAnswers | null>(null);
   const [phase, setPhase] = useState<Phase>({ name: 'trail' });
   const [confirm, setConfirm] = useState<null | 'round' | number>(null);
@@ -63,7 +76,35 @@ export function CompoundScout() {
     setConfirm(null);
   }, [phaseKey]);
 
+  const ready = Boolean(answers);
+  useEffect(() => {
+    if (!ready || !focusScenarioId) return;
+    const found = locateScenario(focusScenarioId);
+    if (found) setPhase({ name: 'scenario', ...found });
+  }, [ready, focusScenarioId]);
+
   const score = useMemo(() => (answers ? roundScore(scout, answers) : null), [answers]);
+
+  const saveScenario = (scenario: ScoutScenario, stage: ScoutStage) => {
+    void (async () => {
+      try {
+        const ok = await toggleFavorite({
+          id: scenario.id,
+          kind: 'learn',
+          title: scenario.title,
+          subtitle: stage.title,
+        });
+        if (!ok) {
+          Alert.alert('Save favorites', 'Create an account to save favorites on your account.', [
+            { text: 'Not now', style: 'cancel' },
+            { text: 'Create account', onPress: () => router.push('/auth/sign-up') },
+          ]);
+        }
+      } catch (err) {
+        Alert.alert('Could not save favorite', err instanceof Error ? err.message : 'Try again.');
+      }
+    })();
+  };
 
   if (!answers || !score) {
     return (
@@ -151,6 +192,13 @@ export function CompoundScout() {
           scenario={scout.stages[phase.stageIndex]!.scenarios[phase.scenarioIndex]!}
           scenarioIndex={phase.scenarioIndex}
           choiceId={answers[scout.stages[phase.stageIndex]!.scenarios[phase.scenarioIndex]!.id]}
+          favorite={isFavorite(scout.stages[phase.stageIndex]!.scenarios[phase.scenarioIndex]!.id)}
+          onToggleFavorite={() =>
+            saveScenario(
+              scout.stages[phase.stageIndex]!.scenarios[phase.scenarioIndex]!,
+              scout.stages[phase.stageIndex]!,
+            )
+          }
           onBack={() => setPhase({ name: 'trail' })}
           onChoose={choose}
           onNext={() => {
@@ -334,6 +382,8 @@ function ScenarioPlay({
   scenario,
   scenarioIndex,
   choiceId,
+  favorite,
+  onToggleFavorite,
   onBack,
   onChoose,
   onNext,
@@ -343,6 +393,8 @@ function ScenarioPlay({
   scenario: ScoutScenario;
   scenarioIndex: number;
   choiceId: string | undefined;
+  favorite: boolean;
+  onToggleFavorite: () => void;
   onBack: () => void;
   onChoose: (scenarioId: string, choiceId: string) => void;
   onNext: () => void;
@@ -367,7 +419,10 @@ function ScenarioPlay({
         Look {scenarioIndex + 1} of {stage.scenarios.length}
       </Text>
       <View style={[styles.promptCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
-        <Text style={[styles.promptTitle, { color: colors.text }]}>{scenario.title}</Text>
+        <View style={styles.promptHeader}>
+          <Text style={[styles.promptTitle, { color: colors.text }]}>{scenario.title}</Text>
+          <FavoriteButton active={favorite} onPress={onToggleFavorite} />
+        </View>
         <Text style={[styles.prompt, { color: colors.text }]}>{scenario.prompt}</Text>
       </View>
       <View style={styles.choiceList}>
@@ -709,7 +764,8 @@ const styles = StyleSheet.create({
   stageHeading: { fontFamily: serif, fontSize: 26, fontWeight: '700' },
   progressLabel: { marginTop: 4, marginBottom: spacing.md, fontSize: 13, fontWeight: '600' },
   promptCard: { borderWidth: 1, borderRadius: radii.lg, padding: spacing.md, marginBottom: spacing.md },
-  promptTitle: { fontFamily: serif, fontSize: 22, fontWeight: '700', marginBottom: 8 },
+  promptHeader: { flexDirection: 'row', alignItems: 'flex-start', gap: 8 },
+  promptTitle: { flex: 1, fontFamily: serif, fontSize: 22, fontWeight: '700', marginBottom: 8 },
   prompt: { fontSize: 16, lineHeight: 24 },
   choiceList: { gap: spacing.sm },
   choice: {

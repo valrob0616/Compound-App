@@ -47,7 +47,27 @@ export type UserProfile = {
   preferredCategory: PreferredCategory;
 };
 
-export type AuthMode = 'demo' | 'supabase';
+export type FavoriteKind = 'news' | 'video' | 'learn';
+
+/** Saved with the account on the server. `savedAt` is set by the server. */
+export type FavoriteItem = {
+  id: string;
+  kind: FavoriteKind;
+  title: string;
+  subtitle?: string;
+  url?: string;
+  youtubeId?: string;
+  savedAt: string;
+};
+
+export type FavoriteDraft = {
+  id: string;
+  kind: FavoriteKind;
+  title: string;
+  subtitle?: string;
+  url?: string;
+  youtubeId?: string;
+};
 
 export type FeedLoadResult = {
   items: FeedItem[];

@@ -43,13 +43,23 @@ export default function FeedScreen() {
   }, [load]);
 
   const onToggleFavorite = useCallback(
-    async (id: string) => {
-      const ok = await toggleFavorite(id);
-      if (!ok) {
-        Alert.alert('Save favorites', 'Create an account to save favorites across sessions.', [
-          { text: 'Not now', style: 'cancel' },
-          { text: 'Create account', onPress: () => router.push('/auth/sign-up') },
-        ]);
+    async (item: NewsItem) => {
+      try {
+        const ok = await toggleFavorite({
+          id: item.id,
+          kind: 'news',
+          title: item.title,
+          subtitle: item.source,
+          url: item.url,
+        });
+        if (!ok) {
+          Alert.alert('Save favorites', 'Create an account to save favorites on your account.', [
+            { text: 'Not now', style: 'cancel' },
+            { text: 'Create account', onPress: () => router.push('/auth/sign-up') },
+          ]);
+        }
+      } catch (err) {
+        Alert.alert('Could not save favorite', err instanceof Error ? err.message : 'Try again.');
       }
     },
     [router, toggleFavorite],
@@ -72,7 +82,7 @@ export default function FeedScreen() {
         <NewsCard
           item={item}
           favorite={isFavorite(item.id)}
-          onToggleFavorite={() => void onToggleFavorite(item.id)}
+          onToggleFavorite={() => void onToggleFavorite(item)}
           onOpen={() =>
             router.push({
               pathname: '/article/[id]',
