@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import { FavoriteButton } from '@/components/FavoriteButton';
@@ -8,6 +8,7 @@ import { AuthModePill, PrimaryButton, ScreenTitle, TextField } from '@/component
 import { PREFERRED_LABELS, privacyContactEmail } from '@/constants/config';
 import { useAppPrefs, useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
+import { confirmAction, showMessage } from '@/lib/dialog';
 import { initials } from '@/lib/format';
 import { radii, spacing } from '@/theme';
 import { serif } from '@/theme/typography';
@@ -135,7 +136,7 @@ export default function AccountScreen() {
               await updateProfile({ displayName: displayName.trim() || user.displayName });
               setStatus('Profile saved.');
             } catch (err) {
-              Alert.alert('Could not save', err instanceof Error ? err.message : 'Try again.');
+              showMessage('Could not save', err instanceof Error ? err.message : 'Try again.');
             }
           })();
         }}
@@ -174,7 +175,7 @@ export default function AccountScreen() {
               active
               onPress={() => {
                 void toggleFavorite(item).catch((err: unknown) => {
-                  Alert.alert('Could not update favorite', err instanceof Error ? err.message : 'Try again.');
+                  showMessage('Could not update favorite', err instanceof Error ? err.message : 'Try again.');
                 });
               }}
             />
@@ -187,14 +188,12 @@ export default function AccountScreen() {
         variant="secondary"
         label="Sign out"
         onPress={() => {
-          Alert.alert('Sign out?', 'You can still browse as a guest. Favorites stay on your account.', [
-            { text: 'Cancel', style: 'cancel' },
-            {
-              text: 'Sign out',
-              style: 'destructive',
-              onPress: () => void signOut(),
-            },
-          ]);
+          confirmAction(
+            'Sign out?',
+            'You can still browse as a guest. Favorites stay on your account.',
+            'Sign out',
+            () => void signOut(),
+          );
         }}
       />
       <View style={{ height: spacing.sm }} />
@@ -202,25 +201,19 @@ export default function AccountScreen() {
         variant="ghost"
         label="Delete account"
         onPress={() => {
-          Alert.alert(
+          confirmAction(
             'Delete account?',
             `This removes your account, password, and favorites from the server, and signs you out on this device. Email ${privacyContactEmail()} if you also want a copy of what was stored.`,
-            [
-              { text: 'Cancel', style: 'cancel' },
-              {
-                text: 'Delete',
-                style: 'destructive',
-                onPress: () => {
-                  void (async () => {
-                    try {
-                      await deleteAccount();
-                    } catch (err) {
-                      Alert.alert('Could not delete', err instanceof Error ? err.message : 'Try again.');
-                    }
-                  })();
-                },
-              },
-            ],
+            'Delete',
+            () => {
+              void (async () => {
+                try {
+                  await deleteAccount();
+                } catch (err) {
+                  showMessage('Could not delete', err instanceof Error ? err.message : 'Try again.');
+                }
+              })();
+            },
           );
         }}
       />

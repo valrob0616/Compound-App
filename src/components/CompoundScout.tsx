@@ -1,11 +1,12 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { PrimaryButton } from '@/components/ui';
 import { useAppPrefs } from '@/context/AuthContext';
+import { promptCreateAccount, showMessage } from '@/lib/dialog';
 import { useAppTheme } from '@/context/ThemeContext';
 import rawScout from '@/data/compound-scout.json';
 import {
@@ -95,13 +96,10 @@ export function CompoundScout({ focusScenarioId }: { focusScenarioId?: string })
           subtitle: stage.title,
         });
         if (!ok) {
-          Alert.alert('Save favorites', 'Create an account to save favorites on your account.', [
-            { text: 'Not now', style: 'cancel' },
-            { text: 'Create account', onPress: () => router.push('/auth/sign-up') },
-          ]);
+          promptCreateAccount(() => router.push('/auth/sign-up'));
         }
       } catch (err) {
-        Alert.alert('Could not save favorite', err instanceof Error ? err.message : 'Try again.');
+        showMessage('Could not save favorite', err instanceof Error ? err.message : 'Try again.');
       }
     })();
   };

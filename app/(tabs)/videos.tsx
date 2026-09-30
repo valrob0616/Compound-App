@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { Alert, FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import { CategorySwitcher } from '@/components/CategorySwitcher';
@@ -9,6 +9,7 @@ import { VideoDisclaimer } from '@/components/VideoDisclaimer';
 import { CATEGORY_LABELS } from '@/constants/config';
 import { useAppPrefs } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
+import { promptCreateAccount, showMessage } from '@/lib/dialog';
 import { rememberFeedItems } from '@/lib/feed';
 import { videosForCategory } from '@/lib/videos';
 import { spacing } from '@/theme';
@@ -36,13 +37,10 @@ export default function VideosScreen() {
           youtubeId: item.youtubeId,
         });
         if (!ok) {
-          Alert.alert('Save favorites', 'Create an account to save favorites on your account.', [
-            { text: 'Not now', style: 'cancel' },
-            { text: 'Create account', onPress: () => router.push('/auth/sign-up') },
-          ]);
+          promptCreateAccount(() => router.push('/auth/sign-up'));
         }
       } catch (err) {
-        Alert.alert('Could not save favorite', err instanceof Error ? err.message : 'Try again.');
+        showMessage('Could not save favorite', err instanceof Error ? err.message : 'Try again.');
       }
     },
     [router, toggleFavorite],

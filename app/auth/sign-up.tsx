@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 
 import { AuthModePill, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
@@ -7,6 +7,7 @@ import { LegalLinks } from '@/components/LegalLinks';
 import { PREFERRED_LABELS } from '@/constants/config';
 import { useAppPrefs, useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
+import { showMessage } from '@/lib/dialog';
 import { isValidEmail } from '@/lib/format';
 import { radii, spacing } from '@/theme';
 import type { PreferredCategory } from '@/types';
@@ -37,7 +38,7 @@ export default function SignUpScreen() {
       if (preferredCategory !== 'both') setCategory(preferredCategory);
       router.replace('/account');
     } catch (err) {
-      Alert.alert('Could not create account', err instanceof Error ? err.message : 'Try again.');
+      showMessage('Could not create account', err instanceof Error ? err.message : 'Try again.');
     }
   };
 

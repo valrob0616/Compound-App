@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 
 import { AuthModePill, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
 import { LegalLinks } from '@/components/LegalLinks';
 import { useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
+import { showMessage } from '@/lib/dialog';
 import { isValidEmail } from '@/lib/format';
 import { spacing } from '@/theme';
 
@@ -28,7 +29,7 @@ export default function SignInScreen() {
       await signIn(email, password);
       router.replace('/account');
     } catch (err) {
-      Alert.alert('Could not sign in', err instanceof Error ? err.message : 'Try again.');
+      showMessage('Could not sign in', err instanceof Error ? err.message : 'Try again.');
     }
   };
 
