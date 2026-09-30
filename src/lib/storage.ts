@@ -58,9 +58,8 @@ export async function removeItem(key: string): Promise<void> {
 }
 
 export const storageKeys = {
-  session: 'hcn.session',
-  demoUsers: 'hcn.demo.users',
-  favorites: (userId: string) => `hcn.favorites.${userId}`,
+  /** Bearer token only. Passwords and account records are not stored on the device. */
+  sessionToken: 'hcn.session.token',
   lastCategory: 'hcn.lastCategory',
   compoundScout: 'hcn.compoundScout.answers',
 } as const;

@@ -19,7 +19,7 @@ export function GuestBanner() {
       <View style={styles.copy}>
         <Text style={[styles.title, { color: colors.text }]}>Browsing as a guest</Text>
         <Text style={[styles.body, { color: colors.textMuted }]}>
-          Create a free account to save favorites and remember your preferred category.
+          Create a free account to save favorites on the account server and remember your preferred category.
         </Text>
       </View>
       <Pressable

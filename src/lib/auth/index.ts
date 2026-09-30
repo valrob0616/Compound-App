@@ -1,16 +1,56 @@
-import type { PreferredCategory, UserProfile } from '@/types';
-import { removeItem, storageKeys } from '@/lib/storage';
-import { getAuthMode } from './mode';
-import * as demo from './demo';
-import * as supabaseAuth from './supabase';
+import type { FavoriteDraft, FavoriteItem, PreferredCategory, UserProfile } from '@/types';
+import { deleteSecureItem, getSecureItem, setSecureItem, storageKeys } from '@/lib/storage';
 
-export { getAuthMode } from './mode';
+import {
+  AccountApiError,
+  accountApiBaseUrl,
+  deleteAccountOnServer,
+  getAccountSession,
+  listAccountFavorites,
+  signInAccount,
+  signOutAccount,
+  signUpAccount,
+  toggleAccountFavorite,
+  updateAccountProfile,
+} from './client';
+import { decodeStoredSession, encodeStoredSession } from './session';
+
+let memoryToken: string | null = null;
+
+async function saveToken(token: string): Promise<void> {
+  memoryToken = token;
+  await setSecureItem(storageKeys.sessionToken, encodeStoredSession(token));
+}
+
+async function clearToken(): Promise<void> {
+  memoryToken = null;
+  await deleteSecureItem(storageKeys.sessionToken);
+}
+
+export function currentSessionToken(): string | null {
+  return memoryToken;
+}
 
 export async function restoreSession(): Promise<UserProfile | null> {
-  if (getAuthMode() === 'supabase') {
-    return supabaseAuth.supabaseGetSession();
+  const raw = await getSecureItem(storageKeys.sessionToken);
+  if (!raw) {
+    memoryToken = null;
+    return null;
   }
-  return demo.demoGetSession();
+  const token = decodeStoredSession(raw);
+  if (!token) {
+    await clearToken();
+    return null;
+  }
+  memoryToken = token;
+  try {
+    return await getAccountSession(accountApiBaseUrl(), token);
+  } catch (err) {
+    if (err instanceof AccountApiError && err.status === 401) {
+      await clearToken();
+    }
+    return null;
+  }
 }
 
 export async function signUp(input: {
@@ -19,47 +59,54 @@ export async function signUp(input: {
   displayName: string;
   preferredCategory?: PreferredCategory;
 }): Promise<UserProfile> {
-  if (getAuthMode() === 'supabase') {
-    return supabaseAuth.supabaseSignUp(input);
-  }
-  return demo.demoSignUp(input);
+  const result = await signUpAccount(accountApiBaseUrl(), input);
+  await saveToken(result.token);
+  return result.user;
 }
 
 export async function signIn(email: string, password: string): Promise<UserProfile> {
-  if (getAuthMode() === 'supabase') {
-    return supabaseAuth.supabaseSignIn(email, password);
-  }
-  return demo.demoSignIn(email, password);
+  const result = await signInAccount(accountApiBaseUrl(), { email, password });
+  await saveToken(result.token);
+  return result.user;
 }
 
 export async function signOut(): Promise<void> {
-  if (getAuthMode() === 'supabase') {
-    await supabaseAuth.supabaseSignOut();
-    return;
+  const token = memoryToken;
+  if (token) {
+    try {
+      await signOutAccount(accountApiBaseUrl(), token);
+    } catch {
+      // The device session is cleared either way. A leftover server session
+      // cannot be reused without the token, which is not kept.
+    }
   }
-  await demo.demoSignOut();
+  await clearToken();
 }
 
 export async function updateProfile(
-  user: UserProfile,
   patch: Partial<Pick<UserProfile, 'displayName' | 'preferredCategory'>>,
 ): Promise<UserProfile> {
-  if (getAuthMode() === 'supabase') {
-    return supabaseAuth.supabaseUpdateProfile(patch);
-  }
-  return demo.demoUpdateProfile(user.id, patch);
+  const token = memoryToken;
+  if (!token) throw new Error('Sign in to update your profile.');
+  return updateAccountProfile(accountApiBaseUrl(), token, patch);
 }
 
-export type DeleteAccountResult = {
-  cloudDeletionPending: boolean;
-};
+export async function deleteAccount(): Promise<void> {
+  const token = memoryToken;
+  if (!token) throw new Error('Sign in to delete your account.');
+  await deleteAccountOnServer(accountApiBaseUrl(), token);
+  await clearToken();
+}
 
-export async function deleteAccount(user: UserProfile): Promise<DeleteAccountResult> {
-  if (getAuthMode() === 'supabase') {
-    await supabaseAuth.supabaseSignOut();
-    await removeItem(storageKeys.favorites(user.id));
-    return { cloudDeletionPending: true };
-  }
-  await demo.demoDeleteAccount(user.id);
-  return { cloudDeletionPending: false };
+export async function loadFavorites(): Promise<FavoriteItem[]> {
+  const token = memoryToken;
+  if (!token) return [];
+  return listAccountFavorites(accountApiBaseUrl(), token);
+}
+
+export async function toggleFavorite(draft: FavoriteDraft): Promise<FavoriteItem[]> {
+  const token = memoryToken;
+  if (!token) throw new Error('Sign in to save favorites.');
+  const result = await toggleAccountFavorite(accountApiBaseUrl(), token, draft);
+  return result.favorites;
 }

@@ -2,7 +2,7 @@
 
 **Family Compound & Homestead Living**  
 Operated by LFH Inc  
-**Effective date:** September 15, 2026
+**Effective date:** September 30, 2026
 
 These terms are a short agreement for using the app. The [Privacy Policy](./privacy-policy.md) explains how information is handled.
 
@@ -14,7 +14,7 @@ Family Compound & Homestead Living offers Family Compound news (RSS) and feature
 
 Accounts are optional. You are responsible for the email and password you use and for the display name you choose. We may refuse or close accounts that are abusive or created in bulk.
 
-Use **Delete account** on the Account screen, or email rob@loudfh.com, if you want the account removed (see the Privacy Policy for demo vs cloud accounts).
+Use **Delete account** on the Account screen, or email rob@loudfh.com, to remove the account from the server.
 
 ## Affiliate disclosure
 

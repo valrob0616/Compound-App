@@ -11,7 +11,7 @@
   <header>
     <p class="meta">Family Compound &amp; Homestead Living · LFH Inc</p>
     <h1>Privacy Policy</h1>
-    <p>Effective date: September 15, 2026</p>
+    <p>Effective date: September 30, 2026</p>
     <nav>
       <a href="./index.html">Legal home</a>
       <a href="./terms.html">Terms of Use</a>
@@ -40,7 +40,7 @@
       <li>Password (see “How accounts work” below)</li>
       <li>Display name you choose</li>
       <li>Preferred category: Homesteading, Family Compounds, or both</li>
-      <li>Favorites: identifiers of news items, videos, or other feed cards you save, stored on the device and keyed to your account</li>
+      <li>Favorites you save while signed in: the title and link (or video id) of a news article, featured video, or Compound Scout look. These are stored with your account on the server</li>
     </ul>
     <p>Do not put sensitive personal information in your display name.</p>
 
@@ -56,10 +56,9 @@
     <p>We do not sell your personal information.</p>
 
     <h2>How accounts work</h2>
-    <p>The app has two authentication modes. Which one you are in is shown on the Account screen.</p>
-    <p><strong>Demo / local mode</strong> (default when no cloud keys are configured). Your email, a salted password hash, display name, and preferred category are stored on this device using the operating system’s secure storage (or browser storage on web previews). No cloud account is created. Uninstalling the app, or using Delete account, removes that local record from this device.</p>
-    <p><strong>Supabase mode</strong> (when the publisher has configured a Supabase project). Sign-up and sign-in are handled by Supabase Auth. Email and password are processed by Supabase. Display name and preferred category are stored in your Auth user metadata. Supabase’s own privacy policy applies to that processing: <a href="https://supabase.com/privacy">https://supabase.com/privacy</a>.</p>
-    <p>Sessions are kept so you stay signed in after restarting the app. Favorites stay on the device in both modes; they are not uploaded to a Family Compound &amp; Homestead Living server in this version.</p>
+    <p>Creating an account sends your email, password, and display name to the Family Compound account server run for this app. The server stores your email, display name, and preferred category. It stores your password only as a bcrypt hash. The password is not saved on your phone, and the app does not keep a copy of the account database on the device.</p>
+    <p>The app keeps a sign-in token in the device’s secure storage (or browser storage on a web preview) so you stay signed in after a restart. That token is not your password. Signing out or deleting the account removes the token from this device.</p>
+    <p>Favorites are the news articles, videos, and Compound Scout looks you bookmark. They are stored with your account on the server and load when you sign in again, including on another device.</p>
 
     <h2>How we use information</h2>
     <p>We use account and preference data to sign you in, show your display name and email, remember your preferred category, and save favorites when you are signed in. We use technical connections (not your account profile) to load public RSS feeds and YouTube thumbnails and videos. When the Store is available, choosing a product may open Amazon.</p>
@@ -70,16 +69,14 @@
       <li><strong>Amazon.</strong> The Store is Coming Soon in this first release. When affiliate product links are added, they will open Amazon using a product ID and an Associates tracking tag. If you continue on Amazon, Amazon may collect information under <a href="https://www.amazon.com/privacy">Amazon’s privacy policy</a>. Affiliate clicks can earn LFH Inc a commission if you buy something. We do not receive your Amazon account details.</li>
       <li><strong>YouTube / Google.</strong> Video cards use YouTube video IDs. Playback uses an in-app player (a YouTube embed) and you can open the video on YouTube. See <a href="https://www.youtube.com/t/terms">YouTube’s terms</a> and <a href="https://policies.google.com/privacy">Google’s privacy policy</a>.</li>
       <li><strong>News publishers.</strong> Article cards open the publisher’s webpage in an in-app browser. RSS feeds for news are requested from public Family Compound publisher URLs (for example Four Generations One Roof, Barndos, and the Foundation for Intentional Community). Those sites may set their own cookies or logs when the page loads.</li>
-      <li><strong>Supabase.</strong> Only when Supabase mode is enabled, as described above.</li>
       <li><strong>Apple, Google, and Expo.</strong> App Store, Google Play, and the Expo build tools (EAS) are used to compile and distribute the app. They are not used in this version as an end-user analytics product inside the app.</li>
     </ul>
 
     <h2>Data retention</h2>
     <ul>
-      <li>Guest category choice: until you change it, clear app data, or uninstall.</li>
-      <li>Demo accounts and hashed passwords: on this device until you delete the account or uninstall the app.</li>
-      <li>Favorites: on this device until you remove them, delete the account, or uninstall.</li>
-      <li>Supabase accounts: until we delete the Auth user after a valid request, or you delete it through a process we provide later.</li>
+      <li>Guest Videos category choice: on this device until you change it, clear app data, or uninstall.</li>
+      <li>Account email, display name, preferred category, bcrypt password hash, and favorites: on the account server until you delete the account, or until we delete them after a request to <a href="mailto:rob@loudfh.com">rob@loudfh.com</a>.</li>
+      <li>Sign-in token: on this device until you sign out, delete the account, or uninstall. The password is not stored on the device.</li>
     </ul>
 
     <h2>Your choices and account deletion</h2>
@@ -87,7 +84,7 @@
       <li>You can browse without an account.</li>
       <li>You can edit your display name and preferred category while signed in.</li>
       <li>You can sign out at any time.</li>
-      <li><strong>Delete account</strong> is on the Account screen. In demo mode this erases the local account, session, and favorites on this device immediately. In Supabase mode it signs you out and clears favorites on this device; email <a href="mailto:rob@loudfh.com">rob@loudfh.com</a> from that same address so we can delete the cloud Auth record.</li>
+      <li><strong>Delete account</strong> is on the Account screen. It deletes the account, password hash, sessions, and favorites on the server, and clears the sign-in token on this device.</li>
       <li>You can also email that address to ask what data we have, to correct your display name, or to request deletion if you cannot use the in-app control.</li>
     </ul>
 
@@ -95,7 +92,7 @@
     <p>Family Compound &amp; Homestead Living is not directed at children under 13, and we do not knowingly collect personal information from children under 13. If you believe a child under 13 created an account, contact us and we will delete it.</p>
 
     <h2>Security</h2>
-    <p>We use platform secure storage for demo sessions and password hashes, and HTTPS for RSS, YouTube, and (when enabled) Supabase. Future Store links to Amazon would also use HTTPS. No method of transmission or storage is perfectly secure.</p>
+    <p>Passwords are hashed with bcrypt on the account server before they are stored. The app does not write the password to device storage. The sign-in token is kept in platform secure storage. The account server should be reached over HTTPS in production. RSS, YouTube, and future Store links also use HTTPS. No method of transmission or storage is perfectly secure.</p>
 
     <h2>Changes</h2>
     <p>If we change this policy, we will update the effective date and the copy in the app. Material changes to how we handle account data will be described in the updated policy.</p>

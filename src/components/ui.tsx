@@ -85,12 +85,11 @@ export function TextField({ label, error, ...rest }: FieldProps) {
   );
 }
 
-export function AuthModePill({ mode }: { mode: 'demo' | 'supabase' }) {
+export function AuthModePill() {
   const { colors } = useAppTheme();
-  const label = mode === 'demo' ? 'Demo auth (local)' : 'Supabase auth';
   return (
     <View style={[styles.pill, { backgroundColor: colors.cardMuted, borderColor: colors.border }]}>
-      <Text style={[styles.pillText, { color: colors.textMuted }]}>{label}</Text>
+      <Text style={[styles.pillText, { color: colors.textMuted }]}>Account server</Text>
     </View>
   );
 }

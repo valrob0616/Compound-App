@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { Alert, FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import { CategorySwitcher } from '@/components/CategorySwitcher';
@@ -9,6 +9,7 @@ import { VideoDisclaimer } from '@/components/VideoDisclaimer';
 import { CATEGORY_LABELS } from '@/constants/config';
 import { useAppPrefs } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
+import { promptCreateAccount, showMessage } from '@/lib/dialog';
 import { rememberFeedItems } from '@/lib/feed';
 import { videosForCategory } from '@/lib/videos';
 import { spacing } from '@/theme';
@@ -26,13 +27,20 @@ export default function VideosScreen() {
   }, [videos]);
 
   const onToggleFavorite = useCallback(
-    async (id: string) => {
-      const ok = await toggleFavorite(id);
-      if (!ok) {
-        Alert.alert('Save favorites', 'Create an account to save favorites across sessions.', [
-          { text: 'Not now', style: 'cancel' },
-          { text: 'Create account', onPress: () => router.push('/auth/sign-up') },
-        ]);
+    async (item: VideoItem) => {
+      try {
+        const ok = await toggleFavorite({
+          id: item.id,
+          kind: 'video',
+          title: item.title,
+          subtitle: item.channel,
+          youtubeId: item.youtubeId,
+        });
+        if (!ok) {
+          promptCreateAccount(() => router.push('/auth/sign-up'));
+        }
+      } catch (err) {
+        showMessage('Could not save favorite', err instanceof Error ? err.message : 'Try again.');
       }
     },
     [router, toggleFavorite],
@@ -56,7 +64,7 @@ export default function VideosScreen() {
         <VideoCard
           item={item}
           favorite={isFavorite(item.id)}
-          onToggleFavorite={() => void onToggleFavorite(item.id)}
+          onToggleFavorite={() => void onToggleFavorite(item)}
           onOpen={() => openVideo(item)}
         />
       )}

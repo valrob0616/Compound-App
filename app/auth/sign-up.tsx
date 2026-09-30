@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 
 import { AuthModePill, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
@@ -7,6 +7,7 @@ import { LegalLinks } from '@/components/LegalLinks';
 import { PREFERRED_LABELS } from '@/constants/config';
 import { useAppPrefs, useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
+import { showMessage } from '@/lib/dialog';
 import { isValidEmail } from '@/lib/format';
 import { radii, spacing } from '@/theme';
 import type { PreferredCategory } from '@/types';
@@ -15,7 +16,7 @@ const PREFERRED: PreferredCategory[] = ['homesteading', 'family-compounds', 'bot
 
 export default function SignUpScreen() {
   const { colors } = useAppTheme();
-  const { signUp, busy, authMode } = useAuth();
+  const { signUp, busy } = useAuth();
   const { setCategory } = useAppPrefs();
   const router = useRouter();
   const [displayName, setDisplayName] = useState('');
@@ -37,7 +38,7 @@ export default function SignUpScreen() {
       if (preferredCategory !== 'both') setCategory(preferredCategory);
       router.replace('/account');
     } catch (err) {
-      Alert.alert('Could not create account', err instanceof Error ? err.message : 'Try again.');
+      showMessage('Could not create account', err instanceof Error ? err.message : 'Try again.');
     }
   };
 
@@ -49,9 +50,9 @@ export default function SignUpScreen() {
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
         <ScreenTitle
           title="Create an account"
-          subtitle="Save a preferred feed and favorites. You can still browse as a guest anytime."
+          subtitle="Name, email, and password are saved on the account server, not on this phone. Favorites stay with the account."
         />
-        <AuthModePill mode={authMode} />
+        <AuthModePill />
         <View style={{ height: spacing.md }} />
         <TextField
           label="Display name"

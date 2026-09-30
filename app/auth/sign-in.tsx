@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 
 import { AuthModePill, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
 import { LegalLinks } from '@/components/LegalLinks';
 import { useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
+import { showMessage } from '@/lib/dialog';
 import { isValidEmail } from '@/lib/format';
 import { spacing } from '@/theme';
 
 export default function SignInScreen() {
   const { colors } = useAppTheme();
-  const { signIn, busy, authMode } = useAuth();
+  const { signIn, busy } = useAuth();
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,7 +29,7 @@ export default function SignInScreen() {
       await signIn(email, password);
       router.replace('/account');
     } catch (err) {
-      Alert.alert('Could not sign in', err instanceof Error ? err.message : 'Try again.');
+      showMessage('Could not sign in', err instanceof Error ? err.message : 'Try again.');
     }
   };
 
@@ -38,8 +39,11 @@ export default function SignInScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
-        <ScreenTitle title="Welcome back" subtitle="Sign in to restore favorites and your preferred category." />
-        <AuthModePill mode={authMode} />
+        <ScreenTitle
+          title="Welcome back"
+          subtitle="Sign in to load favorites saved on your account. Your password stays on the server."
+        />
+        <AuthModePill />
         <View style={{ height: spacing.md }} />
         <TextField
           label="Email"
