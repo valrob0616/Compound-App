@@ -50,7 +50,7 @@ export default function SignUpScreen() {
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
         <ScreenTitle
           title="Create an account"
-          subtitle="Name, email, and password are saved on the account server, not on this phone. Favorites stay with the account."
+          subtitle="Name, email, and password are saved with your account, not on this phone. Favorites stay with the account."
         />
         <AuthModePill />
         <View style={{ height: spacing.md }} />

@@ -12,7 +12,7 @@ export type LegalDocument = {
   blocks: LegalBlock[];
 };
 
-export const PRIVACY_EFFECTIVE_DATE = 'September 30, 2026';
+export const PRIVACY_EFFECTIVE_DATE = 'October 2, 2026';
 export const TERMS_EFFECTIVE_DATE = 'September 30, 2026';
 
 export const privacyPolicy: LegalDocument = {
@@ -78,15 +78,15 @@ export const privacyPolicy: LegalDocument = {
     { type: 'h2', text: 'How accounts work' },
     {
       type: 'p',
-      text: 'Creating an account sends your email, password, and display name to the Family Compound account server run for this app. The server stores your email, display name, and preferred category. It stores your password only as a bcrypt hash. The password is not saved on your phone, and the app does not keep a copy of the account database on the device.',
+      text: 'Creating an account sends your email, password, and display name to Supabase Auth, the account service for this app. Supabase stores your email, display name, and preferred category. It stores your password only as a hash. The password is not saved on your phone, and the app does not keep a copy of the account database on the device.',
     },
     {
       type: 'p',
-      text: 'The app keeps a sign-in token in the device’s secure storage (or browser storage on a web preview) so you stay signed in after a restart. That token is not your password. Signing out or deleting the account removes the token from this device.',
+      text: 'The app keeps a sign-in session (an access token and a refresh token) in the device’s secure storage, or in browser storage on a web preview, so you stay signed in after a restart. That session is not your password. Signing out or deleting the account removes it from this device.',
     },
     {
       type: 'p',
-      text: 'Favorites are the news articles, videos, and Compound Scout looks you bookmark. They are stored with your account on the server and load when you sign in again, including on another device.',
+      text: 'Favorites are the news articles, videos, and Compound Scout looks you bookmark. They are stored in Supabase in a table that only your signed-in account can read or change. They load when you sign in again, including on another device or a fresh install.',
     },
     { type: 'h2', text: 'How we use information' },
     {
@@ -104,6 +104,7 @@ export const privacyPolicy: LegalDocument = {
         'Amazon. The Store is Coming Soon in this first release. When affiliate product links are added, they will open Amazon using a product ID and an Associates tracking tag. If you continue on Amazon, Amazon may collect information under Amazon’s privacy policy. Affiliate clicks can earn LFH Inc a commission if you buy something. We do not receive your Amazon account details.',
         'YouTube / Google. Video cards use YouTube video IDs. Playback uses an in-app player (a YouTube embed) and you can open the video on YouTube. Google’s policies apply.',
         'News publishers. Article cards open the publisher’s webpage in an in-app browser. RSS feeds for news are requested from public Family Compound publisher URLs (for example Four Generations One Roof, Barndos, and the Foundation for Intentional Community). Those sites may set their own cookies or logs when the page loads.',
+        'Supabase. Accounts and favorites are stored in a Supabase project operated for this app. Supabase’s privacy policy applies to that hosting.',
         'Apple, Google, and Expo. App Store, Google Play, and the Expo build tools (EAS) are used to compile and distribute the app. They are not used in this version as an end-user analytics product inside the app.',
       ],
     },
@@ -112,8 +113,8 @@ export const privacyPolicy: LegalDocument = {
       type: 'ul',
       items: [
         'Guest Videos category choice: on this device until you change it, clear app data, or uninstall.',
-        'Account email, display name, preferred category, bcrypt password hash, and favorites: on the account server until you delete the account, or until we delete them after a request to the contact address below.',
-        'Sign-in token: on this device until you sign out, delete the account, or uninstall. The password is not stored on the device.',
+        'Account email, display name, preferred category, password hash, and favorites: in Supabase until you delete the account, or until we delete them after a request to the contact address below.',
+        'Sign-in session: on this device until you sign out, delete the account, or uninstall. The password is not stored on the device.',
       ],
     },
     { type: 'h2', text: 'Your choices and account deletion' },
@@ -123,7 +124,7 @@ export const privacyPolicy: LegalDocument = {
         'You can browse without an account.',
         'You can edit your display name and preferred category while signed in.',
         'You can sign out at any time.',
-        `Delete account is on the Account screen. It deletes the account, password hash, sessions, and favorites on the server, and clears the sign-in token on this device.`,
+        'Delete account is on the Account screen. It deletes the account, password hash, sessions, and favorites in Supabase, and clears the sign-in session on this device.',
         `You can email ${CONTACT} to ask what data we have, to correct your display name, or to request deletion if you cannot use the in-app control.`,
       ],
     },
@@ -135,7 +136,7 @@ export const privacyPolicy: LegalDocument = {
     { type: 'h2', text: 'Security' },
     {
       type: 'p',
-      text: 'Passwords are hashed with bcrypt on the account server before they are stored. The app does not write the password to device storage. The sign-in token is kept in platform secure storage. The account server should be reached over HTTPS in production. RSS, YouTube, and future Store links also use HTTPS. No method of transmission or storage is perfectly secure.',
+      text: 'Passwords are hashed by Supabase Auth before they are stored. The app does not write the password to device storage. The sign-in session is kept in platform secure storage, or in browser storage on a web preview. Supabase is reached over HTTPS. RSS, YouTube, and future Store links also use HTTPS. No method of transmission or storage is perfectly secure.',
     },
     { type: 'h2', text: 'Changes' },
     {

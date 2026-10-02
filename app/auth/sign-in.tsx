@@ -41,7 +41,7 @@ export default function SignInScreen() {
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
         <ScreenTitle
           title="Welcome back"
-          subtitle="Sign in to load favorites saved on your account. Your password stays on the server."
+          subtitle="Sign in to load favorites saved on your account. Your password is not stored on this phone."
         />
         <AuthModePill />
         <View style={{ height: spacing.md }} />

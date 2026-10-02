@@ -11,8 +11,7 @@ Requirements: Node.js 22.13+ and npm.
 
 ```bash
 npm install
-cp .env.example .env   # optional; defaults to http://localhost:8787
-npm run server         # account API (sign-up, sign-in, favorites)
+cp .env.example .env   # set EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_KEY
 npx expo start
 ```
 
@@ -34,7 +33,7 @@ Typecheck:
 npm run typecheck
 ```
 
-Tests (affiliate URLs, RSS parse, Family Compound topic filter, featured videos, Compound Scout content and scoring, account signup/sign-in/favorites against the in-repo server):
+Tests (affiliate URLs, RSS parse, Family Compound topic filter, featured videos, Compound Scout content and scoring, the local account server, and Supabase signup/favorites against a mock — plus the live project when `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_KEY` are set):
 
 ```bash
 npm test
@@ -46,15 +45,15 @@ Preview live RSS titles after Family Compound topic filters (network required):
 npm run preview:feeds
 ```
 
-## What you can demo without any keys
+## What you can demo
 
 1. **News** — Family Compound RSS only (multi-household living, financing, compound design, barndominiums, micro farms). There is no Homesteading switcher on this tab. Pull to refresh. Tap an article for an in-app WebView. A shortcut opens the Videos tab.
 2. **Videos** — **Featured YouTube videos** for Homesteading or Family Compounds, not mixed into the news list. A prominent disclaimer states the clips are third-party YouTube content, not owned or created by LFH Inc or this app. Tap a card for an in-app player and **Open in YouTube**.
 3. **Learn** — **Compound Scout**, an offline scenario game of Family Compound look-fors: acreage for five homes, written zoning, TDEC septic, water, a dispersed layout and pavilion, fire access, power and data, the ranch, ownership, FSA financing, and phasing. Progress and stage badges stay on the device. Replay a stage or the whole round. It is educational, not legal or financial advice.
 4. **Store** — **Coming Soon** for first publish. Homesteading and Family Compounds shopping (Amazon affiliate picks) will be added after launch. Catalog JSON and URL helpers stay in the repo; set `STORE_CATALOG_ENABLED` in `src/constants/config.ts` when you are ready.
-5. **Account** — sign up (name, email, password) and sign in against the account server. Edit display name and preferred category (Homesteading / Family Compounds / both). That preference applies to Featured Videos, not the news RSS. The device keeps a sign-in token so the session survives restarts; the password is not stored on the phone. Bookmark a news article, a featured video, or a Compound Scout look, then open **Account** to see favorites. They load again after you sign in, including on another device. Guests can browse. **Privacy Policy** and **Terms of Use** are on the Account tab without signing in.
+5. **Account** — sign up (name, email, password) and sign in with Supabase Auth once `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_KEY` are set. Edit display name and preferred category (Homesteading / Family Compounds / both). That preference applies to Featured Videos, not the news RSS. The device keeps a sign-in session so it survives restarts; the password is not stored on the phone. Bookmark a news article, a featured video, or a Compound Scout look, then open **Account** to see favorites. They load again after you sign out and back in, including on a fresh install. Guests can browse with no keys. **Privacy Policy** and **Terms of Use** are on the Account tab without signing in.
 
-Accounts are not stored in AsyncStorage or SecureStore. Start `npm run server` before signing up. See [Deploy the account server](#deploy-the-account-server).
+Store builds talk to Supabase directly. They do not need the local account server. See [Accounts on Supabase](#accounts-on-supabase).
 
 ## Environment variables
 
@@ -63,12 +62,14 @@ Copy `.env.example` to `.env` or `.env.local`. Expo only inlines names that star
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `EXPO_PUBLIC_AMAZON_ASSOCIATE_TAG` | After Store launch | Amazon Associates tracking ID. Default placeholder: `yourtag-20`. Not used in the first-publish Store UI. |
-| `EXPO_PUBLIC_API_URL` | For accounts | Base URL of the account server. Default in code: `http://localhost:8787`. Use `http://10.0.2.2:8787` on the Android emulator, a LAN URL on a physical device, and `https://…` in production. |
+| `EXPO_PUBLIC_SUPABASE_URL` | **Release builds** | Supabase project URL, `https://<project-ref>.supabase.co`. Public. |
+| `EXPO_PUBLIC_SUPABASE_KEY` | **Release builds** | Supabase publishable key (`sb_publishable_...`). Public. Not a secret key and not a service-role key. |
+| `EXPO_PUBLIC_API_URL` | Local dev only | Base URL of the in-repo account server when the two Supabase variables are unset. Default in code: `http://localhost:8787`. Ignored when Supabase is configured. A release build does not fall back to this. |
 | `EXPO_PUBLIC_PRIVACY_POLICY_URL` | For store listings | Public Privacy Policy URL. Default: GitHub Pages `…/Compound-App/privacy.html`. |
 | `EXPO_PUBLIC_TERMS_OF_USE_URL` | Optional | Public Terms of Use URL. Default: `…/Compound-App/terms.html`. |
 | `EXPO_PUBLIC_PRIVACY_CONTACT_EMAIL` | Optional | Privacy inbox. Default: `rob@loudfh.com` (change to `privacy@loudfh.com` if you create that alias). |
 
-Do **not** put a real production Associates ID you are not ready to publish, or any other secret, in the repo. The account server does not need an API key: sessions are random bearer tokens, and passwords are bcrypt-hashed in `ACCOUNTS_DATA_FILE`.
+Do **not** put a real production Associates ID you are not ready to publish, a service-role key, or an `sb_secret_` key in the repo or in any `EXPO_PUBLIC_` variable. The publishable key is safe to ship in the app because Row Level Security limits favorites to the signed-in user. Copy `.env.example` to `.env` (gitignored) for local runs. Set the same two Supabase variables on the release build.
 
 ### Amazon Associates tag (post-launch)
 
@@ -79,47 +80,26 @@ The first-publish Store tab is Coming Soon. When you turn the catalog on (`STORE
 3. Set `EXPO_PUBLIC_AMAZON_ASSOCIATE_TAG` and rebuild (`npx expo start -c` so Metro reloads env).
 4. Confirm a product URL includes `?tag=your-real-id`.
 
-## Deploy the account server
+## Accounts on Supabase
 
-The API lives in `server/` and is the source of truth for accounts and favorites. `npm run server` listens on `PORT` (default **8787**) and writes `ACCOUNTS_DATA_FILE` (default `server/data/accounts.json`). That file holds bcrypt password hashes, session token hashes, profiles, and favorites. It is gitignored. Do not commit it. The process logs method, path, and status only — never passwords or request bodies.
+Store builds use Supabase Auth for email and password, and one `public.favorites` table for articles, videos, and Compound Scout looks. The phone stores the Auth session (access token and refresh token) in secure storage, or in browser storage on a web preview. It does not store the password. Display name and preferred category live in the user’s Auth metadata.
 
-No production secret is required to boot. Optional env: `HOST` (default `0.0.0.0`), `BCRYPT_ROUNDS` (default `10`, integer 4–12).
+A release build needs exactly these two public variables:
 
-### Local
+- `EXPO_PUBLIC_SUPABASE_URL` — project URL, `https://<project-ref>.supabase.co`
+- `EXPO_PUBLIC_SUPABASE_KEY` — publishable key, `sb_publishable_...`
 
-```bash
-npm install
-npm run server
-```
+Do not set `EXPO_PUBLIC_API_URL` for a store build. If the Supabase variables are missing, a release build shows an error instead of calling `localhost`.
 
-In another terminal, `npx expo start`. The app calls `EXPO_PUBLIC_API_URL`, or `http://localhost:8787` if that variable is unset. iOS Simulator and web can use localhost. Android emulator: `EXPO_PUBLIC_API_URL=http://10.0.2.2:8787`. A phone on the same Wi-Fi needs your machine’s LAN address (`http://192.168.x.x:8787`). Restart Expo with `npx expo start -c` after changing `EXPO_PUBLIC_` variables.
+### Apply the database migration
 
-`GET /health` returns `{ "ok": true }`.
+In the Supabase SQL editor, run `supabase/migrations/20261002120000_favorites_and_account_delete.sql`. It creates `public.favorites`, enables and forces row level security, and adds policies so a signed-in user can read and write only their own rows. `anon` has no privileges on that table. Signed-in users get select, insert, update, and delete only (not truncate). Delete account calls `public.delete_own_account()`, which removes that Auth user (favorites cascade). The function is executable only by `authenticated`, and it deletes `auth.uid()` only. The database linter warns that this security-definer function is callable by signed-in users; that is the delete path, and it cannot delete anyone else.
 
-### A host you control
+Hosted projects turn on **Confirm email** by default, and the built-in mailer only delivers to organization members. The migration sets `email_confirmed_at` on insert so sign-up can continue with a password sign-in without that mailer. In the dashboard, also turn off **Authentication → Providers → Email → Confirm email** so Auth does not try to send a confirmation message.
 
-1. Install Node.js 22.13+ on the machine (or a container with the repo and `npm install`).
-2. Put the data file on a persistent disk, for example `/var/lib/homestead-compound/accounts.json`.
-3. Run the process and keep it up (systemd, Fly, Render, Railway, or similar):
+### Local account server
 
-   ```bash
-   PORT=8787 \
-   HOST=0.0.0.0 \
-   ACCOUNTS_DATA_FILE=/var/lib/homestead-compound/accounts.json \
-   npm run server
-   ```
-
-4. Put TLS in front of it. Example Caddy snippet:
-
-   ```caddy
-   accounts.example.com {
-     reverse_proxy localhost:8787
-   }
-   ```
-
-5. Set `EXPO_PUBLIC_API_URL=https://accounts.example.com` for the app build (EAS secret or `.env` before `npx expo start -c`). Do not ship a build that points at `http://` except for local development. iOS App Transport Security and Android cleartext rules block non-local HTTP in release builds.
-
-Delete account removes that user, their sessions, and their favorites from the data file. Sign-out drops the token on the device and revokes that session on the server.
+`server/` is still available for local development when `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_KEY` are both unset. `npm run server` listens on `PORT` (default **8787**) and writes `ACCOUNTS_DATA_FILE` (default `server/data/accounts.json`). That file is gitignored. Do not commit it. Optional env: `HOST`, `BCRYPT_ROUNDS` (integer 4–12), and `EXPO_PUBLIC_API_URL` (default `http://localhost:8787`; Android emulator `http://10.0.2.2:8787`). `GET /health` returns `{ "ok": true }`. Restart Expo with `npx expo start -c` after changing `EXPO_PUBLIC_` variables.
 
 ## Feeds and data
 
@@ -156,7 +136,7 @@ eas submit --platform android
 
 Use a [development build](https://docs.expo.dev/develop/development-builds/introduction/) if you outgrow Expo Go.
 
-Set production env vars in [EAS secrets](https://docs.expo.dev/build-reference/variables/) (`eas secret:create`) rather than committing `.env`. Set `EXPO_PUBLIC_API_URL` to the HTTPS account server from [Deploy the account server](#deploy-the-account-server).
+Set production env vars in [EAS environment variables](https://docs.expo.dev/eas/environment-variables/) rather than committing `.env`. A release build needs `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_KEY` only. Do not add a service-role or secret key.
 
 `eas.json` `submit.production.ios.ascAppId` is a placeholder — replace after the app exists in App Store Connect.
 
@@ -171,7 +151,7 @@ Not finished by this scaffold (Apple and Google require your accounts and live h
 - [ ] Apple Developer Program ($99/year) + App Store Connect app record, privacy nutrition labels, export compliance.
 - [ ] Google Play Developer account + Data safety form + content rating questionnaire.
 - [ ] Real Amazon Associates ID in EAS secrets (when enabling the Store catalog after first publish).
-- [ ] Production account server on HTTPS, with `ACCOUNTS_DATA_FILE` on a persistent disk and `EXPO_PUBLIC_API_URL` set in EAS secrets. Add rate limits or a captcha if the signup endpoint is abused.
+- [ ] Set `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_KEY` (publishable key only) on the release build. Apply `supabase/migrations/20261002120000_favorites_and_account_delete.sql` and turn off Confirm email if you do not use a custom mailer.
 - [ ] Support URL, marketing URL, and age rating (likely 4+ / Everyone if content stays non-graphic).
 - [ ] Confirm YouTube ToS for in-app playback of third-party videos; keep “Open in YouTube”.
 - [ ] Review RSS attributions; do not scrape paywalled full text.
@@ -222,11 +202,11 @@ The published address is **rob@loudfh.com**. To use `privacy@loudfh.com` (or ano
 
 Matches the in-app policy. Summary:
 
-**Collected when someone creates an account:** email, password (bcrypt hash on the account server only), display name, preferred category, and favorites (news, videos, and Compound Scout looks). The phone stores a sign-in token, not the password or the account database.
+**Collected when someone creates an account:** email, password (hashed by Supabase Auth, not stored on the phone), display name, preferred category, and favorites (news, videos, and Compound Scout looks). The phone stores a sign-in session, not the password.
 
 **Not collected in this MVP:** precise location, contacts, photos, payment cards, government IDs, ads SDK, analytics SDK. We do not sell personal data. YouTube/Google and RSS publishers apply when the user opens those features. Amazon Associates links are not shown in the first-publish Store UI (Coming Soon).
 
-**Deletion:** Account tab → Delete account. That removes the server account, password hash, sessions, and favorites, and clears the token on this device.
+**Deletion:** Account tab → Delete account. That removes the Supabase Auth user, sessions, and favorites, and clears the session on this device.
 
 Have an attorney review `docs/privacy-policy.md` before you treat it as final for a commercial launch.
 
@@ -240,8 +220,9 @@ src/components/      UI, including Compound Scout
 src/content/         In-app Privacy Policy and Terms
 src/context/         Auth, preferences, theme
 src/data/            Seed news, videos, products, RSS source list, Compound Scout JSON
-src/lib/             RSS, Family Compound news assembly, affiliate URLs, scout scoring, account API client
-server/              Account API (signup, sign-in, bcrypt passwords, favorites)
+src/lib/             RSS, Family Compound news assembly, affiliate URLs, scout scoring, Supabase Auth client
+server/              Optional local account API (not used by store builds)
+supabase/migrations/ Favorites table, RLS, and delete-own-account SQL
 src/theme/           Homestead palette
 src/types/           NewsItem | VideoItem | Product | UserProfile
 docs/                Hostable Privacy Policy and Terms (GitHub Pages)
