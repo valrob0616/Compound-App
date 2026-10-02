@@ -56,7 +56,7 @@ export default function AccountScreen() {
       <ScrollView contentContainerStyle={[styles.content, { backgroundColor: colors.background }]}>
         <ScreenTitle
           title="Your place at the table"
-          subtitle="Browse as a guest. Create an account to save your name and favorites on the account server — not on this phone."
+          subtitle="Browse as a guest. Create an account to save your name and favorites. This phone keeps a sign-in session, not your password."
         />
         <AuthModePill />
         <View style={{ height: spacing.md }} />
@@ -64,7 +64,7 @@ export default function AccountScreen() {
         <View style={{ height: spacing.sm }} />
         <PrimaryButton variant="secondary" label="Sign in" onPress={() => router.push('/auth/sign-in')} />
         <Text style={[styles.hint, { color: colors.textMuted }]}>
-          Name, email, and password are stored on the account server. This device keeps a sign-in token only, so
+          Name, email, and password are stored with your account. This device keeps a sign-in session only, so
           favorites come back when you sign in again.
         </Text>
         <LegalLinks />
@@ -203,7 +203,7 @@ export default function AccountScreen() {
         onPress={() => {
           confirmAction(
             'Delete account?',
-            `This removes your account, password, and favorites from the server, and signs you out on this device. Email ${privacyContactEmail()} if you also want a copy of what was stored.`,
+            `This removes your account, password hash, and favorites, and signs you out on this device. Email ${privacyContactEmail()} if you also want a copy of what was stored.`,
             'Delete',
             () => {
               void (async () => {
@@ -219,8 +219,8 @@ export default function AccountScreen() {
       />
       <LegalLinks />
       <Text style={[styles.privacy, { color: colors.textMuted }]}>
-        Your email, display name, preferred category, and favorites are stored on the account server. The
-        password is stored there only as a bcrypt hash. This device keeps a sign-in token, not the password.
+        Your email, display name, preferred category, and favorites are stored with your account. The
+        password is stored only as a hash. This device keeps a sign-in session, not the password.
         Full details are in the Privacy Policy.
       </Text>
     </ScrollView>

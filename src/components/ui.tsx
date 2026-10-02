@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import { useAppTheme } from '@/context/ThemeContext';
+import { accountsModeLabel } from '@/lib/auth/backend';
 import { radii, spacing } from '@/theme';
 import { serif } from '@/theme/typography';
 
@@ -89,7 +90,7 @@ export function AuthModePill() {
   const { colors } = useAppTheme();
   return (
     <View style={[styles.pill, { backgroundColor: colors.cardMuted, borderColor: colors.border }]}>
-      <Text style={[styles.pillText, { color: colors.textMuted }]}>Account server</Text>
+      <Text style={[styles.pillText, { color: colors.textMuted }]}>{accountsModeLabel()}</Text>
     </View>
   );
 }
