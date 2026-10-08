@@ -45,10 +45,6 @@ async function clearToken(): Promise<void> {
   await deleteSecureItem(storageKeys.sessionToken);
 }
 
-export function currentSessionToken(): string | null {
-  return memoryToken;
-}
-
 export async function restoreSession(): Promise<UserProfile | null> {
   if (useSupabase()) {
     await clearToken();

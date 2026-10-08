@@ -3,23 +3,9 @@ import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { PrimaryButton } from '@/components/ui';
 import { useAppTheme } from '@/context/ThemeContext';
-import { registerDialogHost } from '@/lib/dialog';
+import { registerDialogHost, type AlertRequest, type ConfirmRequest } from '@/lib/dialog';
 import { radii, spacing } from '@/theme';
 import { serif } from '@/theme/typography';
-
-type ConfirmRequest = {
-  title: string;
-  message?: string;
-  confirmLabel: string;
-  cancelLabel: string;
-  onConfirm: () => void;
-  onCancel?: () => void;
-};
-
-type AlertRequest = {
-  title: string;
-  message?: string;
-};
 
 export function DialogHost() {
   const { colors } = useAppTheme();

@@ -3,7 +3,6 @@ import Constants from 'expo-constants';
 import type { CategoryId, PreferredCategory } from '@/types';
 
 export const APP_DISPLAY_NAME = 'Family Compound & Homestead Living';
-export const BUNDLE_ID = 'com.loudfh.homesteadcompound';
 
 export const CATEGORY_LABELS: Record<CategoryId, string> = {
   homesteading: 'Homesteading',
@@ -16,6 +15,8 @@ export const CATEGORY_BLURBS: Record<CategoryId, string> = {
   'family-compounds':
     'Family compound living on shared land: multi-household setups, financing, compound design, barndominiums and related building types, and small micro farms — not only multi-generational homes, and not generic homesteading.',
 };
+
+export const PREFERRED_CATEGORIES: PreferredCategory[] = ['homesteading', 'family-compounds', 'both'];
 
 export const PREFERRED_LABELS: Record<PreferredCategory, string> = {
   homesteading: 'Homesteading',
@@ -30,20 +31,16 @@ export const PREFERRED_LABELS: Record<PreferredCategory, string> = {
 export const STORE_CATALOG_ENABLED = false;
 
 /** Placeholder Associates tag — replace via EXPO_PUBLIC_AMAZON_ASSOCIATE_TAG. */
-export const DEFAULT_AMAZON_ASSOCIATE_TAG = 'yourtag-20';
+const DEFAULT_AMAZON_ASSOCIATE_TAG = 'yourtag-20';
 
 export function amazonAssociateTag(): string {
   const fromEnv = process.env.EXPO_PUBLIC_AMAZON_ASSOCIATE_TAG?.trim();
   return fromEnv && fromEnv.length > 0 ? fromEnv : DEFAULT_AMAZON_ASSOCIATE_TAG;
 }
 
-export function isPlaceholderAssociateTag(tag = amazonAssociateTag()): boolean {
-  return tag === DEFAULT_AMAZON_ASSOCIATE_TAG;
-}
-
 /** Intended GitHub Pages URL after Pages is enabled on this repo (docs/ folder). */
-export const DEFAULT_PRIVACY_POLICY_URL = 'https://valrob0616.github.io/Compound-App/privacy.html';
-export const DEFAULT_TERMS_OF_USE_URL = 'https://valrob0616.github.io/Compound-App/terms.html';
+const DEFAULT_PRIVACY_POLICY_URL = 'https://valrob0616.github.io/Compound-App/privacy.html';
+const DEFAULT_TERMS_OF_USE_URL = 'https://valrob0616.github.io/Compound-App/terms.html';
 export const DEFAULT_PRIVACY_CONTACT_EMAIL = 'rob@loudfh.com';
 
 type ExtraConfig = {

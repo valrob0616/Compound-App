@@ -10,15 +10,11 @@ export function usesSupabaseAccounts(): boolean {
   return supabasePublicConfig() !== null;
 }
 
-/** Expo sets `__DEV__`. A store bundle has it false and must not call the local file server. */
+/** Expo sets `__DEV__`. A store bundle has it false and must not call the local account server. */
 export function devAccountsAllowed(): boolean {
   const flag = (globalThis as { __DEV__?: boolean }).__DEV__;
   if (typeof flag === 'boolean') return flag;
   return process.env.NODE_ENV !== 'production';
-}
-
-export function accountsModeLabel(): string {
-  return usesSupabaseAccounts() ? 'Account: Supabase' : 'Account: local server';
 }
 
 export const RELEASE_SUPABASE_ENV_MESSAGE =

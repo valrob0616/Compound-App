@@ -49,7 +49,7 @@ export type UserProfile = {
 
 export type FavoriteKind = 'news' | 'video' | 'learn';
 
-/** Saved with the account on the server. `savedAt` is set by the server. */
+/** Saved with the signed-in account. `savedAt` is set when the favorite is stored. */
 export type FavoriteItem = {
   id: string;
   kind: FavoriteKind;
@@ -70,6 +70,6 @@ export type FavoriteDraft = {
 };
 
 export type FeedLoadResult = {
-  items: FeedItem[];
+  items: NewsItem[];
   newsSource: 'live' | 'seed' | 'mixed';
 };

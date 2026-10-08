@@ -203,14 +203,6 @@ export function scenarioCount(content: ScoutContent): number {
   return content.stages.reduce((sum, stage) => sum + stage.scenarios.length, 0);
 }
 
-export function findScenario(content: ScoutContent, scenarioId: string): ScoutScenario | undefined {
-  for (const stage of content.stages) {
-    const scenario = stage.scenarios.find((item) => item.id === scenarioId);
-    if (scenario) return scenario;
-  }
-  return undefined;
-}
-
 export function choiceIsCorrect(scenario: ScoutScenario, choiceId: string): boolean {
   return scenario.choices.some((choice) => choice.id === choiceId && choice.correct);
 }

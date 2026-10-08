@@ -1,4 +1,4 @@
-export type StoredSession = {
+type StoredSession = {
   token: string;
 };
 

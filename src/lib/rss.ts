@@ -4,9 +4,6 @@ import type { NewsItem } from '@/types';
 import { parseRssItems, type ParsedRssItem } from './rss-parse';
 import { itemMatchesSource } from './topic-filter';
 
-export { parseRssItems } from './rss-parse';
-export { itemMatchesSource, matchesTopicFilter } from './topic-filter';
-
 const CARD_SUMMARY_LENGTH = 280;
 
 function toNews(source: RssSource, item: ParsedRssItem, index: number): NewsItem {

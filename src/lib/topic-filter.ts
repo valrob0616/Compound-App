@@ -1,9 +1,7 @@
 import type { TopicFilter } from '../data/family-compound-topic.ts';
 
-export type { TopicFilter };
-
 /** Lowercase, strip punctuation, collapse hyphens/spaces so "multi-gen" matches "multi gen". */
-export function normalizeForMatch(value: string): string {
+function normalizeForMatch(value: string): string {
   return value
     .toLowerCase()
     .replace(/&amp;/g, '&')
@@ -28,7 +26,7 @@ export function matchesTopicFilter(text: string, filter?: TopicFilter): boolean 
   return true;
 }
 
-export type SourceMatchInput = {
+type SourceMatchInput = {
   keywords?: string[];
   curatedFeed?: boolean;
 };

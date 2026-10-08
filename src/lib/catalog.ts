@@ -3,10 +3,6 @@ import type { CategoryId, Product } from '@/types';
 
 const products = catalog.products as Product[];
 
-export function getProducts(): Product[] {
-  return products;
-}
-
 export function getProductById(id: string): Product | undefined {
   return products.find((product) => product.id === id);
 }
