@@ -119,7 +119,7 @@ function throwAuth(error: { message: string; status?: number }): never {
   }
   if (/email not confirmed/i.test(message)) {
     throw new AccountApiError(
-      'Confirm your email, then sign in. In the Supabase dashboard, turn off Confirm email if this project has no mailer.',
+      'Confirm your email, then sign in.',
       error.status ?? 401,
     );
   }

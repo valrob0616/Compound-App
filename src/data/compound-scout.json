@@ -16,17 +16,17 @@
           "choices": [
             {
               "id": "take-38",
-              "label": "Take the 38 acres. Five small houses do not need several acres each, and the pasture can be the leftovers.",
+              "label": "Take the 38 acres",
               "correct": false
             },
             {
               "id": "prefer-55-80",
-              "label": "Prefer about 55–80 acres so each of five homes can have a 5–7 acre envelope plus pasture. Use 30–45 only if soils and zoning already hold and the ranch stays light.",
+              "label": "Prefer about 55–80 acres",
               "correct": true
             },
             {
               "id": "need-200",
-              "label": "Hold out for 200 acres. Anything under 100 cannot be a family compound.",
+              "label": "Hold out for 200 acres",
               "correct": false
             }
           ],
@@ -39,17 +39,17 @@
           "choices": [
             {
               "id": "build-the-bottom",
-              "label": "Put the pavilion and the first two homes in the bottom. Standing water for one week is just seasonal character.",
+              "label": "Build in the wet bottom",
               "correct": false
             },
             {
               "id": "protect-the-core",
-              "label": "Keep floodplain and wetlands out of the buildable core. Homes, the pavilion, and drain fields belong on ground that stays dry.",
+              "label": "Keep the core on dry ground",
               "correct": true
             },
             {
               "id": "fill-it",
-              "label": "Buy it and fill the bottom. A little dirt work removes a floodplain.",
+              "label": "Fill the floodplain",
               "correct": false
             }
           ],
@@ -62,17 +62,17 @@
           "choices": [
             {
               "id": "one-yard",
-              "label": "Take the shared yard. Relatives do not need screens, and the equipment yard is the neighbor's business.",
+              "label": "Share one yard",
               "correct": false
             },
             {
               "id": "buffer-and-screens",
-              "label": "Buffer the compound from that incompatible use, and plan planted screens so the homes do not sit on each other's sight lines.",
+              "label": "Buffer the yard and screen views",
               "correct": true
             },
             {
               "id": "one-hedge",
-              "label": "Plant one row of shrubs on the west line and still cluster the houses. A single hedge fixes both problems.",
+              "label": "One hedge, houses still clustered",
               "correct": false
             }
           ],
@@ -92,17 +92,17 @@
           "choices": [
             {
               "id": "perc-later",
-              "label": "Close first. A perc test is a building-permit detail, and a pavilion does not count as sewage.",
+              "label": "Perc test after closing",
               "correct": false
             },
             {
               "id": "perc-before-offer",
-              "label": "Get a perc or a soil letter before the offer, on a TDEC path sized for every bedroom, the pavilion, and any RV dump.",
+              "label": "Perc test before the offer",
               "correct": true
             },
             {
               "id": "compost-only",
-              "label": "Use composting toilets in the outer homes so only the first house needs a permit.",
+              "label": "Composting toilets only",
               "correct": false
             }
           ],
@@ -115,17 +115,17 @@
           "choices": [
             {
               "id": "creek-is-enough",
-              "label": "Treat the creek as the water system. A well is optional when water already crosses the land.",
+              "label": "The creek is the water plan",
               "correct": false
             },
             {
               "id": "well-then-creek",
-              "label": "Confirm well potential or a utility connection, keep septic the required distance from that source, and treat a creek as a plus, not the plan.",
+              "label": "Confirm a well; creek is extra",
               "correct": true
             },
             {
               "id": "well-in-field",
-              "label": "Drill the well in the middle of the future drain field so the pipe runs stay short.",
+              "label": "Drill the well in the drain field",
               "correct": false
             }
           ],
@@ -138,17 +138,17 @@
           "choices": [
             {
               "id": "fence-the-hay",
-              "label": "Fence the hay and stock it. Septic can use the woods or whatever soil is left.",
+              "label": "Fence the hay; septic in the woods",
               "correct": false
             },
             {
               "id": "fields-first",
-              "label": "Master-plan the drain fields and the pasture as different ground. Do not let the hay or the cattle take the reserve area.",
+              "label": "Keep drain fields off the pasture",
               "correct": true
             },
             {
               "id": "fields-under-pavilion",
-              "label": "Put every drain field under the pavilion pad so the meadow stays pure pasture.",
+              "label": "Put drain fields under the pavilion",
               "correct": false
             }
           ],
@@ -168,17 +168,17 @@
           "choices": [
             {
               "id": "statute-is-the-pass",
-              "label": "Skip the county. Ag zoning plus TCA 13-7-114 is the multi-home approval.",
+              "label": "Ag zoning is the approval",
               "correct": false
             },
             {
               "id": "written-verification",
-              "label": "Get written county verification for this parcel. Ag land is not unlimited houses, and that statute is not a multi-home pass.",
+              "label": "Get it in writing from the county",
               "correct": true
             },
             {
               "id": "split-later",
-              "label": "Split into five lots after closing. The surveyor will create the entitlements the zoning map does not show.",
+              "label": "Split into five lots later",
               "correct": false
             }
           ],
@@ -191,17 +191,17 @@
           "choices": [
             {
               "id": "greenbelt-is-zoning",
-              "label": "Count greenbelt as the entitlement for the extra homes, and assume the tax bill never changes.",
+              "label": "Greenbelt means extra homes",
               "correct": false
             },
             {
               "id": "tax-not-permit",
-              "label": "Use greenbelt as tax help when you have enough agricultural acres. It is not a dwelling permit, and a change of use can trigger rollback.",
+              "label": "A tax break, not a permit",
               "correct": true
             },
             {
               "id": "exit-greenbelt",
-              "label": "Pull the whole tract out of greenbelt before you ask the county anything, so the tax question disappears.",
+              "label": "Leave greenbelt before you ask",
               "correct": false
             }
           ],
@@ -214,17 +214,17 @@
           "choices": [
             {
               "id": "same-use",
-              "label": "Market the pads now. Family RV spots and a campground are the same use if the guests are relatives or friends.",
+              "label": "Market the pads as a campground",
               "correct": false
             },
             {
               "id": "split-entitlements",
-              "label": "Keep family cottages and family RV use on the family entitlement. Commercial campground or short-term rental needs its own zoning — often a conditional use permit — and transient septic.",
+              "label": "Keep family RV use non-commercial",
               "correct": true
             },
             {
               "id": "skip-the-dump",
-              "label": "Avoid the question by never permitting the RV dump. Guests can use the house tanks.",
+              "label": "Skip the RV dump",
               "correct": false
             }
           ],
@@ -244,17 +244,17 @@
           "choices": [
             {
               "id": "one-pad",
-              "label": "Cluster all five on the pad. Private envelopes are a luxury, and you can clear the woods after everyone moves in.",
+              "label": "Cluster all five on one pad",
               "correct": false
             },
             {
               "id": "five-envelopes",
-              "label": "Give each home about 5–7 acres, break sight lines with planting, and prefer ground that is already cleared so you are not buying a clearing bill.",
+              "label": "Give each home its own envelope",
               "correct": true
             },
             {
               "id": "half-mile",
-              "label": "Scatter the houses a half-mile apart with no shared core. Distance alone is the whole layout.",
+              "label": "Scatter the houses, skip the core",
               "correct": false
             }
           ],
@@ -267,17 +267,17 @@
           "choices": [
             {
               "id": "houses-first",
-              "label": "Build the private houses first and let the common wait. Families can gather in someone's dining room.",
+              "label": "Houses first, common later",
               "correct": false
             },
             {
               "id": "core-early",
-              "label": "Build the central pavilion, outdoor kitchens, and recreation early. That core is the social glue, not a leftover.",
+              "label": "Build the pavilion early",
               "correct": true
             },
             {
               "id": "largest-kitchen",
-              "label": "Skip a pavilion and make one house the required common. The largest kitchen can host every meal.",
+              "label": "One house hosts every meal",
               "correct": false
             }
           ],
@@ -290,17 +290,17 @@
           "choices": [
             {
               "id": "ag-exempt-skip",
-              "label": "File it as an ag barn and skip septic and zoning. An exemption covers any use inside a metal shell.",
+              "label": "Call it a barn and skip permits",
               "correct": false
             },
             {
               "id": "barn-still-permitted",
-              "label": "A barndo can be the barn, the shop, or an accessory dwelling, and it still has to pass septic and the zoning dwelling rules.",
+              "label": "Still needs septic and zoning",
               "correct": true
             },
             {
               "id": "call-it-storage",
-              "label": "Call the upstairs storage so the bathroom does not count, and move a family in anyway.",
+              "label": "Call the upstairs storage",
               "correct": false
             }
           ],
@@ -313,17 +313,17 @@
           "choices": [
             {
               "id": "one-lane",
-              "label": "One scenic lane can do both jobs if the golf carts yield to trucks.",
+              "label": "One lane for carts and trucks",
               "correct": false
             },
             {
               "id": "separate-trail",
-              "label": "Keep a separate cart trail, winding through the buffers so it does not open sight-line alleys, and fund it from the commons dues.",
+              "label": "Keep a separate cart trail",
               "correct": true
             },
             {
               "id": "no-carts",
-              "label": "Skip carts. Five households should drive the public road to see each other.",
+              "label": "Skip carts; use the public road",
               "correct": false
             }
           ],
@@ -343,17 +343,17 @@
           "choices": [
             {
               "id": "leave-the-lane",
-              "label": "Leave the lane. A family drive does not have to meet a fire-access standard.",
+              "label": "A family lane is enough",
               "correct": false
             },
             {
               "id": "spine-standard",
-              "label": "Build an all-weather spine about 20 feet clear and 13 feet 6 inches of vertical clearance, with a turnaround because the dead-end is longer than 150 feet.",
+              "label": "Build a fire-access spine",
               "correct": true
             },
             {
               "id": "pave-narrow",
-              "label": "Pave a 10-foot path. Pavement replaces width, height, and a place to turn around.",
+              "label": "Pave a narrow path",
               "correct": false
             }
           ],
@@ -366,17 +366,17 @@
           "choices": [
             {
               "id": "satellite-later",
-              "label": "Close, then ask the power company. Satellite internet can cover five households whenever you get to it.",
+              "label": "Sort out power after closing",
               "correct": false
             },
             {
               "id": "day-one-utilities",
-              "label": "Have a power path and either fiber or a solid fixed-wireless path on day one, before you treat the price as a bargain.",
+              "label": "Power and data before you buy",
               "correct": true
             },
             {
               "id": "cabin-hotspot",
-              "label": "Share one cabin-sized hotspot. The ranch does not need real connectivity.",
+              "label": "One cabin hotspot is enough",
               "correct": false
             }
           ],
@@ -389,17 +389,17 @@
           "choices": [
             {
               "id": "strips-and-one-acre",
-              "label": "Weave the pasture between the porches and size the herd at about one acre per pair. The barn can face the pavilion.",
+              "label": "Weave pasture between the porches",
               "correct": false
             },
             {
               "id": "contiguous-ranch",
-              "label": "Keep one contiguous pasture and hay block, put the barn downwind, stock about 1.5–2 acres per cow-calf pair, and give the herd a sacrifice lot for mud.",
+              "label": "One pasture block, barn downwind",
               "correct": true
             },
             {
               "id": "drop-the-ranch",
-              "label": "Drop the ranch. Five homes and cattle cannot share a tract.",
+              "label": "Drop the ranch",
               "correct": false
             }
           ],
@@ -419,17 +419,17 @@
           "choices": [
             {
               "id": "names-on-deed",
-              "label": "Put joint names on the deed and use one family account. Rental cash can help the dues if everyone agrees by text.",
+              "label": "Put everyone on the deed",
               "correct": false
             },
             {
               "id": "llc-and-separate",
-              "label": "Hold the land in an LLC with occupancy agreements, dues, reserves, and a written buy-in and buy-out. Keep hospitality money in a separate entity.",
+              "label": "Hold the land in an LLC",
               "correct": true
             },
             {
               "id": "handshake",
-              "label": "Skip the company and use a handshake. Families who meant well can sort the title later.",
+              "label": "A handshake is enough",
               "correct": false
             }
           ],
@@ -442,17 +442,17 @@
           "choices": [
             {
               "id": "hobby-and-inn",
-              "label": "Lead with hospitality income and a hobby herd. No minimum credit score means the late mortgage is irrelevant.",
+              "label": "Lead with the inn and a hobby herd",
               "correct": false
             },
             {
               "id": "owner-operator",
-              "label": "Use this path only as owner-operator of a family farm selling production. Direct farm-ownership funds top out around $600k; a larger buy is often a bank loan with an FSA guarantee. No minimum score, but the repayment pattern still has to show good faith.",
+              "label": "Use a farm loan as owner-operator",
               "correct": true
             },
             {
               "id": "cash-only",
-              "label": "Assume no agricultural lender will touch five homes, so the only honest path is all cash.",
+              "label": "Pay cash; lenders will not help",
               "correct": false
             }
           ],
@@ -465,17 +465,17 @@
           "choices": [
             {
               "id": "dozers-first",
-              "label": "Clear and fence now. Paperwork can chase the dozers, and the pavilion can follow the last house.",
+              "label": "Clear and fence now",
               "correct": false
             },
             {
               "id": "prove-then-core",
-              "label": "Prove zoning and septic first. Build the spine and the gathering core before the outer homes sprawl, and keep the master-planned drain fields out of the pasture.",
+              "label": "Prove zoning and septic first",
               "correct": true
             },
             {
               "id": "all-five-at-once",
-              "label": "Build all five houses in one season and skip the core. Speed is the phasing plan.",
+              "label": "Build all five houses at once",
               "correct": false
             }
           ],

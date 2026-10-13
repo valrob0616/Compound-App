@@ -4,10 +4,11 @@ import { useRouter } from 'expo-router';
 
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { LegalLinks } from '@/components/LegalLinks';
-import { AuthModePill, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
+import { PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
 import { PREFERRED_LABELS, privacyContactEmail } from '@/constants/config';
 import { useAppPrefs, useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
+import { friendlyAccountError } from '@/lib/account-message';
 import { confirmAction, showMessage } from '@/lib/dialog';
 import { initials } from '@/lib/format';
 import { radii, spacing } from '@/theme';
@@ -58,8 +59,7 @@ export default function AccountScreen() {
           title="Your place at the table"
           subtitle="Browse as a guest. Create an account to save your name and favorites. This phone keeps a sign-in session, not your password."
         />
-        <AuthModePill />
-        <View style={{ height: spacing.md }} />
+        <View style={{ height: spacing.sm }} />
         <PrimaryButton label="Create account" onPress={() => router.push('/auth/sign-up')} />
         <View style={{ height: spacing.sm }} />
         <PrimaryButton variant="secondary" label="Sign in" onPress={() => router.push('/auth/sign-in')} />
@@ -83,8 +83,6 @@ export default function AccountScreen() {
           <Text style={[styles.email, { color: colors.textMuted }]}>{user.email}</Text>
         </View>
       </View>
-      <AuthModePill />
-
       <View style={{ height: spacing.lg }} />
       <TextField
         label="Display name"
@@ -136,7 +134,7 @@ export default function AccountScreen() {
               await updateProfile({ displayName: displayName.trim() || user.displayName });
               setStatus('Profile saved.');
             } catch (err) {
-              showMessage('Could not save', err instanceof Error ? err.message : 'Try again.');
+              showMessage('Could not save', friendlyAccountError(err));
             }
           })();
         }}
@@ -175,7 +173,7 @@ export default function AccountScreen() {
               active
               onPress={() => {
                 void toggleFavorite(item).catch((err: unknown) => {
-                  showMessage('Could not update favorite', err instanceof Error ? err.message : 'Try again.');
+                  showMessage('Could not update favorite', friendlyAccountError(err));
                 });
               }}
             />
@@ -210,7 +208,7 @@ export default function AccountScreen() {
                 try {
                   await deleteAccount();
                 } catch (err) {
-                  showMessage('Could not delete', err instanceof Error ? err.message : 'Try again.');
+                  showMessage('Could not delete', friendlyAccountError(err));
                 }
               })();
             },

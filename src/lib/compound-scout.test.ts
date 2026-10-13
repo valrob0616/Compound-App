@@ -90,6 +90,21 @@ test('each bundled scenario has one correct look and a practical teach-back', ()
   }
 });
 
+test('choice labels stay one line and every scenario keeps its lesson', () => {
+  assert.equal(scenarioCount(content), 19);
+  for (const stage of content.stages) {
+    for (const scenario of stage.scenarios) {
+      assert.equal(scenario.lookFor.length >= 80, true, scenario.id);
+      assert.equal(scenario.prompt.length >= 40, true, scenario.id);
+      for (const choice of scenario.choices) {
+        assert.equal(choice.label.includes('\n'), false, choice.id);
+        assert.equal(choice.label.length >= 8, true, choice.label);
+        assert.equal(choice.label.length <= 36, true, choice.label);
+      }
+    }
+  }
+});
+
 test('disclaimer stays educational and is not legal or financial advice', () => {
   const disclaimer = content.disclaimer.toLowerCase();
   assert.equal(disclaimer.includes('educational'), true);

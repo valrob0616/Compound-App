@@ -4,6 +4,7 @@ import { type ReactNode } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import 'react-native-reanimated';
 
+import { DialogHost } from '@/components/DialogHost';
 import { AppPrefsProvider, AuthProvider, useAuth } from '@/context/AuthContext';
 import { AppThemeProvider, useAppTheme } from '@/context/ThemeContext';
 
@@ -57,6 +58,7 @@ export default function RootLayout() {
     <AppThemeProvider>
       <AuthProvider>
         <AppPrefsProvider>
+          <DialogHost />
           <BootGate>
             <RootNav />
           </BootGate>

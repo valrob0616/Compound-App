@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 
-import { AuthModePill, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
+import { FormError, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
 import { LegalLinks } from '@/components/LegalLinks';
 import { PREFERRED_LABELS } from '@/constants/config';
 import { useAppPrefs, useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
-import { showMessage } from '@/lib/dialog';
+import { friendlyAccountError } from '@/lib/account-message';
 import { isValidEmail } from '@/lib/format';
 import { radii, spacing } from '@/theme';
 import type { PreferredCategory } from '@/types';
@@ -24,6 +24,7 @@ export default function SignUpScreen() {
   const [password, setPassword] = useState('');
   const [preferredCategory, setPreferredCategory] = useState<PreferredCategory>('both');
   const [errors, setErrors] = useState<{ email?: string; password?: string; displayName?: string }>({});
+  const [formError, setFormError] = useState<string | null>(null);
 
   const onSubmit = async () => {
     const next = {
@@ -32,13 +33,14 @@ export default function SignUpScreen() {
       password: password.length >= 6 ? undefined : 'Use at least 6 characters.',
     };
     setErrors(next);
+    setFormError(null);
     if (next.displayName || next.email || next.password) return;
     try {
       await signUp({ email, password, displayName, preferredCategory });
       if (preferredCategory !== 'both') setCategory(preferredCategory);
       router.replace('/account');
     } catch (err) {
-      showMessage('Could not create account', err instanceof Error ? err.message : 'Try again.');
+      setFormError(friendlyAccountError(err));
     }
   };
 
@@ -52,8 +54,7 @@ export default function SignUpScreen() {
           title="Create an account"
           subtitle="Name, email, and password are saved with your account, not on this phone. Favorites stay with the account."
         />
-        <AuthModePill />
-        <View style={{ height: spacing.md }} />
+        <View style={{ height: spacing.sm }} />
         <TextField
           label="Display name"
           value={displayName}
@@ -111,6 +112,7 @@ export default function SignUpScreen() {
           })}
         </View>
         <PrimaryButton label="Create account" loading={busy} onPress={() => void onSubmit()} />
+        <FormError message={formError} />
         <Text style={[styles.switch, { color: colors.textMuted }]}>
           By creating an account you agree to the Terms of Use. Read the Privacy Policy for how we
           handle email, preferences, and favorites.

@@ -4,10 +4,12 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from 'react';
 
+import { friendlyAccountError } from '@/lib/account-message';
 import * as auth from '@/lib/auth';
 import { getJson, setJson, storageKeys } from '@/lib/storage';
 import type { CategoryId, FavoriteDraft, FavoriteItem, PreferredCategory, UserProfile } from '@/types';
@@ -110,15 +112,19 @@ type AppPrefsValue = {
   favoritesNote: string | null;
   isFavorite: (id: string) => boolean;
   toggleFavorite: (draft: FavoriteDraft) => Promise<boolean>;
+  rememberPendingFavorite: (draft: FavoriteDraft) => void;
+  clearPendingFavorite: () => void;
 };
 
 const AppPrefsContext = createContext<AppPrefsValue | null>(null);
 
 export function AppPrefsProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
-  const [category, setCategoryState] = useState<CategoryId>('homesteading');
+  const [category, setCategoryState] = useState<CategoryId>('family-compounds');
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
   const [favoritesNote, setFavoritesNote] = useState<string | null>(null);
+  const pendingFavorite = useRef<FavoriteDraft | null>(null);
+  const favoritesChain = useRef<Promise<void>>(Promise.resolve());
 
   useEffect(() => {
     let cancelled = false;
@@ -144,15 +150,34 @@ export function AppPrefsProvider({ children }: { children: ReactNode }) {
       return;
     }
     setFavoritesNote(null);
-    void auth
-      .loadFavorites()
+    // One load at a time. A second run (strict mode, or a new user object)
+    // waits, then reads the list after any pending save has landed.
+    const run = favoritesChain.current.then(async () => {
+      let items = await auth.loadFavorites();
+      const pending = pendingFavorite.current;
+      if (pending && !items.some((item) => item.id === pending.id)) {
+        pendingFavorite.current = null;
+        try {
+          items = await auth.toggleFavorite(pending);
+        } catch (err) {
+          if (pendingFavorite.current === null) pendingFavorite.current = pending;
+          throw err;
+        }
+      }
+      return items;
+    });
+    favoritesChain.current = run.then(
+      () => undefined,
+      () => undefined,
+    );
+    void run
       .then((items) => {
         if (!cancelled) setFavorites(items);
       })
       .catch((err: unknown) => {
         if (!cancelled) {
           setFavorites([]);
-          setFavoritesNote(err instanceof Error ? err.message : 'Could not load favorites.');
+          setFavoritesNote(friendlyAccountError(err));
         }
       });
     return () => {
@@ -176,6 +201,14 @@ export function AppPrefsProvider({ children }: { children: ReactNode }) {
     [user],
   );
 
+  const rememberPendingFavorite = useCallback((draft: FavoriteDraft) => {
+    pendingFavorite.current = draft;
+  }, []);
+
+  const clearPendingFavorite = useCallback(() => {
+    pendingFavorite.current = null;
+  }, []);
+
   const value = useMemo<AppPrefsValue>(
     () => ({
       category,
@@ -184,8 +217,10 @@ export function AppPrefsProvider({ children }: { children: ReactNode }) {
       favoritesNote,
       isFavorite: (id) => favorites.some((item) => item.id === id),
       toggleFavorite,
+      rememberPendingFavorite,
+      clearPendingFavorite,
     }),
-    [category, favorites, favoritesNote, setCategory, toggleFavorite],
+    [category, favorites, favoritesNote, setCategory, toggleFavorite, rememberPendingFavorite, clearPendingFavorite],
   );
 
   return <AppPrefsContext.Provider value={value}>{children}</AppPrefsContext.Provider>;

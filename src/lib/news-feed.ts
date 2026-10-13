@@ -34,3 +34,11 @@ export function assembleNewsArticles(
   if (familySeed.some((entry) => items.includes(entry))) return { items, source: 'mixed' };
   return { items, source: 'live' };
 }
+
+/** Plain status under the news list. Null while the feed is still loading. */
+export function newsStatusLabel(source: FeedLoadResult['newsSource'] | null): string | null {
+  if (source === 'live') return 'Live updates';
+  if (source === 'mixed') return 'Live updates, plus saved briefings';
+  if (source === 'seed') return 'Showing saved briefings';
+  return null;
+}

@@ -5,7 +5,7 @@ import { FAMILY_COMPOUND_TOPIC } from '../data/family-compound-topic.ts';
 import { NEWS_CATEGORY, RSS_SOURCES, sourcesForNews } from '../data/rss-sources.ts';
 import { SEED_NEWS } from '../data/seed-news.ts';
 import { CURATED_VIDEOS } from '../data/videos.ts';
-import { assembleNewsArticles } from './news-feed.ts';
+import { assembleNewsArticles, newsStatusLabel } from './news-feed.ts';
 import { matchesTopicFilter } from './topic-filter.ts';
 
 test('news section RSS is the family-compound list and nothing else', () => {
@@ -139,6 +139,13 @@ test('family-compound seed stories and videos match the compound topic bar', () 
     const hay = `${item.title} ${item.summary}`;
     assert.equal(matchesTopicFilter(hay, FAMILY_COMPOUND_TOPIC), true, item.title);
   }
+});
+
+test('news status is plain language and stays quiet while loading', () => {
+  assert.equal(newsStatusLabel(null), null);
+  assert.equal(newsStatusLabel('live'), 'Live updates');
+  assert.equal(newsStatusLabel('mixed'), 'Live updates, plus saved briefings');
+  assert.equal(newsStatusLabel('seed'), 'Showing saved briefings');
 });
 
 test('homesteading seeds stay homesteading and do not need the compound topic bar', () => {

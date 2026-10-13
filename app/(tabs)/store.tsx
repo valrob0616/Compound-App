@@ -43,14 +43,7 @@ function ComingSoonStore() {
           tools, seeds, solar, fencing, canning, and compound gear. Amazon affiliate picks will be
           added then.
         </Text>
-        <View style={styles.pills}>
-          <View style={[styles.pill, { backgroundColor: colors.cardMuted, borderColor: colors.border }]}>
-            <Text style={[styles.pillText, { color: colors.text }]}>Homesteading</Text>
-          </View>
-          <View style={[styles.pill, { backgroundColor: colors.cardMuted, borderColor: colors.border }]}>
-            <Text style={[styles.pillText, { color: colors.text }]}>Family Compounds</Text>
-          </View>
-        </View>
+        <Text style={[styles.plain, { color: colors.text }]}>Homesteading and Family Compounds</Text>
       </View>
     </ScrollView>
   );
@@ -138,14 +131,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: spacing.lg,
   },
-  pills: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'center' },
-  pill: {
-    borderWidth: 1,
-    borderRadius: radii.pill,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-  },
-  pillText: { fontSize: 13, fontWeight: '700' },
+  plain: { fontSize: 15, fontWeight: '600', textAlign: 'center' },
   catalogContent: { padding: spacing.md, paddingBottom: 48, gap: spacing.md },
   row: { gap: spacing.md, marginBottom: spacing.md },
   lede: { fontSize: 14, lineHeight: 20, marginBottom: spacing.md },
