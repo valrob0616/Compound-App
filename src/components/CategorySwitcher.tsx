@@ -9,15 +9,16 @@ import type { CategoryId } from '@/types';
 type Props = {
   value: CategoryId;
   onChange: (category: CategoryId) => void;
+  showBlurb?: boolean;
 };
 
 const OPTIONS: CategoryId[] = ['homesteading', 'family-compounds'];
 
-export function CategorySwitcher({ value, onChange }: Props) {
+export function CategorySwitcher({ value, onChange, showBlurb = true }: Props) {
   const { colors } = useAppTheme();
 
   return (
-    <View>
+    <View style={showBlurb ? undefined : styles.compact}>
       <View
         style={[styles.row, { backgroundColor: colors.cardMuted, borderColor: colors.border }]}
         accessibilityRole="tablist"
@@ -29,6 +30,7 @@ export function CategorySwitcher({ value, onChange }: Props) {
               key={option}
               accessibilityRole="tab"
               accessibilityState={{ selected: active }}
+              aria-selected={active}
               accessibilityLabel={CATEGORY_LABELS[option]}
               onPress={() => onChange(option)}
               style={[
@@ -50,12 +52,13 @@ export function CategorySwitcher({ value, onChange }: Props) {
           );
         })}
       </View>
-      <Text style={[styles.blurb, { color: colors.textMuted }]}>{CATEGORY_BLURBS[value]}</Text>
+      {showBlurb ? <Text style={[styles.blurb, { color: colors.textMuted }]}>{CATEGORY_BLURBS[value]}</Text> : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  compact: { marginBottom: spacing.sm },
   row: {
     flexDirection: 'row',
     padding: 4,

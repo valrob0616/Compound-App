@@ -1,4 +1,3 @@
-import { Ionicons } from '@expo/vector-icons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 
@@ -15,13 +14,9 @@ export function GuestBanner() {
 
   return (
     <View style={[styles.wrap, { backgroundColor: colors.cardMuted, borderColor: colors.border }]}>
-      <Ionicons name="leaf-outline" size={20} color={colors.tint} />
-      <View style={styles.copy}>
-        <Text style={[styles.title, { color: colors.text }]}>Browsing as a guest</Text>
-        <Text style={[styles.body, { color: colors.textMuted }]}>
-          Create a free account to save favorites with your account and remember your preferred category.
-        </Text>
-      </View>
+      <Text style={[styles.body, { color: colors.text }]} numberOfLines={1}>
+        Browsing as a guest.
+      </Text>
       <Pressable
         onPress={() => router.push('/auth/sign-up')}
         style={[styles.cta, { backgroundColor: colors.tint }]}
@@ -39,20 +34,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-    padding: spacing.md,
+    paddingLeft: spacing.md,
+    paddingRight: spacing.xs,
+    paddingVertical: spacing.xs,
     borderRadius: radii.md,
     borderWidth: 1,
-    marginBottom: spacing.md,
+    marginBottom: spacing.sm,
+    minHeight: 44,
   },
-  copy: { flex: 1 },
-  title: { fontWeight: '700', fontSize: 14, marginBottom: 2 },
-  body: { fontSize: 12, lineHeight: 16 },
+  body: { flex: 1, fontSize: 15, fontWeight: '600' },
   cta: {
+    minWidth: 44,
+    minHeight: 44,
     paddingHorizontal: 14,
-    paddingVertical: 8,
     borderRadius: radii.pill,
-    minHeight: 36,
+    alignItems: 'center',
     justifyContent: 'center',
   },
-  ctaText: { fontWeight: '700', fontSize: 13 },
+  ctaText: { fontWeight: '700', fontSize: 15 },
 });

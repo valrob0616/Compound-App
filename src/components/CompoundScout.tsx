@@ -6,6 +6,7 @@ import { ActivityIndicator, Platform, Pressable, ScrollView, StyleSheet, Text, V
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { PrimaryButton } from '@/components/ui';
 import { useAppPrefs } from '@/context/AuthContext';
+import { friendlyAccountError } from '@/lib/account-message';
 import { promptCreateAccount, showMessage } from '@/lib/dialog';
 import { useAppTheme } from '@/context/ThemeContext';
 import rawScout from '@/data/compound-scout.json';
@@ -38,6 +39,7 @@ function locateScenario(scenarioId: string): { stageIndex: number; scenarioIndex
 
 type Phase =
   | { name: 'trail' }
+  | { name: 'checklist' }
   | { name: 'scenario'; stageIndex: number; scenarioIndex: number }
   | { name: 'stage-done'; stageIndex: number }
   | { name: 'round-done' };
@@ -45,7 +47,7 @@ type Phase =
 export function CompoundScout({ focusScenarioId }: { focusScenarioId?: string }) {
   const { colors } = useAppTheme();
   const router = useRouter();
-  const { isFavorite, toggleFavorite } = useAppPrefs();
+  const { isFavorite, toggleFavorite, rememberPendingFavorite, clearPendingFavorite } = useAppPrefs();
   const [answers, setAnswers] = useState<ScoutAnswers | null>(null);
   const [phase, setPhase] = useState<Phase>({ name: 'trail' });
   const [confirm, setConfirm] = useState<null | 'round' | number>(null);
@@ -89,17 +91,19 @@ export function CompoundScout({ focusScenarioId }: { focusScenarioId?: string })
   const saveScenario = (scenario: ScoutScenario, stage: ScoutStage) => {
     void (async () => {
       try {
-        const ok = await toggleFavorite({
+        const draft = {
           id: scenario.id,
-          kind: 'learn',
+          kind: 'learn' as const,
           title: scenario.title,
           subtitle: stage.title,
-        });
+        };
+        const ok = await toggleFavorite(draft);
         if (!ok) {
-          promptCreateAccount(() => router.push('/auth/sign-up'));
+          rememberPendingFavorite(draft);
+          promptCreateAccount(() => router.push('/auth/sign-up'), clearPendingFavorite);
         }
       } catch (err) {
-        showMessage('Could not save favorite', err instanceof Error ? err.message : 'Try again.');
+        showMessage('Could not save favorite', friendlyAccountError(err));
       }
     })();
   };
@@ -181,8 +185,10 @@ export function CompoundScout({ focusScenarioId }: { focusScenarioId?: string })
           onAskReplay={() => setConfirm('round')}
           onConfirmReplay={applyConfirm}
           onCancelReplay={() => setConfirm(null)}
+          onChecklist={() => setPhase({ name: 'checklist' })}
         />
       ) : null}
+      {phase.name === 'checklist' ? <Checklist onTrail={() => setPhase({ name: 'trail' })} /> : null}
       {phase.name === 'scenario' ? (
         <ScenarioPlay
           stage={scout.stages[phase.stageIndex]!}
@@ -272,6 +278,7 @@ function Trail({
   onAskReplay,
   onConfirmReplay,
   onCancelReplay,
+  onChecklist,
 }: {
   answers: ScoutAnswers;
   correct: number;
@@ -283,6 +290,7 @@ function Trail({
   onAskReplay: () => void;
   onConfirmReplay: () => void;
   onCancelReplay: () => void;
+  onChecklist: () => void;
 }) {
   const { colors } = useAppTheme();
   const started = Object.keys(answers).length > 0;
@@ -296,6 +304,9 @@ function Trail({
       <Text style={[styles.lede, { color: colors.textMuted }]}>{scout.subtitle}</Text>
       <ScoreMeter correct={correct} total={total} badges={badges} />
       <PrimaryButton label={cta} onPress={onContinue} accessibilityHint="Walk the buy and build stages" />
+      <View style={styles.actionGap}>
+        <PrimaryButton variant="secondary" label="Read the checklist" onPress={onChecklist} />
+      </View>
       {started ? (
         <View style={styles.actionGap}>
           {confirming ? (
@@ -370,6 +381,34 @@ function Trail({
           );
         })}
       </View>
+    </View>
+  );
+}
+
+function Checklist({ onTrail }: { onTrail: () => void }) {
+  const { colors } = useAppTheme();
+  return (
+    <View>
+      <Pressable accessibilityRole="button" accessibilityLabel="Back to the trail" onPress={onTrail} style={styles.backRow}>
+        <Ionicons name="chevron-back" size={18} color={colors.tint} />
+        <Text style={[styles.backLabel, { color: colors.tint }]}>Trail</Text>
+      </Pressable>
+      <Text style={[styles.kicker, { color: colors.accent }]}>Learn</Text>
+      <Text style={[styles.title, { color: colors.text }]}>Checklist</Text>
+      <Text style={[styles.lede, { color: colors.textMuted }]}>
+        The same {scout.stages.reduce((sum, stage) => sum + stage.scenarios.length, 0)} looks, written out so you can scan them.
+      </Text>
+      {scout.stages.map((stage) => (
+        <View key={stage.id} style={styles.checklistStage}>
+          <Text style={[styles.stageHeading, { color: colors.text }]}>{stage.title}</Text>
+          {stage.scenarios.map((scenario) => (
+            <View key={scenario.id} style={[styles.checklistItem, { borderColor: colors.border, backgroundColor: colors.card }]}>
+              <Text style={[styles.resultTitle, { color: colors.text }]}>{scenario.title}</Text>
+              <Text style={[styles.teachBody, { color: colors.text }]}>{scenario.lookFor}</Text>
+            </View>
+          ))}
+        </View>
+      ))}
     </View>
   );
 }
@@ -704,7 +743,7 @@ function Disclaimer() {
 const styles = StyleSheet.create({
   loading: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   screen: { flex: 1 },
-  content: { padding: spacing.md, paddingBottom: 48 },
+  content: { padding: spacing.md, paddingBottom: 96 },
   kicker: {
     fontSize: 12,
     fontWeight: '700',
@@ -768,12 +807,13 @@ const styles = StyleSheet.create({
   choiceList: { gap: spacing.sm },
   choice: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     gap: spacing.sm,
     borderWidth: 2,
     borderRadius: radii.md,
-    padding: spacing.md,
-    minHeight: 48,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 8,
+    minHeight: 44,
   },
   choiceMark: {
     width: 28,
@@ -783,7 +823,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   choiceLetter: { fontSize: 13, fontWeight: '700' },
-  choiceLabel: { flex: 1, fontSize: 15, lineHeight: 21 },
+  choiceLabel: { flex: 1, fontSize: 15, lineHeight: 20 },
+  checklistStage: { marginBottom: spacing.md },
+  checklistItem: {
+    borderWidth: 1,
+    borderRadius: radii.md,
+    padding: spacing.md,
+    marginTop: spacing.sm,
+  },
   hint: { marginTop: spacing.md, fontSize: 14, lineHeight: 20 },
   teachBack: {
     marginTop: spacing.md,

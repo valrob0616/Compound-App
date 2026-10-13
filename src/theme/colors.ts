@@ -46,7 +46,7 @@ export const lightColors: ThemeColors = {
   accent: palette.clay,
   border: palette.line,
   tabBar: '#FFFdf8',
-  tabInactive: '#8A8176',
+  tabInactive: '#5C534A',
   overlay: 'rgba(28, 48, 40, 0.55)',
   chip: palette.cream,
   chipActive: palette.forest,

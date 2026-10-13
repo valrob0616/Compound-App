@@ -1,24 +1,53 @@
-import { Alert, Platform } from 'react-native';
+type ConfirmRequest = {
+  title: string;
+  message?: string;
+  confirmLabel: string;
+  cancelLabel: string;
+  onConfirm: () => void;
+  onCancel?: () => void;
+};
 
-/** Alert.alert is a no-op on react-native-web, so web uses window.alert / confirm. */
-export function showMessage(title: string, message?: string): void {
-  if (Platform.OS === 'web') {
-    window.alert(message ? `${title}\n\n${message}` : title);
-    return;
-  }
-  Alert.alert(title, message);
+type AlertRequest = {
+  title: string;
+  message?: string;
+};
+
+type DialogHostApi = {
+  confirm: (request: ConfirmRequest) => void;
+  alert: (request: AlertRequest) => void;
+};
+
+let host: DialogHostApi | null = null;
+const queue: Array<() => void> = [];
+
+export function registerDialogHost(next: DialogHostApi | null): void {
+  host = next;
+  if (!host) return;
+  const pending = queue.splice(0);
+  for (const job of pending) job();
 }
 
-export function promptCreateAccount(onCreate: () => void): void {
-  const message = 'Create an account to save favorites on your account.';
-  if (Platform.OS === 'web') {
-    if (window.confirm(message)) onCreate();
-    return;
-  }
-  Alert.alert('Save favorites', message, [
-    { text: 'Not now', style: 'cancel' },
-    { text: 'Create account', onPress: onCreate },
-  ]);
+function enqueue(job: () => void): void {
+  if (host) job();
+  else queue.push(job);
+}
+
+/** In-app notice. Replaces window.alert and Alert.alert. */
+export function showMessage(title: string, message?: string): void {
+  enqueue(() => host?.alert({ title, message }));
+}
+
+export function promptCreateAccount(onCreate: () => void, onCancel?: () => void): void {
+  enqueue(() =>
+    host?.confirm({
+      title: 'Save favorites',
+      message: 'Create an account to save this on your account.',
+      confirmLabel: 'Create account',
+      cancelLabel: 'Not now',
+      onConfirm: onCreate,
+      onCancel,
+    }),
+  );
 }
 
 export function confirmAction(
@@ -27,12 +56,13 @@ export function confirmAction(
   confirmLabel: string,
   onConfirm: () => void,
 ): void {
-  if (Platform.OS === 'web') {
-    if (window.confirm(message ? `${title}\n\n${message}` : title)) onConfirm();
-    return;
-  }
-  Alert.alert(title, message, [
-    { text: 'Cancel', style: 'cancel' },
-    { text: confirmLabel, style: 'destructive', onPress: onConfirm },
-  ]);
+  enqueue(() =>
+    host?.confirm({
+      title,
+      message,
+      confirmLabel,
+      cancelLabel: 'Cancel',
+      onConfirm,
+    }),
+  );
 }

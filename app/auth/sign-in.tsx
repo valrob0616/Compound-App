@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 
-import { AuthModePill, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
+import { FormError, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
 import { LegalLinks } from '@/components/LegalLinks';
 import { useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
-import { showMessage } from '@/lib/dialog';
+import { friendlyAccountError } from '@/lib/account-message';
 import { isValidEmail } from '@/lib/format';
 import { spacing } from '@/theme';
 
@@ -17,6 +17,7 @@ export default function SignInScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [formError, setFormError] = useState<string | null>(null);
 
   const onSubmit = async () => {
     const next = {
@@ -24,12 +25,13 @@ export default function SignInScreen() {
       password: password.length >= 6 ? undefined : 'Password must be at least 6 characters.',
     };
     setErrors(next);
+    setFormError(null);
     if (next.email || next.password) return;
     try {
       await signIn(email, password);
       router.replace('/account');
     } catch (err) {
-      showMessage('Could not sign in', err instanceof Error ? err.message : 'Try again.');
+      setFormError(friendlyAccountError(err));
     }
   };
 
@@ -43,8 +45,7 @@ export default function SignInScreen() {
           title="Welcome back"
           subtitle="Sign in to load favorites saved on your account. Your password is not stored on this phone."
         />
-        <AuthModePill />
-        <View style={{ height: spacing.md }} />
+        <View style={{ height: spacing.sm }} />
         <TextField
           label="Email"
           value={email}
@@ -65,6 +66,7 @@ export default function SignInScreen() {
           error={errors.password}
         />
         <PrimaryButton label="Sign in" loading={busy} onPress={() => void onSubmit()} />
+        <FormError message={formError} />
         <Text style={[styles.switch, { color: colors.textMuted }]}>
           New here?{' '}
           <Link href="/auth/sign-up" style={{ color: colors.tint, fontWeight: '700' }}>

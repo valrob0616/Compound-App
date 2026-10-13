@@ -2,21 +2,20 @@ import { useCallback, useEffect, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 
-import { FeaturedVideosLink } from '@/components/FeaturedVideosLink';
 import { GuestBanner } from '@/components/GuestBanner';
 import { NewsCard } from '@/components/NewsCard';
-import { CATEGORY_BLURBS } from '@/constants/config';
 import { useAppPrefs } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
+import { friendlyAccountError } from '@/lib/account-message';
 import { promptCreateAccount, showMessage } from '@/lib/dialog';
 import { loadNewsFeed, rememberFeedItems } from '@/lib/feed';
+import { newsStatusLabel } from '@/lib/news-feed';
 import { spacing } from '@/theme';
-import { serif } from '@/theme/typography';
 import type { FeedLoadResult, NewsItem } from '@/types';
 
 export default function FeedScreen() {
   const { colors } = useAppTheme();
-  const { isFavorite, toggleFavorite } = useAppPrefs();
+  const { isFavorite, toggleFavorite, rememberPendingFavorite, clearPendingFavorite } = useAppPrefs();
   const router = useRouter();
   const [result, setResult] = useState<FeedLoadResult | null>(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -45,32 +44,28 @@ export default function FeedScreen() {
 
   const onToggleFavorite = useCallback(
     async (item: NewsItem) => {
+      const draft = {
+        id: item.id,
+        kind: 'news' as const,
+        title: item.title,
+        subtitle: item.source,
+        url: item.url,
+      };
       try {
-        const ok = await toggleFavorite({
-          id: item.id,
-          kind: 'news',
-          title: item.title,
-          subtitle: item.source,
-          url: item.url,
-        });
+        const ok = await toggleFavorite(draft);
         if (!ok) {
-          promptCreateAccount(() => router.push('/auth/sign-up'));
+          rememberPendingFavorite(draft);
+          promptCreateAccount(() => router.push('/auth/sign-up'), clearPendingFavorite);
         }
       } catch (err) {
-        showMessage('Could not save favorite', err instanceof Error ? err.message : 'Try again.');
+        showMessage('Could not save favorite', friendlyAccountError(err));
       }
     },
-    [router, toggleFavorite],
+    [clearPendingFavorite, rememberPendingFavorite, router, toggleFavorite],
   );
 
-  const sourceLabel =
-    result?.newsSource === 'live'
-      ? 'Live Family Compound RSS'
-      : result?.newsSource === 'mixed'
-        ? 'Live Family Compound RSS, plus seed briefings where a feed was short'
-        : 'Seed briefings (Family Compound RSS unavailable on this network or blocked by CORS on web)';
-
   const items = (result?.items ?? []) as NewsItem[];
+  const sourceLabel = newsStatusLabel(result?.newsSource ?? null);
 
   return (
     <FlatList
@@ -96,19 +91,17 @@ export default function FeedScreen() {
       }
       ListHeaderComponent={
         <View>
-          <Text style={[styles.kicker, { color: colors.accent }]}>RSS</Text>
-          <Text style={[styles.title, { color: colors.text }]}>Family Compound news</Text>
-          <Text style={[styles.lede, { color: colors.textMuted }]}>
-            {CATEGORY_BLURBS['family-compounds']}
-          </Text>
           <GuestBanner />
-          <FeaturedVideosLink />
-          <Text style={[styles.source, { color: colors.textMuted }]}>{sourceLabel}</Text>
+          {sourceLabel ? <Text style={[styles.source, { color: colors.textMuted }]}>{sourceLabel}</Text> : null}
           {error ? <Text style={[styles.error, { color: colors.danger }]}>{error}</Text> : null}
         </View>
       }
       ListEmptyComponent={
-        <Text style={[styles.empty, { color: colors.textMuted }]}>Pull to refresh Family Compound news.</Text>
+        result ? (
+          <Text style={[styles.empty, { color: colors.textMuted }]}>No Family Compound stories yet. Pull to refresh.</Text>
+        ) : (
+          <Text style={[styles.empty, { color: colors.textMuted }]}>Loading news…</Text>
+        )
       }
     />
   );
@@ -116,21 +109,7 @@ export default function FeedScreen() {
 
 const styles = StyleSheet.create({
   content: { padding: spacing.md, paddingBottom: 48 },
-  kicker: {
-    fontSize: 12,
-    fontWeight: '700',
-    letterSpacing: 1,
-    textTransform: 'uppercase',
-    marginBottom: 4,
-  },
-  title: {
-    fontFamily: serif,
-    fontSize: 28,
-    fontWeight: '700',
-    marginBottom: 6,
-  },
-  lede: { fontSize: 15, lineHeight: 21, marginBottom: spacing.md },
-  source: { fontSize: 12, marginBottom: spacing.md },
-  error: { marginBottom: spacing.md, fontSize: 13 },
-  empty: { textAlign: 'center', marginTop: 24 },
+  source: { fontSize: 13, lineHeight: 18, marginBottom: spacing.md },
+  error: { marginBottom: spacing.md, fontSize: 14, lineHeight: 20 },
+  empty: { textAlign: 'center', marginTop: 24, fontSize: 15 },
 });

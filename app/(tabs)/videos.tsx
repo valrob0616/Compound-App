@@ -6,19 +6,19 @@ import { CategorySwitcher } from '@/components/CategorySwitcher';
 import { GuestBanner } from '@/components/GuestBanner';
 import { VideoCard } from '@/components/VideoCard';
 import { VideoDisclaimer } from '@/components/VideoDisclaimer';
-import { CATEGORY_LABELS } from '@/constants/config';
 import { useAppPrefs } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
+import { friendlyAccountError } from '@/lib/account-message';
 import { promptCreateAccount, showMessage } from '@/lib/dialog';
 import { rememberFeedItems } from '@/lib/feed';
 import { videosForCategory } from '@/lib/videos';
 import { spacing } from '@/theme';
-import { serif } from '@/theme/typography';
 import type { VideoItem } from '@/types';
 
 export default function VideosScreen() {
   const { colors } = useAppTheme();
-  const { category, setCategory, isFavorite, toggleFavorite } = useAppPrefs();
+  const { category, setCategory, isFavorite, toggleFavorite, rememberPendingFavorite, clearPendingFavorite } =
+    useAppPrefs();
   const router = useRouter();
   const videos = useMemo(() => videosForCategory(category), [category]);
 
@@ -28,22 +28,24 @@ export default function VideosScreen() {
 
   const onToggleFavorite = useCallback(
     async (item: VideoItem) => {
+      const draft = {
+        id: item.id,
+        kind: 'video' as const,
+        title: item.title,
+        subtitle: item.channel,
+        youtubeId: item.youtubeId,
+      };
       try {
-        const ok = await toggleFavorite({
-          id: item.id,
-          kind: 'video',
-          title: item.title,
-          subtitle: item.channel,
-          youtubeId: item.youtubeId,
-        });
+        const ok = await toggleFavorite(draft);
         if (!ok) {
-          promptCreateAccount(() => router.push('/auth/sign-up'));
+          rememberPendingFavorite(draft);
+          promptCreateAccount(() => router.push('/auth/sign-up'), clearPendingFavorite);
         }
       } catch (err) {
-        showMessage('Could not save favorite', err instanceof Error ? err.message : 'Try again.');
+        showMessage('Could not save favorite', friendlyAccountError(err));
       }
     },
-    [router, toggleFavorite],
+    [clearPendingFavorite, rememberPendingFavorite, router, toggleFavorite],
   );
 
   const openVideo = useCallback(
@@ -72,21 +74,13 @@ export default function VideosScreen() {
       style={{ backgroundColor: colors.background }}
       ListHeaderComponent={
         <View>
-          <Text style={[styles.kicker, { color: colors.accent }]}>YouTube</Text>
-          <Text style={[styles.title, { color: colors.text }]}>Featured videos</Text>
-          <Text style={[styles.lede, { color: colors.textMuted }]}>
-            Curated {CATEGORY_LABELS[category]} videos, separate from Family Compound news. Switch
-            categories to see Homesteading or Family Compounds featured content.
-          </Text>
-          <CategorySwitcher value={category} onChange={setCategory} />
-          <VideoDisclaimer />
+          <CategorySwitcher value={category} onChange={setCategory} showBlurb={false} />
+          <VideoDisclaimer collapsible />
           <GuestBanner />
         </View>
       }
       ListEmptyComponent={
-        <Text style={[styles.empty, { color: colors.textMuted }]}>
-          No featured videos for this category yet.
-        </Text>
+        <Text style={[styles.empty, { color: colors.textMuted }]}>No featured videos for this category yet.</Text>
       }
     />
   );
@@ -94,19 +88,5 @@ export default function VideosScreen() {
 
 const styles = StyleSheet.create({
   content: { padding: spacing.md, paddingBottom: 48 },
-  kicker: {
-    fontSize: 12,
-    fontWeight: '700',
-    letterSpacing: 1,
-    textTransform: 'uppercase',
-    marginBottom: 4,
-  },
-  title: {
-    fontFamily: serif,
-    fontSize: 28,
-    fontWeight: '700',
-    marginBottom: 6,
-  },
-  lede: { fontSize: 15, lineHeight: 21, marginBottom: spacing.md },
-  empty: { textAlign: 'center', marginTop: 24 },
+  empty: { textAlign: 'center', marginTop: 24, fontSize: 15 },
 });

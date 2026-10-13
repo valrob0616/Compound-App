@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import { useAppTheme } from '@/context/ThemeContext';
-import { accountsModeLabel } from '@/lib/auth/backend';
 import { radii, spacing } from '@/theme';
 import { serif } from '@/theme/typography';
 
@@ -86,12 +85,13 @@ export function TextField({ label, error, ...rest }: FieldProps) {
   );
 }
 
-export function AuthModePill() {
+export function FormError({ message }: { message: string | null }) {
   const { colors } = useAppTheme();
+  if (!message) return null;
   return (
-    <View style={[styles.pill, { backgroundColor: colors.cardMuted, borderColor: colors.border }]}>
-      <Text style={[styles.pillText, { color: colors.textMuted }]}>{accountsModeLabel()}</Text>
-    </View>
+    <Text accessibilityLiveRegion="polite" style={[styles.formError, { color: colors.danger }]}>
+      {message}
+    </Text>
   );
 }
 
@@ -126,14 +126,7 @@ const styles = StyleSheet.create({
     minHeight: 48,
   },
   error: { marginTop: 4, fontSize: 12 },
-  pill: {
-    alignSelf: 'flex-start',
-    borderWidth: 1,
-    borderRadius: radii.pill,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-  },
-  pillText: { fontSize: 12, fontWeight: '600' },
+  formError: { marginTop: 8, fontSize: 14, lineHeight: 20 },
   titleBlock: { marginBottom: spacing.md },
   title: { fontFamily: serif, fontSize: 28, fontWeight: '700' },
   subtitle: { marginTop: 6, fontSize: 15, lineHeight: 21 },

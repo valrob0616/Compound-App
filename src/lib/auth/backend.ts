@@ -22,4 +22,4 @@ export function accountsModeLabel(): string {
 }
 
 export const RELEASE_SUPABASE_ENV_MESSAGE =
-  'This build needs EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_KEY (the publishable key). It does not use the local account server.';
+  "Sign-in isn't available in this build. You can keep browsing as a guest.";

@@ -39,7 +39,7 @@ async function request<T>(
     });
   } catch {
     throw new AccountApiError(
-      'Could not reach the account server. Start it with npm run server, or set EXPO_PUBLIC_API_URL.',
+      "We couldn't reach the account service. Check your connection and try again.",
       0,
     );
   }
