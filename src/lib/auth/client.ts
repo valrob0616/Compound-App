@@ -1,3 +1,4 @@
+import { UNREACHABLE_ACCOUNT_MESSAGE } from '../account-message.ts';
 import type { FavoriteDraft, FavoriteItem, PreferredCategory, UserProfile } from '../../types/index.ts';
 
 export class AccountApiError extends Error {
@@ -10,7 +11,7 @@ export class AccountApiError extends Error {
   }
 }
 
-export type AuthPayload = {
+type AuthPayload = {
   token: string;
   user: UserProfile;
 };
@@ -38,10 +39,7 @@ async function request<T>(
       body: init.body !== undefined ? JSON.stringify(init.body) : undefined,
     });
   } catch {
-    throw new AccountApiError(
-      "We couldn't reach the account service. Check your connection and try again.",
-      0,
-    );
+    throw new AccountApiError(UNREACHABLE_ACCOUNT_MESSAGE, 0);
   }
 
   const text = await response.text();

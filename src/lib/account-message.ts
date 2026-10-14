@@ -1,4 +1,4 @@
-const UNREACHABLE = "We couldn't reach the account service. Check your connection and try again.";
+export const UNREACHABLE_ACCOUNT_MESSAGE = "We couldn't reach the account service. Check your connection and try again.";
 
 /**
  * Turn local-server and Supabase failures into a sentence a person can act on.
@@ -14,7 +14,7 @@ export function friendlyAccountError(err: unknown): string {
       raw,
     )
   ) {
-    return UNREACHABLE;
+    return UNREACHABLE_ACCOUNT_MESSAGE;
   }
   return raw;
 }

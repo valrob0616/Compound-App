@@ -53,10 +53,6 @@ export async function setJson(key: string, value: unknown): Promise<void> {
   await AsyncStorage.setItem(key, JSON.stringify(value));
 }
 
-export async function removeItem(key: string): Promise<void> {
-  await AsyncStorage.removeItem(key);
-}
-
 export const storageKeys = {
   /** Bearer token only. Passwords and account records are not stored on the device. */
   sessionToken: 'hcn.session.token',

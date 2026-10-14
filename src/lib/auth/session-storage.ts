@@ -28,7 +28,7 @@ export function sessionBlobContainsPassword(value: string): boolean {
   }
 }
 
-export function createGuardedAuthStorage(inner: AuthStorage): AuthStorage {
+function createGuardedAuthStorage(inner: AuthStorage): AuthStorage {
   return {
     getItem: (key) => inner.getItem(key),
     removeItem: (key) => inner.removeItem(key),

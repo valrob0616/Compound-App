@@ -1,4 +1,4 @@
-type ConfirmRequest = {
+export type ConfirmRequest = {
   title: string;
   message?: string;
   confirmLabel: string;
@@ -7,7 +7,7 @@ type ConfirmRequest = {
   onCancel?: () => void;
 };
 
-type AlertRequest = {
+export type AlertRequest = {
   title: string;
   message?: string;
 };

@@ -4,15 +4,13 @@ import { Link, useRouter } from 'expo-router';
 
 import { FormError, PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
 import { LegalLinks } from '@/components/LegalLinks';
-import { PREFERRED_LABELS } from '@/constants/config';
+import { PREFERRED_CATEGORIES, PREFERRED_LABELS } from '@/constants/config';
 import { useAppPrefs, useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
 import { friendlyAccountError } from '@/lib/account-message';
 import { isValidEmail } from '@/lib/format';
 import { radii, spacing } from '@/theme';
 import type { PreferredCategory } from '@/types';
-
-const PREFERRED: PreferredCategory[] = ['homesteading', 'family-compounds', 'both'];
 
 export default function SignUpScreen() {
   const { colors } = useAppTheme();
@@ -88,7 +86,7 @@ export default function SignUpScreen() {
           Used for Featured Videos. News stays on Family Compound RSS.
         </Text>
         <View style={styles.row}>
-          {PREFERRED.map((option) => {
+          {PREFERRED_CATEGORIES.map((option) => {
             const active = preferredCategory === option;
             return (
               <Pressable

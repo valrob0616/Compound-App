@@ -2,7 +2,7 @@ import { createServer as createHttpServer, type IncomingMessage, type Server, ty
 
 import { AccountError, type AccountService } from './accounts.ts';
 
-export type AccountServerHandle = {
+type AccountServerHandle = {
   server: Server;
   url: string;
 };

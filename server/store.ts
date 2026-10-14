@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import type { Database } from './types.ts';
 
-export function emptyDatabase(): Database {
+function emptyDatabase(): Database {
   return { users: [], sessions: [], favorites: {} };
 }
 

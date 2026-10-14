@@ -1,9 +1,6 @@
 import { NEWS_CATEGORY } from '../data/rss-sources.ts';
 import type { FeedLoadResult, NewsItem } from '../types/index.ts';
-
-function byDateDesc(a: { publishedAt: string }, b: { publishedAt: string }): number {
-  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
-}
+import { comparePublishedDesc } from './format.ts';
 
 function normalizeTitle(title: string): string {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
@@ -29,7 +26,7 @@ export function assembleNewsArticles(
     items.push(item);
   }
 
-  items.sort(byDateDesc);
+  items.sort(comparePublishedDesc);
   if (familyLive.length === 0) return { items, source: 'seed' };
   if (familySeed.some((entry) => items.includes(entry))) return { items, source: 'mixed' };
   return { items, source: 'live' };

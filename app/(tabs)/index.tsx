@@ -13,7 +13,7 @@ import { newsStatusLabel } from '@/lib/news-feed';
 import { spacing } from '@/theme';
 import type { FeedLoadResult, NewsItem } from '@/types';
 
-export default function FeedScreen() {
+export default function NewsScreen() {
   const { colors } = useAppTheme();
   const { isFavorite, toggleFavorite, rememberPendingFavorite, clearPendingFavorite } = useAppPrefs();
   const router = useRouter();
@@ -64,7 +64,7 @@ export default function FeedScreen() {
     [clearPendingFavorite, rememberPendingFavorite, router, toggleFavorite],
   );
 
-  const items = (result?.items ?? []) as NewsItem[];
+  const items = result?.items ?? [];
   const sourceLabel = newsStatusLabel(result?.newsSource ?? null);
 
   return (

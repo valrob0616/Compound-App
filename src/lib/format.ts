@@ -1,3 +1,7 @@
+export function comparePublishedDesc(a: { publishedAt: string }, b: { publishedAt: string }): number {
+  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+}
+
 export function formatRelativeDate(iso: string): string {
   const then = new Date(iso).getTime();
   if (Number.isNaN(then)) return '';

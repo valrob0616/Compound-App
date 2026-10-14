@@ -28,10 +28,10 @@ function BootGate({ children }: { children: ReactNode }) {
 }
 
 function RootNav() {
-  const { scheme, colors } = useAppTheme();
+  const { colors } = useAppTheme();
   return (
     <>
-      <StatusBar style={scheme === 'dark' ? 'light' : 'light'} />
+      <StatusBar style="light" />
       <Stack
         screenOptions={{
           headerStyle: { backgroundColor: colors.header },

@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import { FavoriteButton } from '@/components/FavoriteButton';
 import { LegalLinks } from '@/components/LegalLinks';
 import { PrimaryButton, ScreenTitle, TextField } from '@/components/ui';
-import { PREFERRED_LABELS, privacyContactEmail } from '@/constants/config';
+import { PREFERRED_CATEGORIES, PREFERRED_LABELS, privacyContactEmail } from '@/constants/config';
 import { useAppPrefs, useAuth } from '@/context/AuthContext';
 import { useAppTheme } from '@/context/ThemeContext';
 import { friendlyAccountError } from '@/lib/account-message';
@@ -13,9 +13,7 @@ import { confirmAction, showMessage } from '@/lib/dialog';
 import { initials } from '@/lib/format';
 import { radii, spacing } from '@/theme';
 import { serif } from '@/theme/typography';
-import type { FavoriteItem, FavoriteKind, PreferredCategory } from '@/types';
-
-const PREFERRED: PreferredCategory[] = ['homesteading', 'family-compounds', 'both'];
+import type { FavoriteItem, FavoriteKind } from '@/types';
 
 const KIND_LABEL: Record<FavoriteKind, string> = {
   news: 'Article',
@@ -96,7 +94,7 @@ export default function AccountScreen() {
         Used for Featured Videos. News stays on Family Compound RSS.
       </Text>
       <View style={styles.prefRow}>
-        {PREFERRED.map((option) => {
+        {PREFERRED_CATEGORIES.map((option) => {
           const active = (user.preferredCategory ?? 'both') === option;
           return (
             <Pressable

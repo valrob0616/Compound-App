@@ -1,7 +1,5 @@
-export const palette = {
+const palette = {
   forest: '#2C4A3E',
-  forestDeep: '#1C3028',
-  sage: '#6B8F71',
   cream: '#F4EFE6',
   paper: '#FBF8F2',
   clay: '#B85C38',
@@ -33,7 +31,6 @@ export type ThemeColors = {
   success: string;
   danger: string;
   wheat: string;
-  sage: string;
 };
 
 export const lightColors: ThemeColors = {
@@ -56,7 +53,6 @@ export const lightColors: ThemeColors = {
   success: palette.success,
   danger: palette.danger,
   wheat: palette.wheat,
-  sage: palette.sage,
 };
 
 export const darkColors: ThemeColors = {
@@ -79,7 +75,6 @@ export const darkColors: ThemeColors = {
   success: '#7DAB8A',
   danger: '#E08B82',
   wheat: '#C4A35A',
-  sage: '#6B8F71',
 };
 
 export const spacing = {
@@ -87,15 +82,10 @@ export const spacing = {
   sm: 10,
   md: 16,
   lg: 24,
-  xl: 32,
 } as const;
 
 export const radii = {
-  sm: 8,
   md: 14,
   lg: 20,
   pill: 999,
 } as const;
-
-export const APP_NAME = 'Family Compound & Homestead Living';
-export const APP_TAGLINE = 'News, video, and gear for the land and the people on it.';
